@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<a href="{%  url 'help_item_create' %}"><p>Добавить пункт помощи</p></a>
+<ul>
+    {% for help_item in help_item_list %}
+        <li>{{ help_item.name }}</li>
+        {{ help_item.name }}
+        <a href="{%  url 'help_item_update' pk=help_item.id %}"><p>Обновить информацию про помощь</p></a>
+        <a href="{%  url 'help_item_delete' pk=help_item.id %}"><p>Удалить пункт помощи</p></a>
+
+    <hr>
+    {% endfor %}
+</ul>
+<a href="{%  url 'main' %}"><p>На главную</p></a>

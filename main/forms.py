@@ -46,6 +46,7 @@ class AchievementForm(forms.ModelForm):
         model = Achievement
         fields = '__all__'
 
+
 class HelpItemForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(HelpItemForm, self).__init__(*args, **kwargs)

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<a href="{%  url 'person_create' %}"><p>Добавить специалиста</p></a>
+{% if authors_list %}
+    <ul>
+        {% for person in authors_list %}
+            <li>{{ person.name }}</li>
+            {{ person.email }}
+        <a href="{%  url 'person_update' pk=person.id %}"><p>Обновить информацию про специалиста</p></a>
+        <a href="{%  url 'person_delete' pk=person.id %}"><p>Удалить специалиста</p></a>
+        <hr>
+        {% endfor %}
+    </ul>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/author?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }} </a>
+                {% endif %}
+                <span class="page-current">
+                    {{ page_obj.number }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/author?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+{% else %}
+    <h3>Специалисты</h3>
+    <p> Специалистов не найдено </p>
+{% endif %}
+<a href="{%  url 'main' %}"><p>На главную</p></a>

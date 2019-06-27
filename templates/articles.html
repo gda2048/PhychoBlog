@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<a href="{%  url 'article_create' %}"><p>Добавить статью</p></a>
+<ul>
+    {% for article in articles_list %}
+        <li>{{ article.name }}</li>
+        {{ article.author.name }}
+        {{ article.release_date }}
+        {{ article.content|cut:'h' |cut:'H'| linebreaks |title| truncatechars:'20'}}
+        <br>{{ 1 |add:"12" }}<br>
+        <a href="{%  url 'article_update' pk=article.id %}"><p>Обновить информацию про статью</p></a>
+        <a href="{%  url 'article_delete' pk=article.id %}"><p>Удалить статью</p></a>
+
+    <hr>
+    {% endfor %}
+</ul>
+<a href="{%  url 'main' %}"><p>На главную</p></a>

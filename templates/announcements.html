@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<a href="{%  url 'announcement_create' %}"><p>Добавить анонсы</p></a>
+<ul>
+    {% for announcement in announcement_list %}
+        <li>{{ announcement.name }}</li>
+        {{ announcement.article.name }}
+        <a href="{%  url 'announcement_update' pk=announcement.id %}"><p>Обновить информацию про анонсы</p></a>
+        <a href="{%  url 'announcement_delete' pk=announcement.id %}"><p>Удалить анонсы</p></a>
+
+    <hr>
+    {% endfor %}
+</ul>
+<a href="{%  url 'main' %}"><p>На главную</p></a>

@@ -27,11 +27,13 @@ class PersonCreate(CreateView):
         user.save()
         return super(PersonCreate, self).form_valid(form)
 
+
 class PersonUpdate(UpdateView):
     form_class = PersonFormUpdate
     model = Person
     template_name = 'post.html'
     success_url = '/author/'
+
     def form_valid(self, form):
         res = form.save(commit=False)
         user  = User.objects.get(username = self.object.name)

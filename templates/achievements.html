@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<body>
+<a href="{%  url 'achievement_create' %}"><p>Добавить достижение</p></a>
+<ul>
+    {% for achievement in achievement_list %}
+        <li>{{ achievement.alt }}</li>
+        {{ achievement.priority}}
+        <br>
+        <img src="{{ achievement.photo.url }}" alt="{{ achievement.alt }}">
+        <a href="{%  url 'achievement_update' pk=achievement.id %}"><p>Обновить информацию про достижение</p></a>
+        <a href="{%  url 'achievement_delete' pk=achievement.id %}"><p>Удалить достижение</p></a>
+
+    <hr>
+    {% endfor %}
+</ul>
+<a href="{%  url 'main' %}"><p>На главную</p></a>
+</body>
+</html>

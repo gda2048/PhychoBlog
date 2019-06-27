@@ -16,7 +16,7 @@ class Person(models.Model):
     email = models.EmailField()
     info = models.TextField('Основная информация', blank=True)
     bio = models.TextField('Биография', blank=True)
-    photo = models.FilePathField('Фотография', path=IMAGES, null=True)
+    photo = models.FilePathField('Фотография', path=IMAGES, null=True, blank=True)
     password = models.CharField('Пароль', max_length=50)
 
     class Meta:
@@ -95,7 +95,7 @@ class PhotoItem(models.Model):
     """
     id = models.AutoField(primary_key=True)
     alt = models.CharField("Описание", max_length=200, blank=True)
-    photo = models.FilePathField("Изображение", path=IMAGES, null=True)
+    photo = models.ImageField('Изображение', upload_to='article/', height_field=100, width_field=100, null=True)
 
     class Meta:
         """
