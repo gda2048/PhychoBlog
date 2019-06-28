@@ -114,6 +114,9 @@ class Achievement(PhotoItem):
     """
     priority = models.IntegerField("Приоритет", default=2)
 
+    def __str__(self):
+        return self.alt
+
     class Meta:
         """
         Achievement model settings
