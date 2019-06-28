@@ -2,7 +2,7 @@
 Stores all models of the project
 """
 from django.db import models
-from psycho.settings import IMAGES
+from psycho.settings import MEDIA_ROOT
 
 
 class Person(models.Model):
@@ -16,7 +16,7 @@ class Person(models.Model):
     email = models.EmailField()
     info = models.TextField('Основная информация', blank=True)
     bio = models.TextField('Биография', blank=True)
-    photo = models.FilePathField('Фотография', path=IMAGES, null=True, blank=True)
+    photo = models.FilePathField('Фотография', path=MEDIA_ROOT, null=True, blank=True)
     password = models.CharField('Пароль', max_length=50)
 
     class Meta:
@@ -95,7 +95,9 @@ class PhotoItem(models.Model):
     """
     id = models.AutoField(primary_key=True)
     alt = models.CharField("Описание", max_length=200, blank=True)
-    photo = models.ImageField('Изображение', upload_to='article/', height_field=100, width_field=100, null=True)
+    height = models.PositiveIntegerField(null=True)
+    width = models.PositiveIntegerField(null=True)
+    photo = models.ImageField('Изображение', height_field='height', width_field='width', null=True)
 
     class Meta:
         """

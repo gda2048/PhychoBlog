@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -119,6 +120,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-IMAGES = BASE_DIR + '/main/static/images'
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+MEDIA_ROOT = os.path.join(STATIC_ROOT, 'images')
+MEDIA_URL = '/images/'
+print(STATIC_ROOT)
+print(MEDIA_ROOT)
+print(PROJECT_ROOT)

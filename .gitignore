@@ -6,3 +6,5 @@ venv/
 psycho/__pycache__/
 
 main/__pycache__/
+
+__pycache__/

@@ -15,6 +15,9 @@ Including another URLconf
 """
 from main import views
 from django.urls import path, re_path
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
 
 urlpatterns = [
     path('author/create/', views.PersonCreate.as_view(), name='person_create'),
@@ -42,5 +45,7 @@ urlpatterns = [
     path('help_item/update/<int:pk>/', views.HelpItemUpdate.as_view(), name='help_item_update'),
     path('help_item/delete/<int:pk>/', views.HelpItemDelete.as_view(), name='help_item_delete'),
 
+    path('admin/', admin.site.urls),
     path('', views.main, name='main'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

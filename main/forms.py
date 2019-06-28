@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 
+
 class PersonForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PersonForm, self).__init__(*args, **kwargs)
@@ -10,6 +11,7 @@ class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
         fields = '__all__'
+
 
 class PersonFormUpdate(forms.ModelForm):
     class Meta:
