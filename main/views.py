@@ -4,13 +4,19 @@ from django.contrib.auth.models import User
 from .models import Person, Achievement, Announcement, Article, HelpItem
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView
-from django.core.paginator import Paginator
+from django import forms
 
 
 class PersonCreate(CreateView):
     model = Person
+    fields = ['full_name', 'name', 'birth_date', 'email', 'info', 'bio', 'photo']
     template_name = 'post.html'
     success_url = '/author/'
+
+    def get_form(self, form_class=None):
+        form = super(PersonCreate, self).get_form(form_class)
+        form.fields['birth_date'].widget = forms.SelectDateWidget()
+        return form
 
     def form_valid(self, form):
         res = form.save(commit=False)
@@ -22,12 +28,18 @@ class PersonCreate(CreateView):
 
 class PersonUpdate(UpdateView):
     model = Person
+    fields = ['full_name', 'name', 'birth_date', 'email', 'info', 'bio', 'photo']
     template_name = 'post.html'
     success_url = '/author/'
 
+    def get_form(self, form_class=None):
+        form = super(PersonUpdate, self).get_form(form_class)
+        form.fields['birth_date'].widget = forms.SelectDateWidget()
+        return form
+
     def form_valid(self, form):
         res = form.save(commit=False)
-        user  = User.objects.get(username = self.object.name)
+        user = User.objects.get(username = self.object.name)
         user.email = res.email
         user.save()
         return super(PersonUpdate, self).form_valid(form)
@@ -80,15 +92,27 @@ class ArticleListView(ListView):
 
 
 class AnnouncementCreate(CreateView):
+    fields = ['name', 'content', 'article', 'date', 'main']
     model = Announcement
     template_name = 'post.html'
     success_url = '/announcement/'
+
+    def get_form(self, form_class=None):
+        form = super(AnnouncementCreate, self).get_form(form_class)
+        form.fields['date'].widget = forms.SelectDateWidget()
+        return form
 
 
 class AnnouncementUpdate(UpdateView):
     model = Announcement
+    fields = ['name', 'content', 'article', 'date', 'main']
     template_name = 'post.html'
     success_url = '/announcement/'
+
+    def get_form(self, form_class=None):
+        form = super(AnnouncementUpdate, self).get_form(form_class)
+        form.fields['date'].widget = forms.SelectDateWidget()
+        return form
 
 
 class AnnouncementDelete(DeleteView):
@@ -101,6 +125,8 @@ class AnnouncementListView(ListView):
     model = Announcement
     template_name = 'announcements.html'
     context_object_name = 'announcement_list'
+    paginate_by = 1
+    ordering = ['-main']
 
 
 class AchievementCreate(CreateView):
@@ -119,7 +145,6 @@ class AchievementUpdate(UpdateView):
 
 class AchievementDelete(DeleteView):
     model = Achievement
-    fields = ['alt', 'photo', 'priority']
     template_name = 'post.html'
     success_url = '/achievement/'
 
@@ -128,6 +153,7 @@ class AchievementListView(ListView):
     model = Achievement
     template_name = 'achievements.html'
     context_object_name = 'achievement_list'
+    ordering = ['-priority']
 
 
 class HelpItemCreate(CreateView):

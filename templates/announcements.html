@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 <a href="{%  url 'announcement_create' %}"><p>Добавить анонсы</p></a>
-<ul>
+<div>
     {% for announcement in announcement_list %}
-        <li>{{ announcement.name }}</li>
-        {{ announcement.article.name }}
-        <a href="{%  url 'announcement_update' pk=announcement.id %}"><p>Обновить информацию про анонсы</p></a>
-        <a href="{%  url 'announcement_delete' pk=announcement.id %}"><p>Удалить анонсы</p></a>
+        <div>{{ announcement.name }}<br>
+            {{ announcement.article.name }}<br>
+            {{ announcement.content }}<br>
+            <a href="{%  url 'announcement_update' pk=announcement.id %}"><p>Обновить информацию про анонсы</p></a>
+            <a href="{%  url 'announcement_delete' pk=announcement.id %}"><p>Удалить анонсы</p></a>
+            <hr>
+        </div>
 
-    <hr>
     {% endfor %}
-</ul>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/announcement?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }} </a>
+                {% endif %}
+                <span class="page-current">
+                    {{ page_obj.number }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/announcement?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+</div>
 <a href="{%  url 'main' %}"><p>На главную</p></a>

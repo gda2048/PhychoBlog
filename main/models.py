@@ -19,6 +19,9 @@ class Person(models.Model):
     photo = models.FilePathField('Фотография', path=MEDIA_ROOT, null=True, blank=True)
     password = models.CharField('Пароль', max_length=50)
 
+    def __str__(self):
+        return self.full_name
+
     class Meta:
         """
         Person model settings
@@ -39,6 +42,9 @@ class Article(models.Model):
     release_date = models.DateField("Дата выпуска статьи", auto_now=True)
     author = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Автор')
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         """
         Article model settings
@@ -55,10 +61,13 @@ class Announcement(models.Model):
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField("Название", max_length=50)
-    content = models.CharField("Контент", max_length=200, blank=True)
+    content = models.TextField("Контент", max_length=200, blank=True)
     article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name="Статья")
     date = models.DateField("Дата события")
     main = models.BooleanField("Отображать вверху", default=False)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         """
