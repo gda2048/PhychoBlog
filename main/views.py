@@ -1,14 +1,13 @@
 from django.shortcuts import render
-from .forms import *
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from .models import Person, Achievement, Announcement, Article, HelpItem
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView
 from django.core.paginator import Paginator
 
 
 class PersonCreate(CreateView):
-    form_class = PersonForm
     model = Person
     template_name = 'post.html'
     success_url = '/author/'
@@ -22,7 +21,6 @@ class PersonCreate(CreateView):
 
 
 class PersonUpdate(UpdateView):
-    form_class = PersonFormUpdate
     model = Person
     template_name = 'post.html'
     success_url = '/author/'
@@ -39,6 +37,7 @@ class PersonDelete(DeleteView):
     model = Person
     template_name = 'post.html'
     success_url = '/author/'
+
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         success_url = self.get_success_url()
@@ -56,14 +55,12 @@ class PersonListView(ListView):
 
 
 class ArticleCreate(CreateView):
-    form_class = ArticleForm
     model = Article
     template_name = 'post.html'
     success_url = '/article/'
 
 
 class ArticleUpdate(UpdateView):
-    form_class = ArticleForm
     model = Article
     template_name = 'post.html'
     success_url = '/article/'
@@ -83,14 +80,12 @@ class ArticleListView(ListView):
 
 
 class AnnouncementCreate(CreateView):
-    form_class = AnnouncementForm
     model = Announcement
     template_name = 'post.html'
     success_url = '/announcement/'
 
 
 class AnnouncementUpdate(UpdateView):
-    form_class = AnnouncementForm
     model = Announcement
     template_name = 'post.html'
     success_url = '/announcement/'
@@ -135,20 +130,13 @@ class AchievementListView(ListView):
     context_object_name = 'achievement_list'
 
 
-def post_new(request):
-    form = PersonForm()
-    return render(request, 'post.html', {'form': form})
-
-
 class HelpItemCreate(CreateView):
-    form_class = HelpItemForm
     model = HelpItem
     template_name = 'post.html'
     success_url = '/help_item/'
 
 
 class HelpItemUpdate(UpdateView):
-    form_class = HelpItemForm
     model = HelpItem
     template_name = 'post.html'
     success_url = '/help_item/'
