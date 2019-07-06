@@ -3,6 +3,8 @@ Stores all models of the project
 """
 from django.db import models
 from psycho.settings import MEDIA_ROOT
+from django.contrib.auth.models import User
+from .managers import PeopleManager
 
 
 class Person(models.Model):
@@ -18,6 +20,30 @@ class Person(models.Model):
     bio = models.TextField('Биография', blank=True)
     photo = models.FilePathField('Фотография', path=MEDIA_ROOT, null=True, blank=True)
     password = models.CharField('Пароль', max_length=50)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', null=True, blank=True)
+    objects = PeopleManager()
+
+    def save(self, *args, **kwargs):
+        if self.user:
+            user = User.objects.get(id=self.user.id)
+            user.username, user.email = self.name, self.email
+            user.set_password(self.password)
+            user.save()
+        else:
+            user = User.objects.create_user(self.name, self.email, self.password)
+            user.save()
+            self.user = user
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        user = User.objects.get(id=self.user.id)
+        print(1)
+        if not user.is_superuser:
+            user.delete()
+            super().delete(*args, **kwargs)
+        else:
+            print("superuser can't be deleted")
+            print(user.id)
 
     def __str__(self):
         return self.full_name
@@ -85,7 +111,7 @@ class HelpItem(models.Model):
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField("Название", max_length=50)
-    description = models.CharField("Описание", max_length=200)
+    description = models.TextField("Описание", max_length=200)
     expert = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Эксперт')
 
     class Meta:

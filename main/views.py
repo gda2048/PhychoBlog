@@ -9,7 +9,7 @@ from django import forms
 
 class PersonCreate(CreateView):
     model = Person
-    fields = ['full_name', 'name', 'birth_date', 'email', 'info', 'bio', 'photo']
+    fields = ['full_name', 'name', 'birth_date', 'email', 'info', 'bio', 'photo', 'password']
     template_name = 'post.html'
     success_url = '/author/'
 
@@ -18,17 +18,10 @@ class PersonCreate(CreateView):
         form.fields['birth_date'].widget = forms.SelectDateWidget()
         return form
 
-    def form_valid(self, form):
-        res = form.save(commit=False)
-        print(res.name, res.email, res.password)
-        user = User.objects.create_user(res.name, res.email, res.password)
-        user.save()
-        return super(PersonCreate, self).form_valid(form)
-
 
 class PersonUpdate(UpdateView):
     model = Person
-    fields = ['full_name', 'name', 'birth_date', 'email', 'info', 'bio', 'photo']
+    fields = ['full_name', 'name', 'birth_date', 'email', 'info', 'bio', 'photo', 'password']
     template_name = 'post.html'
     success_url = '/author/'
 
@@ -37,33 +30,18 @@ class PersonUpdate(UpdateView):
         form.fields['birth_date'].widget = forms.SelectDateWidget()
         return form
 
-    def form_valid(self, form):
-        res = form.save(commit=False)
-        user = User.objects.get(username = self.object.name)
-        user.email = res.email
-        user.save()
-        return super(PersonUpdate, self).form_valid(form)
-
 
 class PersonDelete(DeleteView):
     model = Person
     template_name = 'post.html'
     success_url = '/author/'
 
-    def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        success_url = self.get_success_url()
-        user = User.objects.get(username=self.object.name)
-        user.delete()
-        self.object.delete()
-        return HttpResponseRedirect(success_url)
-
 
 class PersonListView(ListView):
     model = Person
     template_name = 'people.html'
     context_object_name = 'authors_list'
-    paginate_by = 1
+    paginate_by = 4
 
 
 class ArticleCreate(CreateView):
@@ -160,12 +138,14 @@ class HelpItemCreate(CreateView):
     model = HelpItem
     template_name = 'post.html'
     success_url = '/help_item/'
+    fields = ['name', 'description', 'expert']
 
 
 class HelpItemUpdate(UpdateView):
     model = HelpItem
     template_name = 'post.html'
     success_url = '/help_item/'
+    fields = ['name', 'description', 'expert']
 
 
 class HelpItemDelete(DeleteView):
