@@ -112,6 +112,9 @@ class HelpItem(models.Model):
     description = models.TextField("Описание", max_length=200)
     expert = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Эксперт')
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         """
         HelpItem model settings
@@ -128,8 +131,8 @@ class PhotoItem(models.Model):
     """
     id = models.AutoField(primary_key=True)
     alt = models.CharField("Описание", max_length=200, blank=True)
-    height = models.PositiveIntegerField(null=True)
-    width = models.PositiveIntegerField(null=True)
+    height = models.PositiveIntegerField(null=True, blank=True)
+    width = models.PositiveIntegerField(null=True, blank=True)
     photo = models.ImageField('Изображение', height_field='height', width_field='width', null=True)
 
     class Meta:
@@ -146,6 +149,7 @@ class Achievement(PhotoItem):
     Stores information about a single certificate or other proof of competence
     """
     priority = models.IntegerField("Приоритет", default=2)
+    expert = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Эксперт')
 
     def __str__(self):
         return self.alt

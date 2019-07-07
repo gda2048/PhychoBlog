@@ -18,6 +18,11 @@ from django.urls import path, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from .settings import site_name
+
+admin.site.site_header = site_name
+admin.site.site_title = site_name
+admin.site.index_title = "Добро пожаловать"
 
 urlpatterns = [
     path('author/create/', views.PersonCreate.as_view(), name='person_create'),

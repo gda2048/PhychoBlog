@@ -132,3 +132,4 @@ MEDIA_URL = '/images/'
     print(MEDIA_ROOT)
     print(PROJECT_ROOT)
 '''
+site_name = 'Art Of Life'
