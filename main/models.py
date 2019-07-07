@@ -4,7 +4,6 @@ Stores all models of the project
 from django.db import models
 from psycho.settings import MEDIA_ROOT
 from django.contrib.auth.models import User
-from .managers import PeopleManager
 
 
 class Person(models.Model):
@@ -21,7 +20,6 @@ class Person(models.Model):
     photo = models.FilePathField('Фотография', path=MEDIA_ROOT, null=True, blank=True)
     password = models.CharField('Пароль', max_length=50)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', null=True, blank=True)
-    objects = PeopleManager()
 
     def save(self, *args, **kwargs):
         if self.user:
