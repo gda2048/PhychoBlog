@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib.auth.models import User, Group
 from main.models import Achievement, Person, Article, Announcement, HelpItem
 
 
@@ -14,5 +13,6 @@ admin.site.register(Achievement)
 admin.site.register(Article)
 admin.site.register(Announcement)
 admin.site.register(HelpItem)
+# from django.contrib.auth.models import User, Group
 # TODO admin.site.unregister(User)
 # TODO admin.site.unregister(Group)

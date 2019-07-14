@@ -1,9 +1,10 @@
 """
 Stores all models of the project
 """
-from django.db import models
-from psycho.settings import MEDIA_ROOT
 from django.contrib.auth.models import User
+from django.db import models
+
+from psycho.settings import MEDIA_ROOT
 
 
 class Person(models.Model):

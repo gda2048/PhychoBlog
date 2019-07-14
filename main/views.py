@@ -1,10 +1,9 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.contrib.auth.models import User
-from .models import Person, Achievement, Announcement, Article, HelpItem
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView
 from django import forms
+from django.shortcuts import render
+from django.views.generic import ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+from .models import Person, Achievement, Announcement, Article, HelpItem
 
 
 class PersonCreate(CreateView):
