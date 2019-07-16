@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-{% load staticfiles %}
+{% extends 'base.html' %}
+{% block title %}  Специалисты {% endblock %}
+{% block content %}
 <a href="{%  url 'person_create' %}"><p>Добавить специалиста</p></a>
 {% if authors_list %}
     <ul>
@@ -30,4 +31,4 @@
     <h3>Специалисты</h3>
     <p> Специалистов не найдено </p>
 {% endif %}
-<a href="{%  url 'main' %}"><p>На главную</p></a>
+{% endblock %}

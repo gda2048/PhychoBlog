@@ -47,12 +47,14 @@ class ArticleCreate(CreateView):
     model = Article
     template_name = 'post.html'
     success_url = '/article/'
+    fields = ['name', 'content', 'content_min', 'author']
 
 
 class ArticleUpdate(UpdateView):
     model = Article
     template_name = 'post.html'
     success_url = '/article/'
+    fields = ['name', 'content', 'content_min', 'author']
 
 
 class ArticleDelete(DeleteView):

@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-{% load staticfiles %}
+{% extends 'base.html' %}
+{% block title %} Блог {% endblock %}
+{% block content %}
 <a href="{%  url 'article_create' %}"><p>Добавить статью</p></a>
 <ul>
     {% for article in articles_list %}
@@ -15,3 +16,4 @@
     {% endfor %}
 </ul>
 <a href="{%  url 'main' %}"><p>На главную</p></a>
+{% endblock %}

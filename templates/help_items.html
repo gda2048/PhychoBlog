@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-{% load staticfiles %}
+{% extends 'base.html' %}
+{% block title %} Помощь {% endblock %}
+{% block content %}
 <a href="{%  url 'help_item_create' %}"><p>Добавить пункт помощи</p></a>
 <ul>
     {% for help_item in help_item_list %}
@@ -11,4 +12,4 @@
     <hr>
     {% endfor %}
 </ul>
-<a href="{%  url 'main' %}"><p>На главную</p></a>
+{% endblock %}

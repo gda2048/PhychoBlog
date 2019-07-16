@@ -178,3 +178,30 @@ class ArticlePhotoReport(PhotoItem):
         db_table = 'photos'
         verbose_name = 'Фото для статьи'
         verbose_name_plural = 'Фото для статьи'
+
+
+EventType = (
+    ('common', 'Обучение для всех'),
+    ('prof', 'Обучение для профессионалов'),
+    ('personal', 'Программы личностного роста'),
+    ('university', 'Базовое психологическое образование в хгак'),
+)
+
+
+class Event(models.Model):
+    """
+    Stores information about a single event
+    """
+    id = models.AutoField(primary_key=True)
+    name = models.CharField("Название", max_length=50)
+    content = models.TextField("Контент", max_length=200, blank=True, null=True)
+    start_date = models.DateField('Дата начала мероприятия')
+    duration = models.CharField('Длительность', max_length=20, blank=True, null=True)
+
+    class Meta:
+        """
+        Event model settings
+        """
+        db_table = 'events'
+        verbose_name = 'Мероприятие'
+        verbose_name_plural = 'Мероприятия'
