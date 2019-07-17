@@ -1,1 +1,1 @@
-web: python PsychoBlog/manage.py runserver 0.0.0.0:$PORT --noreload
+web: python PhychoBlog/manage.py runserver 0.0.0.0:$PORT --noreload
