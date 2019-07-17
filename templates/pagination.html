@@ -1,15 +1,52 @@
 {% if is_paginated %}
-            <div class="pagination">
-            <span class="page-links">
-                {% if page_obj.has_previous %}
-                    <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }} </a>
+    <hr>
+    <nav aria-label="Page navigation example" class="fixed-bottom mb-5">
+        <ul class="pagination justify-content-center pagination-lg">
+            {% if page_obj.has_previous %}
+                <!-- If it ain't a search result display, don't append the search query
+                     to the URL. -->
+                {% if not search %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}"
+                           tabindex="-1">Предыдущая</a>
+                    </li>
+                {% else %}
+                    <!-- Append the searched query to the URL, so that on a search results page,
+                         the pagination don't revert to listing all the listview items. -->
+                    <li class="page-item">
+                        <a class="page-link" href="?{{ search }}&page={{ page_obj.previous_page_number }}"
+                           tabindex="-1">Предыдущая</a>
+                    </li>
                 {% endif %}
-                <span class="page-current">
-                    {{ page_obj.number }}
-                </span>
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Предыдущая</a>
+                </li>
+            {% endif %}
+            {% for object in page_obj.paginator.page_range %}
+                {% ifequal page_obj.number forloop.counter %}
+                    <li class="page-item disabled"><a class="page-link"
+                                                      href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link"
+                                             href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+                {% endifequal %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                {% if not search %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?{{ search }}&page={{ page_obj.next_page_number }}">Следующая</a>
+                    </li>
                 {% endif %}
-            </span>
-            </div>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Следующая</a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
 {% endif %}
