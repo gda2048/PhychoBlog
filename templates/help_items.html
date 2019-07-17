@@ -1,15 +1,13 @@
 {% extends 'base.html' %}
 {% block title %} Помощь {% endblock %}
 {% block content %}
-<a href="{%  url 'help_item_create' %}"><p>Добавить пункт помощи</p></a>
-<ul>
-    {% for help_item in help_item_list %}
-        <li>{{ help_item.name }}<br>
-        {{ help_item.description }}
-        <a href="{%  url 'help_item_update' pk=help_item.id %}"><p>Обновить информацию про помощь</p></a>
-        <a href="{%  url 'help_item_delete' pk=help_item.id %}"><p>Удалить пункт помощи</p></a>
-        </li>
-    <hr>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for help_item in help_item_list %}
+            <li>{{ help_item.name }}<br>
+                {{ help_item.description | linebreaks }}
+
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
 {% endblock %}

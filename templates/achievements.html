@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html lang="ru">
-<head>
-    <title>Achievement</title>
-</head>
-<body>
-<a href="{% url 'achievement_create' %}"><p>Добавить достижение</p></a>
-<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around;">
-    {% for achievement in achievement_list %}
-    <div style="height: 30%; width: 30%; text-align: center;">
-        {{ achievement.alt }} pr - {{ achievement.priority }}<br>
-        <img src="{{ achievement.photo.url }}" alt="{{ achievement.alt }}" style="max-width: 100%; max-height: 100%;">
-        <a href="{% url 'achievement_update' pk=achievement.id %}"><p>Обновить информацию про достижение</p></a>
-        <a href="{% url 'achievement_delete' pk=achievement.id %}"><p>Удалить достижение</p></a>
+{% extends 'base.html' %}
+{% block title %} Достижения {% endblock %}
+{% block content %}
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around;">
+        {% for achievement in achievement_list %}
+            <div style="height: 30%; width: 30%; text-align: center;">
+                {{ achievement.alt }} pr - {{ achievement.priority }}<br>
+                <img src="{{ achievement.photo.url }}" alt="{{ achievement.alt }}"
+                     style="max-width: 100%; max-height: 100%;">
+            </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
-<a href="{% url 'main' %}"><p>На главную</p></a>
-</body>
-</html>
+{% endblock %}

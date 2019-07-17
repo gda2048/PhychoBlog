@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top row justify-content-around font-weight-bold mw-100">
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top row justify-content-around font-weight-bold mw-100">
     <a class="navbar-brand col-4" href="/">Art Of Life</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,12 +23,13 @@
                     Обучение
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'article_list' %}">Обучение специалистов</a>
-                    <a class="dropdown-item" href="{% url 'article_list' %}">Обучение для всех</a>
+                    <a class="dropdown-item" href="{% url 'event_list' %}">Обучение специалистов</a>
+                    <a class="dropdown-item" href="{% url 'event_list' %}">Обучение для всех</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'article_list' %}">Базовое психологическое образование в ХДАК</a>
+                    <a class="dropdown-item" href="{% url 'event_list' %}">Базовое психологическое образование в
+                        ХДАК</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'article_list' %}">Программы личностного роста</a>
+                    <a class="dropdown-item" href="{% url 'event_list' %}">Программы личностного роста</a>
                 </div>
             </li>
             <li class="nav-item col-lg-3">
@@ -55,11 +56,11 @@
         </ul>
     </div>
 </nav>
-    {% block content %}{% endblock %}
+{% block content %}{% endblock %}
 
 
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
 
 </body>
 </html>

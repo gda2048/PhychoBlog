@@ -191,6 +191,7 @@ class Achievement(PhotoItem):
         """
         db_table = 'achievements'
         verbose_name = 'Достижение'
+        ordering = ['-priority']
         verbose_name_plural = 'Достижения'
 
 

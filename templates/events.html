@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} Мероприятия {% endblock %}
+{% block content %}
+    <ul>
+        {% for event_item in event_list %}
+            <li>{{ event_item.name }}<br>
+                {{ event_item.content | linebreaks }}<br>
+                {{ event_item.start_date }}<br>
+                {{ event_item.duration }}<br>
+                {{ event_item.type }}<br>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% endblock %}
