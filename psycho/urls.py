@@ -34,9 +34,10 @@ urlpatterns = [
     path('achievement/', views.AchievementListView.as_view(), name='achievement_list'),
 
     path('help_item/', views.HelpItemListView.as_view(), name='help_item_list'),
-    path('event/', views.EventListView.as_view(), name='event_list'),
 
     path('admin/', admin.site.urls),
     path('', views.main, name='main'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+urlpatterns += [
+    re_path('^event/(?P<type>[a-zA-Z0-9-]+)/$', views.EventListView.as_view(), name='event_list'),
+]

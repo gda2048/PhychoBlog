@@ -23,13 +23,13 @@
                     Обучение
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'event_list' %}">Обучение специалистов</a>
-                    <a class="dropdown-item" href="{% url 'event_list' %}">Обучение для всех</a>
+                    <a class="dropdown-item" href="{% url 'event_list' type='common' %}">Обучение специалистов</a>
+                    <a class="dropdown-item" href="{% url 'event_list' type='prof' %}">Обучение для всех</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'event_list' %}">Базовое психологическое образование в
+                    <a class="dropdown-item" href="{% url 'event_list' type='university' %}">Базовое психологическое образование в
                         ХДАК</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'event_list' %}">Программы личностного роста</a>
+                    <a class="dropdown-item" href="{% url 'event_list' type='personal' %}">Программы личностного роста</a>
                 </div>
             </li>
             <li class="nav-item col-lg-3">
