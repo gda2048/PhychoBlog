@@ -37,6 +37,7 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('', views.main, name='main'),
+    path('shop/', views.shop, name='shop'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += [
     re_path('^event/(?P<type>[a-zA-Z0-9-]+)/$', views.EventListView.as_view(), name='event_list'),

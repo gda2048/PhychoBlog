@@ -5,9 +5,11 @@
         {% for help_item in help_item_list %}
             <li>{{ help_item.name }}<br>
                 {{ help_item.description | linebreaks }}
-
             </li>
             <hr>
         {% endfor %}
+        {% block pagination %}
+            {% include 'pagination.html' %}
+        {% endblock %}
     </ul>
 {% endblock %}

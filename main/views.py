@@ -8,14 +8,14 @@ class PersonListView(ListView):
     model = Person
     template_name = 'people.html'
     context_object_name = 'authors_list'
-    paginate_by = 4
+    paginate_by = 1
 
 
 class ArticleListView(ListView):
     model = Article
     template_name = 'articles.html'
     context_object_name = 'articles_list'
-    paginate_by = 3
+    paginate_by = 1
 
 
 class AnnouncementListView(ListView):
@@ -43,7 +43,7 @@ class EventListView(ListView):
     model = Event
     template_name = 'events.html'
     context_object_name = 'event_list'
-    paginate_by = 2
+    paginate_by = 1
 
     def get_queryset(self):
         return Event.objects.filter(type=self.kwargs['type'])
@@ -51,3 +51,7 @@ class EventListView(ListView):
 
 def main(request):
     return render(request, 'main.html')
+
+
+def shop(request):
+    return render(request, 'shop.html')

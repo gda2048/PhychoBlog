@@ -10,5 +10,8 @@
 
             <hr>
         {% endfor %}
+        {% block pagination %}
+            {% include 'pagination.html' %}
+        {% endblock %}
     </ul>
 {% endblock %}

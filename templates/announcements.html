@@ -8,22 +8,9 @@
                 {{ announcement.content }}<br>
                 <hr>
             </div>
-
         {% endfor %}
-        {% if is_paginated %}
-            <div class="pagination">
-            <span class="page-links">
-                {% if page_obj.has_previous %}
-                    <a href="/announcement?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }} </a>
-                {% endif %}
-                <span class="page-current">
-                    {{ page_obj.number }}
-                </span>
-                {% if page_obj.has_next %}
-                    <a href="/announcement?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
-                {% endif %}
-            </span>
-            </div>
-        {% endif %}
+        {% block pagination %}
+            {% include 'pagination.html' %}
+        {% endblock %}
     </div>
 {% endblock %}
