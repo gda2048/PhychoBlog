@@ -3,6 +3,9 @@ from main.models import Achievement, Person, Article, Announcement, HelpItem, Ev
 
 
 class PersonAdmin(admin.ModelAdmin):
+    exclude = ['user']
+    list_display = ('full_name', 'name', 'email')
+
     def delete_queryset(self, request, queryset):
         for person in queryset:
             person.delete()

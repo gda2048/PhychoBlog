@@ -4,7 +4,7 @@ Stores all models of the project
 from django.contrib.auth.models import User
 from django.db import models
 
-from psycho.settings import MEDIA_ROOT
+from psycho.settings import MEDIA_ROOT, st_password
 
 
 class Person(models.Model):
@@ -13,20 +13,19 @@ class Person(models.Model):
     """
     id = models.AutoField(primary_key=True)
     full_name = models.CharField('Полное имя', max_length=50)
-    name = models.CharField('Имя', max_length=20, unique=True)
+    name = models.CharField('Логин', max_length=20, unique=True)
     birth_date = models.DateField('Дата рождения')
     email = models.EmailField()
     info = models.TextField('Основная информация', blank=True)
     bio = models.TextField('Биография', blank=True)
     photo = models.FilePathField('Фотография', path=MEDIA_ROOT, null=True, blank=True)
-    password = models.CharField('Пароль', max_length=50)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', null=True, blank=True)
 
     def save(self, *args, **kwargs):
         if self.user:
             user = User.objects.get(id=self.user.id)
             user.username, user.email = self.name, self.email
-            user.set_password(self.password)
+            user.set_password(st_password)
             user.save()
         else:
             user = User.objects.create_user(self.name, self.email, self.password)

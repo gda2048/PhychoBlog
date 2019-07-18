@@ -124,3 +124,5 @@ MEDIA_URL = '/images/'
     print(PROJECT_ROOT)
 '''
 site_name = 'Art Of Life'
+st_password = '12345678'
+
