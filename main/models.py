@@ -32,6 +32,9 @@ class Person(models.Model):
             user = User.objects.create_user(self.name, self.email, self.password)
             user.save()
             self.user = user
+            user.groups.add(1)
+            user.is_staff = True
+            user.save()
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
