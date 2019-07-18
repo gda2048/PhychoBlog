@@ -25,10 +25,9 @@ class Person(models.Model):
         if self.user:
             user = User.objects.get(id=self.user.id)
             user.username, user.email = self.name, self.email
-            user.set_password(st_password)
             user.save()
         else:
-            user = User.objects.create_user(self.name, self.email, self.password)
+            user = User.objects.create_user(self.name, self.email, st_password)
             user.save()
             self.user = user
             user.groups.add(1)
