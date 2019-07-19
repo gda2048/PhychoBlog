@@ -4,10 +4,30 @@ Stores all models of the project
 from django.contrib.auth.models import User
 from django.db import models
 
-from psycho.settings import MEDIA_ROOT, st_password
+from psycho.settings import st_password
 
 
-class Person(models.Model):
+class PhotoItem(models.Model):
+    """
+    Abstract
+    help to store information about the photo
+    """
+    id = models.AutoField(primary_key=True)
+    photo = models.ImageField('Изображение', height_field='height', width_field='width', null=True, blank=True)
+    alt = models.TextField("Описание фото", max_length=200, blank=True)
+    height = models.PositiveIntegerField(null=True, blank=True)
+    width = models.PositiveIntegerField(null=True, blank=True)
+
+    class Meta:
+        """
+        PhotoItem model settings
+        """
+        abstract = True
+        verbose_name = 'Картинка'
+        verbose_name_plural = 'Картинки'
+
+
+class Person(PhotoItem):
     """
     Stores all information about a psychologist
     """
@@ -18,7 +38,6 @@ class Person(models.Model):
     email = models.EmailField()
     info = models.TextField('Основная информация', blank=True)
     bio = models.TextField('Биография', blank=True)
-    photo = models.FilePathField('Фотография', path=MEDIA_ROOT, null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', null=True, blank=True)
 
     def save(self, *args, **kwargs):
@@ -65,14 +84,14 @@ EventType = (
 )
 
 
-class Event(models.Model):
+class Event(PhotoItem):
     """
     Stores information about a single event
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField("Название", max_length=50)
     content = models.TextField("Контент", max_length=200, blank=True, null=True)
-    start_date = models.DateField('Дата начала мероприятия')
+    start_date = models.DateTimeField('Дата начала мероприятия')
     duration = models.CharField('Длительность', max_length=20, blank=True, null=True)
     type = models.CharField(max_length=20, choices=EventType, default='common')
 
@@ -96,7 +115,7 @@ class Article(models.Model):
     name = models.CharField("Название", max_length=50)
     content = models.TextField("Контент", blank=True)
     content_min = models.TextField("Миниверсия статьи", max_length=300, blank=True)
-    release_date = models.DateField("Дата выпуска статьи", auto_now=True)
+    release_date = models.DateTimeField("Дата выпуска статьи", auto_now_add=True)
     author = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Автор')
 
     def __str__(self):
@@ -141,7 +160,7 @@ class HelpItem(models.Model):
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField("Название", max_length=50)
-    description = models.TextField("Описание", max_length=200)
+    description = models.TextField("Описание", null=True, blank=True, max_length=200)
     expert = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Эксперт')
 
     def __str__(self):
@@ -154,26 +173,6 @@ class HelpItem(models.Model):
         db_table = 'help'
         verbose_name = 'Пункт помощи'
         verbose_name_plural = 'Пункты помощи'
-
-
-class PhotoItem(models.Model):
-    """
-    Abstract
-    help to store information about the photo
-    """
-    id = models.AutoField(primary_key=True)
-    alt = models.CharField("Описание", max_length=200, blank=True)
-    height = models.PositiveIntegerField(null=True, blank=True)
-    width = models.PositiveIntegerField(null=True, blank=True)
-    photo = models.ImageField('Изображение', height_field='height', width_field='width', null=True)
-
-    class Meta:
-        """
-        PhotoItem model settings
-        """
-        abstract = True
-        verbose_name = 'Картинка'
-        verbose_name_plural = 'Картинки'
 
 
 class Achievement(PhotoItem):
@@ -200,8 +199,10 @@ class ArticlePhotoReport(PhotoItem):
     """
     Stores photos for articles
     """
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, blank=True, verbose_name="Статья")
-    announcement = models.BooleanField("Добавить в анонсы", default=False)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name="Статья")
+
+    def __str__(self):
+        return self.alt
 
     class Meta:
         """

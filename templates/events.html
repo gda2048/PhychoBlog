@@ -8,6 +8,10 @@
                 {{ event_item.start_date }}<br>
                 {{ event_item.duration }}<br>
                 {{ event_item.type }}<br>
+                {% if  event_item.photo %}
+                <img src="{{ event_item.photo.url }}" alt="{{ event_item.alt }}"
+                     style="max-width: 100%; max-height: 100%;">
+                {% endif %}
             </li>
             <hr>
         {% endfor %}
