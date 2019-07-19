@@ -6,15 +6,17 @@
     <meta charset="UTF-8">
     <title>{% block title %}Title{% endblock %}</title>
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/psycho.css' %}" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top row justify-content-around font-weight-bold mw-100">
+<body class="container-fluid">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top row justify-content-around font-weight-bold">
     <a class="navbar-brand col-4" href="/">Art Of Life</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon    "></span>
+        <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse col-8" id="navbarSupportedContent">
         <ul class="navbar-nav container-fluid row justify-content-around">
@@ -24,13 +26,13 @@
                     Обучение
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'event_list' type='common' %}">Обучение специалистов</a>
-                    <a class="dropdown-item" href="{% url 'event_list' type='prof' %}">Обучение для всех</a>
+                    <a class="dropdown-item wh-n" href="{% url 'event_list' type='common' %}">Обучение специалистов</a>
+                    <a class="dropdown-item wh-n" href="{% url 'event_list' type='prof' %}">Обучение для всех</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'event_list' type='university' %}">Базовое психологическое образование в
+                    <a class="dropdown-item wh-n" href="{% url 'event_list' type='university' %}">Базовое психологическое образование в
                         ХДАК</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'event_list' type='personal' %}">Программы личностного роста</a>
+                    <a class="dropdown-item wh-n" href="{% url 'event_list' type='personal' %}">Программы личностного роста</a>
                 </div>
             </li>
             <li class="nav-item col-lg-3">
