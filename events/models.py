@@ -15,7 +15,7 @@ class Event(PhotoItem):
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField("Название", max_length=50)
-    content = models.TextField("Контент", max_length=200, blank=True, null=True)
+    content = models.TextField("Описание мероприятия", max_length=200, blank=True, null=True)
     start_date = models.DateTimeField('Дата начала мероприятия')
     duration = models.CharField('Длительность', max_length=20, blank=True, null=True)
     type = models.CharField('Тип', max_length=20, choices=EventType, default='common')
@@ -38,7 +38,7 @@ class Announcement(models.Model):
     """
     id = models.AutoField(primary_key=True)
     name = models.CharField("Название", max_length=50)
-    content = models.TextField("Контент", max_length=200, blank=True)
+    content = models.TextField("Описание анонса", max_length=200, blank=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name="Мероприятие")
     main = models.BooleanField("Отображать вверху", default=False)
 

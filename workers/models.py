@@ -10,11 +10,13 @@ class Person(PhotoItem):
     Stores all information about a psychologist
     """
     id = models.AutoField(primary_key=True)
-    full_name = models.CharField('Полное имя', max_length=50)
-    name = models.CharField('Логин', max_length=20, unique=True)
+    full_name = models.CharField('Имя', max_length=50)
+    name = models.CharField('Логин', max_length=20, unique=True,
+                            help_text='Уникальный логин. При входе в систему его нужно будет указывать. ')
     birth_date = models.DateField('Дата рождения')
     email = models.EmailField()
-    info = models.TextField('Основная информация', blank=True)
+    info = models.TextField('Основная информация', blank=True,
+                            help_text='Хорошее краткое описание своей деятельности')
     bio = models.TextField('Биография', blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', null=True, blank=True)
 
@@ -79,7 +81,8 @@ class Achievement(PhotoItem):
     """
     Stores information about a single certificate or other proof of competence
     """
-    priority = models.IntegerField("Приоритет", default=2)
+    priority = models.IntegerField("Приоритет", default=2,
+                                   help_text='Чем больше приоритет, тем выше в списке будет достижение')
     expert = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Эксперт')
 
     def __str__(self):

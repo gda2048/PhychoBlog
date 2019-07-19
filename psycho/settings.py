@@ -120,12 +120,6 @@ STATICFILES_DIRS = (
 )
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static/images')
 MEDIA_URL = '/images/'
-
-'''
-    print(STATIC_ROOT)
-    print(MEDIA_ROOT)
-    print(PROJECT_ROOT)
-'''
 site_name = 'Art Of Life'
 st_password = '12345678'
 
