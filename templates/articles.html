@@ -7,6 +7,12 @@
             {{ article.author.name }}
             {{ article.release_date }}
             {{ article.content| linebreaks |title| truncatechars:'50' }}
+            {% for ph in article.photos.all %}
+                {% if ph.photo %}
+                <img src="{{ ph.photo.url }}" alt="{{ ph.alt }}"
+                     style="max-width: 100%; max-height: 100%;">
+                {% endif %}
+            {% endfor  %}
 
             <hr>
         {% endfor %}

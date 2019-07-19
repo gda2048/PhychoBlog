@@ -116,7 +116,7 @@ class Article(models.Model):
     content = models.TextField("Контент", blank=True)
     content_min = models.TextField("Миниверсия статьи", max_length=300, blank=True)
     release_date = models.DateTimeField("Дата выпуска статьи", auto_now_add=True)
-    author = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Автор')
+    author = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Автор', related_name='author')
 
     def __str__(self):
         return self.name
@@ -199,7 +199,7 @@ class ArticlePhotoReport(PhotoItem):
     """
     Stores photos for articles
     """
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name="Статья")
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name="Статья", related_name='photos')
 
     def __str__(self):
         return self.alt
