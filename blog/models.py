@@ -13,7 +13,8 @@ class Article(models.Model):
     content_min = models.TextField("Миниверсия статьи", max_length=300, blank=True,
                                    help_text='Как статья отображается в свернутом виде. Максимум 200 символов.')
     release_date = models.DateTimeField("Дата выпуска статьи", auto_now_add=True)
-    author = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Автор', related_name='author')
+    author = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Автор', related_name='author',
+                               null=True, blank=True)
 
     def __str__(self):
         return self.name

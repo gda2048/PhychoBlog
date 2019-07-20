@@ -24,9 +24,20 @@ class ArticleAdmin(admin.ModelAdmin):
     fields = ['name', 'author', 'content', 'content_min']
     inlines = [PictureInline]
 
+    def get_readonly_fields(self, request, obj=None):
+        if request.user.is_staff:
+            if request.user.is_superuser:
+                return []
+            else:
+                return ['author']
+
     def get_queryset(self, request):
         qs = super(ArticleAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         else:
             return qs.filter(author=request.user.profile)
+
+    def save_model(self, request, obj, *args):
+        obj.author = request.user.profile
+        super().save_model(request, obj, *args)
