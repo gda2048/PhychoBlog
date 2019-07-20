@@ -61,7 +61,7 @@ class HelpItem(models.Model):
     Stores information about the type of help
     """
     id = models.AutoField(primary_key=True)
-    name = models.CharField("Название", max_length=50)
+    name = models.CharField("Название", max_length=50, help_text='С чем работает эксперт?')
     description = models.TextField("Описание", null=True, blank=True, max_length=200)
     expert = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Эксперт')
 
