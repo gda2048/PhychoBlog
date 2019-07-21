@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+
 from main.models import PhotoItem
 
 EventType = (
@@ -23,6 +25,12 @@ class Event(PhotoItem):
     def __str__(self):
         return self.name
 
+    def is_outdated(self):
+        return 'Мероприятие прошло' if (self.start_date < timezone.now()) \
+            else str((self.start_date - timezone.now()).days)
+
+    is_outdated.short_description = 'Осталось дней'
+
     class Meta:
         """
         Event model settings
@@ -30,6 +38,7 @@ class Event(PhotoItem):
         db_table = 'events'
         verbose_name = 'Мероприятие'
         verbose_name_plural = 'Мероприятия'
+        ordering = ['-start_date']
 
 
 class Announcement(models.Model):
@@ -39,7 +48,7 @@ class Announcement(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField("Название", max_length=50)
     content = models.TextField("Описание анонса", max_length=200, blank=True)
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name="Мероприятие")
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name="Мероприятие", related_name='announcements')
     main = models.BooleanField("Отображать вверху", default=False)
 
     def __str__(self):

@@ -54,6 +54,7 @@ class Person(PhotoItem):
         db_table = 'people'
         verbose_name = 'Специалист'
         verbose_name_plural = 'Специалисты'
+        ordering = ['-user__is_superuser']
 
 
 class HelpItem(models.Model):
@@ -63,7 +64,7 @@ class HelpItem(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField("Название", max_length=50, help_text='С чем работает эксперт?')
     description = models.TextField("Описание", null=True, blank=True, max_length=200)
-    expert = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Эксперт')
+    expert = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Эксперт', related_name='help_items')
 
     def __str__(self):
         return self.name
@@ -83,7 +84,7 @@ class Achievement(PhotoItem):
     """
     priority = models.IntegerField("Приоритет", default=2,
                                    help_text='Чем больше приоритет, тем выше в списке будет достижение')
-    expert = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Эксперт')
+    expert = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Эксперт', related_name='achievements')
 
     def __str__(self):
         return self.alt

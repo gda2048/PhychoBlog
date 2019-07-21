@@ -12,11 +12,18 @@ class AnnouncementInline(admin.TabularInline):
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     exclude = ['width', 'height']
-    list_display = ('name', 'type')
+    list_display = ('name', 'type', 'announcement_count', 'is_outdated')
     list_filter = ('type',)
     fields = ['name', ('start_date', 'duration'), 'type', 'content', ('photo', 'img_preview'), 'alt']
     inlines = [AnnouncementInline]
     readonly_fields = ['img_preview']
+    list_per_page = 20
+    date_hierarchy = 'start_date'
+
+    def announcement_count(self, obj):
+        return obj.announcements.count()
+
+    announcement_count.short_description = 'Количество анонсов'
 
     def img_preview(self, obj):
         return mark_safe(

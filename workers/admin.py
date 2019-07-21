@@ -26,7 +26,7 @@ class AchievementInline(admin.TabularInline):
 
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'name', 'email')
+    list_display = ('full_name', 'name', 'email', 'achievement_count', 'help_item_count', 'is_superuser')
     fieldsets = (
         ('Для создание пользователя',
          {'fields': ('name', 'email')}),
@@ -36,6 +36,23 @@ class PersonAdmin(admin.ModelAdmin):
     )
     readonly_fields = ['img_preview']
     inlines = [AchievementInline, HelpItemInline]
+    list_per_page = 20
+
+    def is_superuser(self, obj):
+        return obj.user.is_superuser
+
+    is_superuser.short_description = 'Суперпользователь'
+    is_superuser.boolean = True
+
+    def achievement_count(self, obj):
+        return obj.achievements.count()
+
+    achievement_count.short_description = 'Количество достижений'
+
+    def help_item_count(self, obj):
+        return obj.help_items.count()
+
+    help_item_count.short_description = 'Количество пунктов помощи'
 
     def img_preview(self, obj):
         return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(url=obj.photo.url,

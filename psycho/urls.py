@@ -27,7 +27,7 @@ from .settings import site_name
 
 admin.site.site_header = site_name
 admin.site.site_title = site_name
-admin.site.index_title = "Добро пожаловать"
+admin.site.index_title = "Добро пожаловать в панель настроек " + site_name
 
 urlpatterns = [
                   path('author/', workers_view.PersonListView.as_view(), name='person_list'),

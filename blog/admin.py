@@ -20,9 +20,15 @@ class PictureInline(admin.TabularInline):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('name', 'release_date')
+    list_display = ('name', 'release_date', 'pictures_count')
     fields = ['name', 'author', 'content', 'content_min']
     inlines = [PictureInline]
+    list_per_page = 20
+
+    def pictures_count(self, obj):
+        return obj.photos.count()
+
+    pictures_count.short_description = 'Количество картинок'
 
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_staff:
