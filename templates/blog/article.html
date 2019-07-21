@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} {{ article.name }} {% endblock %}
+{% block content %}
+    {{ article.name }} <br>
+    {{ article.content }} <br>
+    {{ article.author.name }} <br>
+     {% for ph in article.photos.all %}
+                {% if ph.photo %}
+                <img src="{{ ph.photo.url }}" alt="{{ ph.alt }}"
+                     style="max-width: 100%; max-height: 100%;">
+                {% endif %}
+            {% endfor  %}
+
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from workers.models import Person, Achievement, HelpItem
 
 
@@ -21,3 +21,9 @@ class HelpItemListView(ListView):
     template_name = 'workers/help_items.html'
     context_object_name = 'help_item_list'
     paginate_by = 1
+
+
+class PersonDetailView(DetailView):
+    model = Person
+    queryset = Person.objects.all()
+    template_name = 'workers/worker.html'

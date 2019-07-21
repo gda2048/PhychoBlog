@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} {{ event.name }} {% endblock %}
+{% block content %}
+    {{ event.name }}<br>
+    {{ event.content | linebreaks }}<br>
+    {{ event.start_date }}<br>
+    {{ event.duration }}<br>
+    {{ event.type }}<br>
+    {% if  event.photo %}
+    <img src="{{ event.photo.url }}" alt="{{ event.alt }}"
+         style="max-width: 100%; max-height: 100%;">
+    {% endif %}
+
+{% endblock %}

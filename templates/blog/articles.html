@@ -6,6 +6,7 @@
             <li>{{ article.name }}</li>
             {{ article.author.name }}
             {{ article.release_date }}
+            <a href = '{% url 'article' pk=article.id %}'>Посмотреть</a>
             {{ article.content| linebreaks |title| truncatechars:'50' }}
             {% for ph in article.photos.all %}
                 {% if ph.photo %}

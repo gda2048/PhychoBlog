@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from events.models import Event, Announcement
 
 
@@ -17,3 +17,9 @@ class AnnouncementListView(ListView):
     template_name = 'events/announcements.html'
     context_object_name = 'announcement_list'
     paginate_by = 1
+
+
+class EventDetailView(DetailView):
+    model = Event
+    queryset = Event.objects.all()
+    template_name = 'events/event.html'

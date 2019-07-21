@@ -5,7 +5,9 @@
         <ul>
             {% for person in authors_list %}
                 <li>{{ person.name }}</li>
-                {{ person.email }}
+                {{ person.email }}<br>
+                 <a href = '{% url 'person' pk=person.id %}'>Посмотреть</a>
+
                 {% if person.photo %}
                 <img src="{{ person.photo.url }}" alt="{{ person.alt }}"
                      style="max-width: 100%; max-height: 100%;">

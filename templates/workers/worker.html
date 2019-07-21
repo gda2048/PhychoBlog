@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}  Специалисты {% endblock %}
+{% block content %}
+            <li>{{ person.name }}</li>
+            {{ person.email }}
+            {% if person.photo %}
+            <img src="{{ person.photo.url }}" alt="{{ person.alt }}"
+                 style="max-width: 100%; max-height: 100%;">
+            {% endif %}
+{% endblock %}
