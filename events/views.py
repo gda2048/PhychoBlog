@@ -4,7 +4,7 @@ from events.models import Event, Announcement
 
 class EventListView(ListView):
     model = Event
-    template_name = 'events.html'
+    template_name = 'events/events.html'
     context_object_name = 'event_list'
     paginate_by = 1
 
@@ -14,6 +14,6 @@ class EventListView(ListView):
 
 class AnnouncementListView(ListView):
     model = Announcement
-    template_name = 'announcements.html'
+    template_name = 'events/announcements.html'
     context_object_name = 'announcement_list'
     paginate_by = 1

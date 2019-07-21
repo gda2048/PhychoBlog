@@ -73,6 +73,7 @@ class HelpItem(models.Model):
         """
         HelpItem model settings
         """
+        ordering = ['-id']
         db_table = 'help'
         verbose_name = 'Пункт помощи'
         verbose_name_plural = 'Пункты помощи'

@@ -16,13 +16,9 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, re_path
-from django.views.generic import RedirectView
+from django.urls import path, include
 
-import blog.views as blog_view
-import events.views as event_view
-import main.views as main_view
-import workers.views as workers_view
+from django.views.generic.base import RedirectView
 from .settings import site_name
 
 admin.site.site_header = site_name
@@ -30,21 +26,10 @@ admin.site.site_title = site_name
 admin.site.index_title = "Добро пожаловать в панель настроек " + site_name
 
 urlpatterns = [
-                  path('author/', workers_view.PersonListView.as_view(), name='person_list'),
-
-                  path('article/', blog_view.ArticleListView.as_view(), name='article_list'),
-
-                  path('announcement/', event_view.AnnouncementListView.as_view(), name='announcement_list'),
-
-                  path('achievement/', workers_view.AchievementListView.as_view(), name='achievement_list'),
-
-                  path('help_item/', workers_view.HelpItemListView.as_view(), name='help_item_list'),
-
-                  path('admin/', admin.site.urls),
-                  path('', main_view.main, name='main'),
-                  path('shop/', main_view.shop, name='shop'),
-
+                path('', RedirectView.as_view(pattern_name='announcement_list'), name='main'),
+                path('blog/', include('blog.urls')),
+                path('', include('main.urls')),
+                path('events/', include('events.urls')),
+                path('workers/', include('workers.urls')),
+                path('admin/', admin.site.urls),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += [
-    re_path('^event/(?P<type>[a-zA-Z0-9-]+)/$', event_view.EventListView.as_view(), name='event_list'),
-]
