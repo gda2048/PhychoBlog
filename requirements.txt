@@ -1,5 +1,4 @@
 Django==2.2.3
-django-bootstrap4==0.0.8
 dj-database-url==0.5.0
 gunicorn==19.9.0
 Pillow==6.1.0
