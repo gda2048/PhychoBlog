@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load bootstrap4 %}
+{%  bootstrap_css %}
+{%  bootstrap_javascript jquery='full' %}
+
 <html lang="ru">
 
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Title{% endblock %}</title>
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+
+
     <link href="{% static 'css/psycho.css' %}" rel="stylesheet" type="text/css">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,8 +67,6 @@
 {% block content %}{% endblock %}
 
 
-<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
 
 </body>
 </html>

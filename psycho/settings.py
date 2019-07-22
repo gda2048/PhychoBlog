@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'events.apps.EventsConfig',
     'blog.apps.BlogConfig',
     'workers.apps.WorkersConfig',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
