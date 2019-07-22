@@ -1,3 +1,10 @@
 .wh-n{
     white-space: normal;
 }
+.h100{
+    height: 100vh;
+}
+.center{
+    position: relative;
+    top: 30%;
+}

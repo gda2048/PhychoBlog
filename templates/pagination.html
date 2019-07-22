@@ -1,7 +1,7 @@
 {% if is_paginated %}
     <hr>
     <nav aria-label="Page navigation example" class="fixed-bottom mb-5">
-        <ul class="pagination justify-content-center pagination-lg">
+        <ul class="pagination flex-wrap justify-content-center">
             {% if page_obj.has_previous %}
                 <!-- If it ain't a search result display, don't append the search query
                      to the URL. -->
