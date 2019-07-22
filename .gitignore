@@ -9,3 +9,8 @@ main/__pycache__/
 
 __pycache__/
 
+settings.ini
+
+
+
+psycho/staticfiles/
