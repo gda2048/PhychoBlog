@@ -11,3 +11,51 @@
 .carousel-inner > carousel-item > img {
 margin: 0 auto;
 }
+
+.h600{
+    height: 600px; !important;
+}
+.h300{
+    height: 300px; !important;
+}
+
+.bg-psycho-blue{
+    background-color: #005B9A;
+}
+.text-psycho-blue{
+    color: #005B9A;
+}
+
+.bg-psycho-lightblue{
+    background-color: #0191C8;
+}
+.text-psycho-lightblue{
+    color: #0191C8;
+}
+
+.bg-psycho-teal{
+    background-color: #74C2E1;
+}
+.text-psycho-teal{
+    color: #74C2E1;
+}
+
+.text-psycho-grayorange{
+    color: #8C8984;
+}
+
+.bg-psycho-pearlbush{
+    background-color: #d7e5e5;
+}
+
+.link-blue{
+    color: #005B9A;
+}
+.link-blue:visited{
+    color: #005B9A;
+}
+
+.page-link{
+    background-color: #005B9A;
+    color: white;
+}
