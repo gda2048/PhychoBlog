@@ -24,7 +24,7 @@ class Article(models.Model):
         Article model settings
         """
         db_table = 'articles'
-        ordering = ['release_date']
+        ordering = ['-release_date']
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
 

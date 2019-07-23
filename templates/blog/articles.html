@@ -4,6 +4,12 @@
 {% endblock %}
 {% block title %} Блог {% endblock %}
 {% block content %}
+    <div class="jumbotron mt-2 p-3 p-md-5 text-white rounded bg-psycho-teal">
+        <div class="col-md-6 px-0">
+          <h3 class="font-italic">Блог Art Of Life</h3>
+          <p class="lead my-3">Статьи специалистов нашей команды о психологии</p>
+        </div>
+    </div>
     <div>
         <div class="row">
         {% for article in articles_list %}
@@ -17,7 +23,7 @@
                     </span>
                 </div>
                 <div class="card-body border bg-psycho-pearlbush">
-                    <div> {{ article.content| linebreaks |title| truncatechars:'300' }}</div>
+                    <p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p>
                 </div>
               <div class="card-footer bg-psycho-teal text-right">
                   <b><a class='btn bg-psycho-pearlbush text-psycho-blue ' href = '{% url 'article' pk=article.id %}'>Посмотреть</a></b>

@@ -2,7 +2,7 @@
 {% block title %} {{ article.name }} {% endblock %}
 {% block content %}
     {{ article.name }} <br>
-    {{ article.content }} <br>
+    <p class="mr-auto text-justify">{{ article.content | linebreaksbr| safe }} <br></p>
     {{ article.author.name }} <br>
 
     <div id="carouselExampleIndicators1" class="carousel slide d-none d-lg-block " data-ride="carousel">
