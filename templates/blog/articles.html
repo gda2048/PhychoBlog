@@ -1,35 +1,39 @@
 {% extends 'base.html' %}
 {% block link %}
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 {% endblock %}
 {% block title %} Блог {% endblock %}
 {% block content %}
     <div class="jumbotron mt-2 p-3 p-md-5 text-white rounded bg-psycho-teal">
         <div class="col-md-6 px-0">
-          <h3 class="font-italic">Блог Art Of Life</h3>
-          <p class="lead my-3">Статьи специалистов нашей команды о психологии</p>
+            <h3 class="font-italic">Блог Art Of Life</h3>
+            <p class="lead my-3">Статьи специалистов нашей команды о психологии</p>
         </div>
     </div>
     <div>
-        <div class="row">
-        {% for article in articles_list %}
-            <div class="card col-sm-12 col-md-6 col-lg-4 border-0 my-2" data-aos="flip-right">
-                <div class="card-header bg-psycho-lightblue text-light">
-                    <h3>{{ article.name }}</h3>
-                    <span>
-                        <b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"> {{ article.author.full_name }}</a></b>
-                        <span class="d-xl-none"><br></span>
-                        от {{ article.release_date | date:"d E Y" }}
-                    </span>
+        <div class="row justify-content-around mx-5">
+            {% for article in articles_list %}
+                <div class="card col-12 col-sm-12 col-md-12 col-xl-3 m-5 border-0 bg-psycho-pearlbush"
+                     data-aos="flip-right">
+                    <div class="card-header bg-psycho-pearlbush">
+                            <h3 class="text-psycho-blue">{{ article.name }}</h3>
+                            <div class="text-psycho-lightblue text-center">
+                                <b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"> <i
+                                        class="fas fa-user"></i> {{ article.author.full_name }}</a></b>
+                                <span class="d-xl-none"><br></span>&nbsp;
+                                <i class="fas fa-calendar"></i> <i>{{ article.release_date | date:"d E Y" }}</i>
+                            </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p>
+                    </div>
+                    <div class="card-footer text-right border-0 bg-psycho-pearlbush">
+                        <b><a class='btn bg-psycho-teal text-psycho-blue ' href='{% url 'article' pk=article.id %}'>Читать далее...</a></b>
+                    </div>
                 </div>
-                <div class="card-body border bg-psycho-pearlbush">
-                    <p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p>
-                </div>
-              <div class="card-footer bg-psycho-teal text-right">
-                  <b><a class='btn bg-psycho-pearlbush text-psycho-blue ' href = '{% url 'article' pk=article.id %}'>Посмотреть</a></b>
-              </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
         </div>
         {% block pagination %}
             {% include 'pagination.html' %}
@@ -41,4 +45,31 @@
     <script>
         AOS.init();
     </script>
+    {% block onload %}
+        <script>
+            function sleep(milliseconds) {
+                let start = new Date().getTime();
+                for (let i = 0; i < 1e7; i++) {
+                    if ((new Date().getTime() - start) > milliseconds) {
+                        break;
+                    }
+                }
+            }
+
+            window.onload = function () {
+                sleep(1000);
+                document.getElementById('preloader').classList.add('d-none');
+                document.getElementById('body').classList.remove('d-none');
+                let l = 0;
+                let lst = document.getElementsByClassName("card-header");
+                for (let i = 0; i < lst.length; ++i) {
+                    l = Math.max(lst[i].offsetHeight, l)
+                }
+                for (let i = 0; i < lst.length; ++i) {
+                    lst[i].style.height = l.toString() + "px";
+                }
+            }
+        </script>
+
+    {% endblock %}
 {% endblock %}
