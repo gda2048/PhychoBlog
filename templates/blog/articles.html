@@ -1,24 +1,26 @@
 {% extends 'base.html' %}
+{% block link %}
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
 {% block title %} Блог {% endblock %}
 {% block content %}
     <div>
         <div class="row">
         {% for article in articles_list %}
-            <div class="card col-sm-12 col-md-6 col-lg-4 border-0 my-2">
-                <div class="card-header bg-psycho-lightblue text-light text-center"><h3>{{ article.name }}</h3></div>
-                <div class="card-body border bg-psycho-pearlbush">
-
-                    <div> {{ article.content| linebreaks |title| truncatechars:'300' }}</div>
-
+            <div class="card col-sm-12 col-md-6 col-lg-4 border-0 my-2" data-aos="flip-right">
+                <div class="card-header bg-psycho-lightblue text-light">
+                    <h3>{{ article.name }}</h3>
+                    <span>
+                        <b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"> {{ article.author.full_name }}</a></b>
+                        <span class="d-xl-none"><br></span>
+                        от {{ article.release_date | date:"d E Y" }}
+                    </span>
                 </div>
-              <div class="card-footer bg-psycho-teal">
-                  <b><a class='btn bg-psycho-pearlbush text-psycho-blue mr-lg-5' href = '{% url 'article' pk=article.id %}'>Посмотреть</a></b>
-                  <span class="d-xl-none"><br></span>
-                  <span>Автор<b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"> {{ article.author.full_name }}</a></b>
-                      от {{ article.release_date | date:"d E Y" }}</span>
-
-
-
+                <div class="card-body border bg-psycho-pearlbush">
+                    <div> {{ article.content| linebreaks |title| truncatechars:'300' }}</div>
+                </div>
+              <div class="card-footer bg-psycho-teal text-right">
+                  <b><a class='btn bg-psycho-pearlbush text-psycho-blue ' href = '{% url 'article' pk=article.id %}'>Посмотреть</a></b>
               </div>
             </div>
         {% endfor %}
@@ -27,4 +29,10 @@
             {% include 'pagination.html' %}
         {% endblock %}
     </div>
+{% endblock %}
+{% block script %}
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 {% endblock %}
