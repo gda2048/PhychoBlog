@@ -16,7 +16,7 @@
                 <div class="card col-12 col-sm-12 col-md-12 col-xl-5 my-3 m-xl-5 border-0 bg-psycho-pearlbush"
                      data-aos="flip-right">
                     <div class="card-header bg-psycho-pearlbush border-0 cardhead">
-                        <h3 class="text-psycho-blue">{{ article.name }}</h3>
+                        <a href="{% url 'article' pk=article.id %}"><h3 class="text-psycho-blue">{{ article.name }}</h3></a>
                     </div>
                     <div class="card-header bg-psycho-pearlbush">
                         <div class="text-psycho-lightblue">

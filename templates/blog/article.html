@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% block title %} {{ article.name }} {% endblock %}
 {% block content %}
-        <div class="bg-psycho-pearlbush">
+    <div class="bg-psycho-pearlbush min-vh-100">
         <div class="jumbotron mt-2 text-white rounded bg-psycho-teal">
-            <h3 class="font-italic">{{ article.name }}</h3>
+            <h1 class="d-none d-xl-inline font-italic">{{ article.name }}</h1>
+            <h3 class="d-xl-none font-italic">{{ article.name }}</h3>
             <div class="col-md-6 px-0 text-psycho-blue">
                 <p class="lead my-3"><b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><i
                         class="fas fa-user"></i> {{ article.author.full_name }}</a></b>
@@ -12,72 +13,123 @@
                     <i class="fas fa-calendar"></i> <i>{{ article.release_date | date:"d E Y" }}</i></p>
             </div>
         </div>
-        <div class="">
-            <div class="mx-auto text-justify">
-                <p class="mr-auto d-none d-md-block">{{ article.content | linebreaksbr | safe }} <br></p>
-                <small class="mr-auto d-md-none">{{ article.content | linebreaksbr | safe }} <br></small>
+        <div class="row justify-content-around">
+            <div class="col-11 col-md-7">
+                <div class="mx-auto text-justify mx-5">
+                    <p class="mr-auto d-none d-md-block">{{ article.content | linebreaksbr | safe }} <br></p>
+                    <small class="mr-auto d-md-none">{{ article.content | linebreaksbr | safe }} <br></small>
+                </div>
+                <div id="carouselExampleIndicators1" class="carousel slide d-none d-lg-block  mb-5"
+                     data-ride="carousel">
+                    <ol class="carousel-indicators">
+
+                        {% for ph in article.photos.all %}
+                            <li data-target="#carouselExampleIndicators1" data-slide-to="{{ forloop.counter0 }}"
+                                    {% if forloop.first %} class="active" {% endif %}></li>
+                        {% endfor %}
+
+                    </ol>
+
+                    <div class="carousel-inner">
+                        {% for ph in article.photos.all %}
+                            {% if ph.photo %}
+                                <div class="h600 carousel-item w-100 {% if forloop.first %} active {% endif %}">
+                                    <img class="w-auto h-100 img-fluid m-auto d-block" src="{{ ph.photo.url }}"
+                                         alt="{{ ph.alt }}">
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% if article.photos.count > 1 %}
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button"
+                           data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button"
+                           data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    {% endif %}
+                </div>
+                <div id="carouselExampleIndicators2" class="carousel slide d-lg-none  mb-5" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        {% for ph in article.photos.all %}
+                            <li data-target="#carouselExampleIndicators2" data-slide-to="{{ forloop.counter0 }}"
+                                    {% if forloop.first %} class="active" {% endif %}></li>
+                        {% endfor %}
+                    </ol>
+
+                    <div class="carousel-inner">
+                        {% for ph in article.photos.all %}
+                            {% if ph.photo %}
+                                <div class="carousel-item w-100 {% if forloop.first %} active {% endif %}">
+                                    <img class="w-auto mh-100 mw-100 img-fluid m-auto d-block center"
+                                         src="{{ ph.photo.url }}"
+                                         alt="{{ ph.alt }}">
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% if article.photos.count > 1 %}
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    {% endif %}
+                </div>
             </div>
-            <div id="carouselExampleIndicators1" class="carousel slide d-none d-lg-block  mb-5" data-ride="carousel">
-                <ol class="carousel-indicators">
 
-                    {% for ph in article.photos.all %}
-                        <li data-target="#carouselExampleIndicators1" data-slide-to="{{ forloop.counter0 }}"
-                                {% if forloop.first %} class="active" {% endif %}></li>
-                    {% endfor %}
-
-                </ol>
-
-                <div class="carousel-inner">
-                    {% for ph in article.photos.all %}
-                        {% if ph.photo %}
-                            <div class="h600 carousel-item w-100 {% if forloop.first %} active {% endif %}">
-                                <img class="w-auto h-100 img-fluid m-auto d-block" src="{{ ph.photo.url }}"
-                                     alt="{{ ph.alt }}">
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+            <div class="col-11 col-md-4 bg-psycho-pearlbush">
+                <div class="jumbotron text-white rounded bg-psycho-teal text-center">
+                    <h1 class="d-none d-xl-inline font-italic">Новые статьи</h1>
+                    <h3 class="d-xl-none font-italic">Новые статьи</h3>
                 </div>
 
-                <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-            <div id="carouselExampleIndicators2" class="carousel slide d-lg-none  mb-5" data-ride="carousel">
-                <ol class="carousel-indicators">
-
-                    {% for ph in article.photos.all %}
-                        <li data-target="#carouselExampleIndicators2" data-slide-to="{{ forloop.counter0 }}"
-                                {% if forloop.first %} class="active" {% endif %}></li>
-                    {% endfor %}
-
-                </ol>
-
-                <div class="carousel-inner">
-                    {% for ph in article.photos.all %}
-                        {% if ph.photo %}
-                            <div class="carousel-item w-100 {% if forloop.first %} active {% endif %}">
-                                <img class="w-auto mh-100 mw-100 img-fluid m-auto d-block center" src="{{ ph.photo.url }}"
-                                     alt="{{ ph.alt }}">
+                {% for article in last_articles %}
+                    <div class="card col-12 mb-3 bg-psycho-teal">
+                        <div class="card-header bg-psycho-teal border-0 cardhead">
+                            <a href="{% url 'article' pk=article.id %}"><h3 class="text-psycho-blue">{{ article.name }}</h3></a>
+                        </div>
+                        <div class="card-header bg-psycho-teal">
+                            <div class="text-psycho-lightblue">
+                                <b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><i
+                                        class="fas fa-user"></i> {{ article.author.full_name }}</a></b>
+                                <span class="d-xl-none"><br></span>
+                                <span class="d-none d-xl-inline">&nbsp;</span>
+                                <i class="fas fa-calendar"></i> <i>{{ article.release_date | date:"d E Y" }}</i>
                             </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-
-                <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+                        </div>
+                        <div class="card-body cardbody">
+                            {% if article.main_image.photo.url %}
+                                <div>
+                                    <div class="text-center my-2 "><img class="img-fluid center"
+                                                                        src="{{ article.main_image.photo.url }}"
+                                                                        alt="{{ article.main_image.alt }}"></div>
+                                    <div>
+                                        <p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer text-right border-0 bg-psycho-teal">
+                            <b><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'article' pk=article.id %}'>Читать
+                                далее...</a></b>
+                            <span class="d-none d-xl-inline">&nbsp;<br>&nbsp;</span>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-            <br>
+
         </div>
     </div>
 {% endblock %}
