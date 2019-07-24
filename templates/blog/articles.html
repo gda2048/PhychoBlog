@@ -58,9 +58,7 @@
 {% endblock %}
 {% block script %}
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
+
     {% block onload %}
         <script>
             function sleep(milliseconds) {
@@ -84,6 +82,7 @@
             }
 
             window.onload = function () {
+                AOS.init();
                 sleep(1000);
                 document.getElementById('preloader').classList.add('d-none');
                 document.getElementById('body').classList.remove('d-none');
@@ -92,6 +91,7 @@
                     max_class(document.getElementsByClassName("cardhead"));
                     max_class(document.getElementsByClassName("cardbody"));
                 }
+                AOS.refresh();
             }
         </script>
 

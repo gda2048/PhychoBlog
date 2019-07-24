@@ -8,6 +8,12 @@
     position: relative;
     top: 30%;
 }
+
+.center-preloader{
+    position: relative;
+    top: 20%;
+}
+
 .carousel-inner > carousel-item > img {
 margin: 0 auto;
 }
