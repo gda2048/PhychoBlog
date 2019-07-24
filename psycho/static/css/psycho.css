@@ -6,7 +6,7 @@
 }
 .center{
     position: relative;
-    top: 30%;
+    top: 25%;
 }
 
 .center-preloader{
@@ -22,7 +22,7 @@ margin: 0 auto;
     height: 600px; !important;
 }
 .h300{
-    height: 300px; !important;
+    height: 200px; !important;
 }
 
 .bg-psycho-blue{

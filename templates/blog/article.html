@@ -1,16 +1,28 @@
 {% extends 'base.html' %}
 {% block title %} {{ article.name }} {% endblock %}
 {% block content %}
-    {{ article.name }} <br>
-    <p class="mr-auto text-justify">{{ article.content | linebreaksbr| safe }} <br></p>
-    {{ article.author.name }} <br>
-
-    <div id="carouselExampleIndicators1" class="carousel slide d-none d-lg-block " data-ride="carousel">
+        <div class="bg-psycho-pearlbush">
+        <div class="jumbotron mt-2 text-white rounded bg-psycho-teal">
+            <h3 class="font-italic">{{ article.name }}</h3>
+            <div class="col-md-6 px-0 text-psycho-blue">
+                <p class="lead my-3"><b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><i
+                        class="fas fa-user"></i> {{ article.author.full_name }}</a></b>
+                    <span class="d-xl-none"><br></span>
+                    <span class="d-none d-xl-inline">&nbsp;</span>
+                    <i class="fas fa-calendar"></i> <i>{{ article.release_date | date:"d E Y" }}</i></p>
+            </div>
+        </div>
+        <div class="">
+            <div class="mx-auto text-justify">
+                <p class="mr-auto d-none d-md-block">{{ article.content | linebreaksbr | safe }} <br></p>
+                <small class="mr-auto d-md-none">{{ article.content | linebreaksbr | safe }} <br></small>
+            </div>
+            <div id="carouselExampleIndicators1" class="carousel slide d-none d-lg-block  mb-5" data-ride="carousel">
                 <ol class="carousel-indicators">
 
                     {% for ph in article.photos.all %}
                         <li data-target="#carouselExampleIndicators1" data-slide-to="{{ forloop.counter0 }}"
-                            {% if forloop.first %} class="active" {% endif %}></li>
+                                {% if forloop.first %} class="active" {% endif %}></li>
                     {% endfor %}
 
                 </ol>
@@ -19,10 +31,11 @@
                     {% for ph in article.photos.all %}
                         {% if ph.photo %}
                             <div class="h600 carousel-item w-100 {% if forloop.first %} active {% endif %}">
-                                <img class="w-auto h-100 img-fluid m-auto d-block" src="{{ ph.photo.url }}" alt="{{ ph.alt }}">
+                                <img class="w-auto h-100 img-fluid m-auto d-block" src="{{ ph.photo.url }}"
+                                     alt="{{ ph.alt }}">
                             </div>
                         {% endif %}
-                    {% endfor  %}
+                    {% endfor %}
                 </div>
 
                 <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
@@ -34,12 +47,12 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-    <div id="carouselExampleIndicators2" class="carousel slide d-lg-none " data-ride="carousel">
+            <div id="carouselExampleIndicators2" class="carousel slide d-lg-none  mb-5" data-ride="carousel">
                 <ol class="carousel-indicators">
 
                     {% for ph in article.photos.all %}
                         <li data-target="#carouselExampleIndicators2" data-slide-to="{{ forloop.counter0 }}"
-                            {% if forloop.first %} class="active" {% endif %}></li>
+                                {% if forloop.first %} class="active" {% endif %}></li>
                     {% endfor %}
 
                 </ol>
@@ -47,11 +60,12 @@
                 <div class="carousel-inner">
                     {% for ph in article.photos.all %}
                         {% if ph.photo %}
-                            <div class="h300 carousel-item w-100 {% if forloop.first %} active {% endif %}">
-                                <img class="w-auto h-100 img-fluid m-auto d-block" src="{{ ph.photo.url }}" alt="{{ ph.alt }}">
+                            <div class="carousel-item w-100 {% if forloop.first %} active {% endif %}">
+                                <img class="w-auto mh-100 mw-100 img-fluid m-auto d-block center" src="{{ ph.photo.url }}"
+                                     alt="{{ ph.alt }}">
                             </div>
                         {% endif %}
-                    {% endfor  %}
+                    {% endfor %}
                 </div>
 
                 <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
@@ -63,5 +77,7 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
-
+            <br>
+        </div>
+    </div>
 {% endblock %}
