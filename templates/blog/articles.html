@@ -17,20 +17,23 @@
             {% for article in articles_list %}
                 <div class="card col-12 col-sm-12 col-md-12 col-xl-3 m-5 border-0 bg-psycho-pearlbush"
                      data-aos="flip-right">
-                    <div class="card-header bg-psycho-pearlbush">
-                            <h3 class="text-psycho-blue">{{ article.name }}</h3>
-                            <div class="text-psycho-lightblue text-center">
-                                <b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"> <i
-                                        class="fas fa-user"></i> {{ article.author.full_name }}</a></b>
-                                <span class="d-xl-none"><br></span>&nbsp;
-                                <i class="fas fa-calendar"></i> <i>{{ article.release_date | date:"d E Y" }}</i>
-                            </div>
+                    <div class="card-header bg-psycho-pearlbush border-0 cardhead">
+                        <h3 class="text-psycho-blue">{{ article.name }}</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-header bg-psycho-pearlbush">
+                        <div class="text-psycho-lightblue">
+                            <b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"> <i
+                                    class="fas fa-user"></i> {{ article.author.full_name }}</a></b>
+                            <span class="d-xl-none"><br></span>&nbsp;
+                            <i class="fas fa-calendar"></i> <i>{{ article.release_date | date:"d E Y" }}</i>
+                        </div>
+                    </div>
+                    <div class="card-body cardbody">
                         <p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p>
                     </div>
                     <div class="card-footer text-right border-0 bg-psycho-pearlbush">
-                        <b><a class='btn bg-psycho-teal text-psycho-blue ' href='{% url 'article' pk=article.id %}'>Читать далее...</a></b>
+                        <b><a class='btn bg-psycho-teal text-psycho-blue ' href='{% url 'article' pk=article.id %}'>Читать
+                            далее...</a></b>
                     </div>
                 </div>
             {% endfor %}
@@ -56,17 +59,25 @@
                 }
             }
 
+
+            function max_class(lst, mx = true) {
+                let l = mx?-Infinity:Infinity;
+                for (let i = 0; i < lst.length; ++i) {
+                    l = mx?Math.max(lst[i].offsetHeight, l):Math.min(lst[i].offsetHeight, l);
+                }
+                for (let i = 0; i < lst.length; ++i) {
+                    lst[i].style.height = l.toString() + "px";
+                }
+            }
+
             window.onload = function () {
                 sleep(1000);
                 document.getElementById('preloader').classList.add('d-none');
                 document.getElementById('body').classList.remove('d-none');
-                let l = 0;
-                let lst = document.getElementsByClassName("card-header");
-                for (let i = 0; i < lst.length; ++i) {
-                    l = Math.max(lst[i].offsetHeight, l)
-                }
-                for (let i = 0; i < lst.length; ++i) {
-                    lst[i].style.height = l.toString() + "px";
+                let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                if (width>=1200) {
+                    max_class(document.getElementsByClassName("cardhead"));
+                    max_class(document.getElementsByClassName("cardbody"));
                 }
             }
         </script>
