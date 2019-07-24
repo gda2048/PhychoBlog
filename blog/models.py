@@ -1,4 +1,5 @@
 from django.db import models
+
 from main.models import PhotoItem
 from workers.models import Person
 
@@ -15,6 +16,10 @@ class Article(models.Model):
     release_date = models.DateTimeField("Дата выпуска статьи", auto_now_add=True)
     author = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Автор', related_name='author',
                                null=True, blank=True)
+
+    @property
+    def main_image(self):
+        return self.photos.filter(main=True)[:1].get()
 
     def __str__(self):
         return self.name
@@ -35,6 +40,8 @@ class ArticlePhotoReport(PhotoItem):
     """
     article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name="Статья", related_name='photos',
                                 help_text='К какой статье относится картинка')
+    main = models.BooleanField("Отображать в preview", default=False, help_text='Если отмечено несколько '
+                                                                                'картинок, то выбирается любая')
 
     def __str__(self):
         return self.alt

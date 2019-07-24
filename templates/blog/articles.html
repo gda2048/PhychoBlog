@@ -15,7 +15,7 @@
     <div>
         <div class="row justify-content-around mx-1 mx-xl-5">
             {% for article in articles_list %}
-                <div class="card col-12 col-sm-12 col-md-12 col-xl-3 my-3 m-xl-5 border-0 bg-psycho-pearlbush"
+                <div class="card col-12 col-sm-12 col-md-12 col-xl-5 my-3 m-xl-5 border-0 bg-psycho-pearlbush"
                      data-aos="flip-right">
                     <div class="card-header bg-psycho-pearlbush border-0 cardhead">
                         <h3 class="text-psycho-blue">{{ article.name }}</h3>
@@ -30,7 +30,18 @@
                         </div>
                     </div>
                     <div class="card-body cardbody">
-                        <p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p>
+                        {% if article.main_image.photo.url %}
+                            <div class="d-none d-xl-flex row">
+                                <div class="col-xl-6 text-center"><img class="img-fluid center" src="{{ article.main_image.photo.url }}" alt="{{ article.main_image.alt }}"></div>
+                                <div class="col-xl-6"><p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                            </div>
+                            <div class="d-xl-none">
+                                <div class="text-center my-2 "><img class="img-fluid center" src="{{ article.main_image.photo.url }}" alt="{{ article.main_image.alt }}"></div>
+                                <div><p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                            </div>
+                        {% else %}
+                                <div><p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                        {% endif %}
                     </div>
                     <div class="card-footer text-right border-0 bg-psycho-pearlbush">
                         <b><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'article' pk=article.id %}'>Читать

@@ -36,13 +36,9 @@ class Person(PhotoItem):
 
     def delete(self, *args, **kwargs):
         user = User.objects.get(id=self.user.id)
-        print(1)
         if not user.is_superuser:
             user.delete()
             super().delete(*args, **kwargs)
-        else:
-            print("superuser can't be deleted")
-            print(user.id)
 
     def __str__(self):
         return self.full_name

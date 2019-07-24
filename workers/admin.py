@@ -1,6 +1,8 @@
 from django.contrib import admin
-from workers.models import Achievement, Person, HelpItem
+from django.contrib import messages
 from django.utils.html import mark_safe
+
+from workers.models import Achievement, Person, HelpItem
 
 
 class HelpItemInline(admin.TabularInline):
@@ -63,7 +65,20 @@ class PersonAdmin(admin.ModelAdmin):
 
     def delete_queryset(self, request, queryset):
         for person in queryset:
-            person.delete()
+            if person.user.is_superuser:
+                messages.add_message(request, messages.ERROR, "Никто не может удалить суперпользователя. "
+                                                              "Для начала нужно сделать его обычным пользователем, "
+                                                              "если у вас есть такие права")
+            else:
+                person.delete()
+
+    def delete_model(self, request, obj):
+        if obj.user.is_superuser:
+            messages.add_message(request, messages.ERROR, "Никто не может удалить суперпользователя "
+                                                          "Для начала нужно сделать его обычным пользователем,"
+                                                          " если у вас есть такие права")
+        else:
+            super(PersonAdmin, self).delete_model(request, obj)
 
     def get_queryset(self, request):
         qs = super(PersonAdmin, self).get_queryset(request)

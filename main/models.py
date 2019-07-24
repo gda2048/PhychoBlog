@@ -15,6 +15,11 @@ class PhotoItem(models.Model):
     height = models.PositiveIntegerField(null=True, blank=True)
     width = models.PositiveIntegerField(null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        if self.alt == '':
+            self.alt = self.photo.name
+        super(PhotoItem, self).save(*args, **kwargs)
+
     class Meta:
         """
         PhotoItem model settings
@@ -22,4 +27,3 @@ class PhotoItem(models.Model):
         abstract = True
         verbose_name = 'Картинка'
         verbose_name_plural = 'Картинки'
-

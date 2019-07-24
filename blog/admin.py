@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib import messages
 from django.utils.html import mark_safe
 
 from blog.models import Article, ArticlePhotoReport
@@ -8,7 +9,7 @@ class PictureInline(admin.TabularInline):
     model = ArticlePhotoReport
     extra = 0
     readonly_fields = ['img_preview']
-    fields = ['article', 'photo', 'img_preview', 'alt']
+    fields = ['article', 'photo', 'img_preview', 'alt', 'main']
 
     def img_preview(self, obj):
         return mark_safe(
@@ -20,15 +21,19 @@ class PictureInline(admin.TabularInline):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('name', 'release_date', 'pictures_count')
+    list_display = ('name', 'release_date', 'pictures_count', 'main_image')
     fields = ['name', 'author', 'content', 'content_min']
     inlines = [PictureInline]
     list_per_page = 20
+
+    def main_image(self, obj):
+        return obj.photos.filter(main=True)[:1].get()
 
     def pictures_count(self, obj):
         return obj.photos.count()
 
     pictures_count.short_description = 'Количество картинок'
+    main_image.short_description = 'Изображение, которое будет показано'
 
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_staff:
@@ -47,3 +52,6 @@ class ArticleAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, *args):
         obj.author = request.user.profile
         super().save_model(request, obj, *args)
+        if len(obj.photos.filter(main=True)) > 1:
+            messages.add_message(request, messages.WARNING, 'Вы выбрали несколько картинок для статьи для preview. '
+                                                            'Лучше выбрать одну. ')
