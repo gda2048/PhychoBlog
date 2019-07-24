@@ -13,18 +13,19 @@
         </div>
     </div>
     <div>
-        <div class="row justify-content-around mx-5">
+        <div class="row justify-content-around mx-1 mx-xl-5">
             {% for article in articles_list %}
-                <div class="card col-12 col-sm-12 col-md-12 col-xl-3 m-5 border-0 bg-psycho-pearlbush"
+                <div class="card col-12 col-sm-12 col-md-12 col-xl-3 my-3 m-xl-5 border-0 bg-psycho-pearlbush"
                      data-aos="flip-right">
                     <div class="card-header bg-psycho-pearlbush border-0 cardhead">
                         <h3 class="text-psycho-blue">{{ article.name }}</h3>
                     </div>
                     <div class="card-header bg-psycho-pearlbush">
                         <div class="text-psycho-lightblue">
-                            <b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"> <i
+                            <b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><i
                                     class="fas fa-user"></i> {{ article.author.full_name }}</a></b>
-                            <span class="d-xl-none"><br></span>&nbsp;
+                            <span class="d-xl-none"><br></span>
+                            <span class="d-none d-xl-inline">&nbsp;</span>
                             <i class="fas fa-calendar"></i> <i>{{ article.release_date | date:"d E Y" }}</i>
                         </div>
                     </div>
@@ -32,8 +33,9 @@
                         <p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p>
                     </div>
                     <div class="card-footer text-right border-0 bg-psycho-pearlbush">
-                        <b><a class='btn bg-psycho-teal text-psycho-blue ' href='{% url 'article' pk=article.id %}'>Читать
+                        <b><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'article' pk=article.id %}'>Читать
                             далее...</a></b>
+                        <span class="d-none d-xl-inline">&nbsp;<br>&nbsp;</span>
                     </div>
                 </div>
             {% endfor %}
