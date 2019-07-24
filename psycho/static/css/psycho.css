@@ -14,7 +14,7 @@
     top: 20%;
 }
 
-.carousel-inner > carousel-item > img {
+.carousel-inner > .carousel-item > img {
 margin: 0 auto;
 }
 

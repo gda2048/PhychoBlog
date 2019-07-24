@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('events', '0001_initial'),
     ]
@@ -13,6 +12,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='event',
             name='type',
-            field=models.CharField(choices=[('common', 'Обучение для всех'), ('prof', 'Обучение для профессионалов'), ('personal', 'Программы личностного роста'), ('university', 'Базовое психологическое образование в хгак')], default='common', max_length=20, verbose_name='Тип'),
+            field=models.CharField(choices=[('common', 'Обучение для всех'), ('prof', 'Обучение для профессионалов'),
+                                            ('personal', 'Программы личностного роста'),
+                                            ('university', 'Базовое психологическое образование в хгак')],
+                                   default='common', max_length=20, verbose_name='Тип'),
         ),
     ]

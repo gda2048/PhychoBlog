@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+
 import dj_database_url
 from decouple import config
 
@@ -123,4 +124,3 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static/images')
 MEDIA_URL = '/images/'
 site_name = 'Art Of Life'
 st_password = '12345678'
-

@@ -20,8 +20,8 @@ class AchievementInline(admin.TabularInline):
 
     def img_preview(self, obj):
         return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(url=obj.photo.url,
-                                                                                      width=obj.photo.width/10,
-                                                                                      height=obj.photo.height/10))
+                                                                                      width=obj.photo.width / 10,
+                                                                                      height=obj.photo.height / 10))
 
     img_preview.short_description = 'Предпросмотр фото'
 
@@ -58,8 +58,8 @@ class PersonAdmin(admin.ModelAdmin):
 
     def img_preview(self, obj):
         return mark_safe('<img src="{url}" width="{width}" height={height} />'.format(url=obj.photo.url,
-                                                                                      width=obj.photo.width/10,
-                                                                                      height=obj.photo.height/10))
+                                                                                      width=obj.photo.width / 10,
+                                                                                      height=obj.photo.height / 10))
 
     img_preview.short_description = 'Предпросмотр фото'
 

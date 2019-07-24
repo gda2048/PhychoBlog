@@ -1,4 +1,5 @@
 from django.views.generic import ListView, DetailView
+
 from events.models import Event, Announcement
 
 

@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('main', '0005_auto_20190717_0829'),
     ]
@@ -12,6 +11,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='announcement',
-            options={'ordering': ['-main', 'event__start_date'], 'verbose_name': 'Анонс', 'verbose_name_plural': 'Анонсы'},
+            options={'ordering': ['-main', 'event__start_date'], 'verbose_name': 'Анонс',
+                     'verbose_name_plural': 'Анонсы'},
         ),
     ]

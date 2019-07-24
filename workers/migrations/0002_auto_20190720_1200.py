@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('workers', '0001_initial'),
     ]
@@ -13,7 +12,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='achievement',
             name='priority',
-            field=models.IntegerField(default=2, help_text='Чем больше приоритет, тем выше в списке будет достижение', verbose_name='Приоритет'),
+            field=models.IntegerField(default=2, help_text='Чем больше приоритет, тем выше в списке будет достижение',
+                                      verbose_name='Приоритет'),
         ),
         migrations.AlterField(
             model_name='helpitem',
@@ -28,11 +28,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='person',
             name='info',
-            field=models.TextField(blank=True, help_text='Хорошее краткое описание своей деятельности', verbose_name='Основная информация'),
+            field=models.TextField(blank=True, help_text='Хорошее краткое описание своей деятельности',
+                                   verbose_name='Основная информация'),
         ),
         migrations.AlterField(
             model_name='person',
             name='name',
-            field=models.CharField(help_text='Уникальный логин. При входе в систему его нужно будет указывать. ', max_length=20, unique=True, verbose_name='Логин'),
+            field=models.CharField(help_text='Уникальный логин. При входе в систему его нужно будет указывать. ',
+                                   max_length=20, unique=True, verbose_name='Логин'),
         ),
     ]

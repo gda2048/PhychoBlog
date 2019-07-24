@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('main', '0009_auto_20190718_1438'),
     ]
@@ -23,7 +22,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='photo',
-            field=models.ImageField(height_field='height', null=True, upload_to='', verbose_name='Изображение', width_field='width'),
+            field=models.ImageField(height_field='height', null=True, upload_to='', verbose_name='Изображение',
+                                    width_field='width'),
         ),
         migrations.AddField(
             model_name='event',
@@ -48,6 +48,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='person',
             name='photo',
-            field=models.ImageField(height_field='height', null=True, upload_to='', verbose_name='Изображение', width_field='width'),
+            field=models.ImageField(height_field='height', null=True, upload_to='', verbose_name='Изображение',
+                                    width_field='width'),
         ),
     ]
