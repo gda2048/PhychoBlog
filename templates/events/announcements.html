@@ -1,16 +1,85 @@
 {% extends 'base.html' %}
 {% block title %} Анонсы {% endblock %}
 {% block content %}
-    <div>
-        {% for announcement in announcement_list %}
-            <div>{{ announcement.name }}<br>
-                {{ announcement.article.name }}<br>
-                {{ announcement.content }}<br>
-                <hr>
-            </div>
-        {% endfor %}
+    <div class="col-11 offset-md-2 col-md-8">
+
+        <div class="row justify-content-around mx-1 mx-xl-5">
+            {% for announcement in announcement_list %}
+                <div class="card col-12 border-announcement bg-psycho-pearlbush row announcement justify-content-around"
+                     data-aos="flip-right">
+                    <div class="card-header border-0 bg-psycho-pearlbush">
+                            <div class="text-psycho-lightblue">
+                                <i class="fas fa-calendar"></i> <i>{{ announcement.event.start_date | date:"d E Y" }}</i>
+                                {% if announcement.event.duration %}
+                                    <span class="d-xl-none"><br></span>
+                                    <span class="d-none d-xl-inline">&nbsp;</span>
+                                    <i class="fas fa-clock"></i> <i>{{ announcement.event.duration }}</i>
+                                {% endif %}
+                            </div>
+                    </div>
+                    <div class="col-6 text-left">
+
+                        {% if announcement.event.photo %}
+                                <div class="offset-1 text-left mb-2 h300 ">
+                                    <img class="w-auto h-100 img-fluid rounded" src="{{ announcement.event.photo.url }}"
+                                                                    alt="{{ announcement.event.alt }}">
+                                </div>
+
+                        {% endif %}
+
+                    </div>
+                    <div class="col-5">
+                        <div class="card bg-psycho-pearlbush border-0 cardhead">
+                            <a href="{% url 'event' pk=announcement.event.id %}"><h3
+                                    class="text-psycho-blue">{{ announcement.name }}</h3></a>
+                        </div>
+                        <div class="card-body cardbody">
+                            {{ announcement.content }}
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+
         {% block pagination %}
             {% include 'pagination.html' %}
         {% endblock %}
     </div>
 {% endblock %}
+    {% block onload %}
+        <script>
+            function sleep(milliseconds) {
+                let start = new Date().getTime();
+                for (let i = 0; i < 1e7; i++) {
+                    if ((new Date().getTime() - start) > milliseconds) {
+                        break;
+                    }
+                }
+            }
+
+
+            function max_class(lst, mx = true) {
+                let l = mx?-Infinity:Infinity;
+                for (let i = 0; i < lst.length; ++i) {
+                    l = mx?Math.max(lst[i].offsetHeight, l):Math.min(lst[i].offsetHeight, l);
+                }
+                for (let i = 0; i < lst.length; ++i) {
+                    lst[i].style.height = l.toString() + "px";
+                }
+            }
+
+            window.onload = function () {
+                sleep(1000);
+                document.getElementById('preloader').classList.add('d-none');
+                document.getElementById('body').classList.remove('d-none');
+                let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                if (width>=1200) {
+                    max_class(document.getElementsByClassName("announcement"));
+                }
+            }
+        </script>
+
+    {% endblock %}

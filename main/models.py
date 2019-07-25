@@ -11,7 +11,7 @@ class PhotoItem(models.Model):
     """
     id = models.AutoField(primary_key=True)
     photo = models.ImageField('Изображение', height_field='height', width_field='width', null=True, blank=True)
-    alt = models.TextField("Описание фото", max_length=200, blank=True)
+    alt = models.TextField("Описание фото", max_length=200, blank=True, null=True)
     height = models.PositiveIntegerField(null=True, blank=True)
     width = models.PositiveIntegerField(null=True, blank=True)
 

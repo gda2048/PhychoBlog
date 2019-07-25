@@ -17,7 +17,7 @@ class AnnouncementListView(ListView):
     model = Announcement
     template_name = 'events/announcements.html'
     context_object_name = 'announcement_list'
-    paginate_by = 1
+    paginate_by = 20
 
 
 class EventDetailView(DetailView):

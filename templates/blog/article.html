@@ -25,7 +25,7 @@
 
                     </ol>
 
-                    <div class="carousel-inner">
+                    <div class="carousel-inner border border-dark">
                         {% for ph in article.photos.all %}
                             {% if ph.photo %}
                                 <div class="h600 carousel-item w-100 {% if forloop.first %} active {% endif %}">
@@ -59,7 +59,7 @@
                     <div class="carousel-inner">
                         {% for ph in article.photos.all %}
                             {% if ph.photo %}
-                                <div class="h300 carousel-item w-100 {% if forloop.first %} active {% endif %}">
+                                <div class="h300 ca rousel-item w-100 {% if forloop.first %} active {% endif %}">
                                     <img class="w-auto h-100 img-fluid m-auto d-block center"
                                          src="{{ ph.photo.url }}"
                                          alt="{{ ph.alt }}">
@@ -86,9 +86,9 @@
             </div>
 
             <div class="col-11 col-md-4 bg-psycho-pearlbush">
-                <div class="jumbotron text-white rounded bg-psycho-teal text-center">
-                    <h1 class="d-none d-xl-inline font-italic">Новые статьи</h1>
-                    <h3 class="d-xl-none font-italic">Новые статьи</h3>
+                <div class="text-white rounded bg-psycho-teal text-center my-2 py-4">
+                    <h3 class="d-none d-xl-inline font-italic">Новые статьи</h3>
+                    <h4 class="d-xl-none font-italic">Новые статьи</h4>
                 </div>
 
                 {% for article in last_articles %}

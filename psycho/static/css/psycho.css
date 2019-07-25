@@ -24,12 +24,15 @@ margin: 0 auto;
 .h300{
     height: 200px; !important;
 }
+.w300{
+    width: 200px; !important;
+}
 
 .bg-psycho-blue{
-    background-color: #005B9A;
+    background-color: #3B5998;
 }
 .text-psycho-blue{
-    color: #005B9A;
+    color: #3B5998;
 }
 
 .bg-psycho-lightblue{
@@ -51,7 +54,7 @@ margin: 0 auto;
 }
 
 .bg-psycho-pearlbush{
-    background-color: #d7e5e5;
+    background-color: #f7f7f7;
 }
 
 .link-blue{
@@ -71,4 +74,11 @@ margin: 0 auto;
 }
 .custom-toggler .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.border-announcement{
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 2px dashed #3B5998;
 }
