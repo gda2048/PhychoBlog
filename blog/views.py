@@ -17,5 +17,6 @@ class ArticleDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
+        context['images'] = Article.objects.get(pk=self.kwargs['pk']).photos.exclude(binary_image=None)
         context['last_articles'] = Article.objects.order_by('-release_date').exclude(id__in=[self.object.id])[:2]
         return context
