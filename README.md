@@ -1,5 +1,5 @@
 # PhychoBlog
-
+Портал для психологического института. Предполагает блог, мероприятия и анонсы.
 ## heroku
 ```
 heroku git:remote psychoblog
