@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView
 
 from events.models import Event, Announcement
+from blog.models import Article
 
 
 class EventListView(ListView):
@@ -18,6 +19,11 @@ class AnnouncementListView(ListView):
     template_name = 'events/announcements.html'
     context_object_name = 'announcement_list'
     paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        context = super(AnnouncementListView, self).get_context_data(**kwargs)
+        context['last_articles'] = Article.objects.order_by('-release_date')[:2]
+        return context
 
 
 class EventDetailView(DetailView):

@@ -7,7 +7,7 @@ class PersonListView(ListView):
     model = Person
     template_name = 'workers/people.html'
     context_object_name = 'authors_list'
-    paginate_by = 1
+    paginate_by = 3
 
 
 class AchievementListView(ListView):
