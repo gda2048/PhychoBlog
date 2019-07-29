@@ -20,6 +20,9 @@ from django.urls import path, include
 from django.views.generic.base import RedirectView
 
 from .settings import site_name
+from blog.models import ArticlePhotoReport
+from workers.models import Achievement, Person
+from events.models import Event
 
 admin.site.site_header = site_name
 admin.site.site_title = site_name
@@ -33,3 +36,7 @@ urlpatterns = [
                   path('workers/', include('workers.urls')),
                   path('admin/', admin.site.urls),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+ArticlePhotoReport.all_img_from_binary()
+Achievement.all_img_from_binary()
+Event.all_img_from_binary()
+Person.all_img_from_binary()

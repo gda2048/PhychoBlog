@@ -15,7 +15,7 @@ class EventAdmin(admin.ModelAdmin):
     exclude = ['width', 'height']
     list_display = ('name', 'type', 'announcement_count', 'is_outdated')
     list_filter = ('type',)
-    fields = ['name', ('start_date', 'duration'), 'type', 'content', ('photo', 'img_preview'), 'alt']
+    fields = ['name', ('start_date', 'end_date'), 'type', 'content', ('photo', 'img_preview'), 'alt']
     inlines = [AnnouncementInline]
     readonly_fields = ['img_preview']
     list_per_page = 20

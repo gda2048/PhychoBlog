@@ -19,7 +19,7 @@ class PhotoItem(models.Model):
     binary_image = models.BinaryField(null=True)
     ext = models.CharField(max_length=10, null=True, blank=True)
 
-    def save(self, *args, **kwargs):
+    def save_photo(self):
         if self.photo:
             self.photo.open()
             with BytesIO() as output:
@@ -32,7 +32,21 @@ class PhotoItem(models.Model):
                 self.alt = self.photo.name
         else:
             self.binary_image = None
+
+    def save(self, *args, **kwargs):
         super(PhotoItem, self).save(*args, **kwargs)
+
+    def img_from_binary(self):
+        if self.photo and self.binary_image:
+            try:
+                self.photo.open()
+            except FileNotFoundError:
+                Image.open(BytesIO(self.binary_image)).save(self.photo.path)
+
+    @classmethod
+    def all_img_from_binary(cls):
+        for obj in cls.objects.all():
+            obj.img_from_binary()
 
     class Meta:
         """

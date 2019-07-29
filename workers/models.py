@@ -32,6 +32,7 @@ class Person(PhotoItem):
             user.groups.add(1)
             user.is_staff = True
             user.save()
+        self.save_photo()
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
