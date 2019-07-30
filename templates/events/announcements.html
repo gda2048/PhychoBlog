@@ -9,19 +9,19 @@
 </div>
 <div class="row justify-content-around">
     <div class="row col-md-7">
-
+        <div class="text-center col-12 font-weight-bold"><h3>Анонсы мероприятий</h3></div>
         <div class="row mx-1 mx-xl-5 justify-content-around">
             {% for announcement in announcement_list %}
                 <div class="card col-12 border-announcement bg-psycho-pearlbush row {% if announcement.event.photo %}announcement{% endif %} justify-content-around"
                      data-aos="flip-right">
                     <div class="card-header border-0 bg-psycho-pearlbush">
-                            <div class="text-psycho-lightblue">
-                                {% if announcement.event.start_date %}<i class="fas fa-calendar"></i> Начало: <i>{{ announcement.event.start_date | date:"d E Y H:i" }}</i><br>{% endif %}
-                                {% if announcement.event.end_date %}<i class="fas fa-calendar"></i> Конец: <i>{{ announcement.event.end_date | date:"d E Y H:i" }}</i><br>{% endif %}
+                            <dic class="text-psycho-lightblue border-psycho-date">
+                                {% if announcement.event.start_date %}&nbsp;<i class="fas fa-calendar"></i> Начало: <i>{{ announcement.event.start_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
+                                {% if announcement.event.end_date %}&nbsp;<i class="fas fa-calendar"></i> Конец: <i>{{ announcement.event.end_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
                                 {% if announcement.event.duration %}
-                                    <i class="fas fa-clock"></i> <i>{{ announcement.event.duration }}</i>
+                                    &nbsp;<i class="fas fa-clock"></i> Длительность: <i>{{ announcement.event.duration }}&nbsp;</i>
                                 {% endif %}
-                            </div>
+                            </dic>
                     </div>
                     <div class="col-md-6 text-left">
                         {% if announcement.event.photo %}

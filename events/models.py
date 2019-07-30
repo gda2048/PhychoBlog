@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from datetime import datetime, timedelta
 
 from main.models import PhotoItem
 
@@ -20,7 +21,6 @@ class Event(PhotoItem):
     content = models.TextField("Описание мероприятия", max_length=200, blank=True, null=True)
     start_date = models.DateTimeField('Дата и время начала мероприятия', null=True, blank=True)
     end_date = models.DateTimeField('Дата и время окончания мероприятия', null=True, blank=True)
-    duration = models.CharField('Длительность', max_length=20, blank=True, null=True)
     type = models.CharField('Тип', max_length=20, choices=EventType, default='common')
 
     def __str__(self):
@@ -30,9 +30,18 @@ class Event(PhotoItem):
         return 'Мероприятие прошло' if (self.start_date < timezone.now()) \
             else str((self.start_date - timezone.now()).days)
 
+    def duration(self):
+        if self.end_date and self.start_date:
+            time = (self.end_date - self.start_date)
+            if time.days > 0:
+                return str(time.days) + ' дн.'
+            elif time.seconds > 3600:
+                return str(time.seconds//3600) + ' ч.'
+
     is_outdated.short_description = 'Осталось дней'
 
     class Meta:
+
         """
         Event model settings
         """

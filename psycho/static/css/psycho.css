@@ -1,6 +1,11 @@
 body{
     font-family: 'Forum', cursive;
 }
+
+.border-psycho-date {
+    display: inline-block;
+  border: 3px solid #0191C8;
+}
 .dropdown-menu > a:hover {
 background-color: transparent;
 background-image: none;
