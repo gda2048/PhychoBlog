@@ -1,6 +1,6 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
-from datetime import datetime, timedelta
 
 from main.models import PhotoItem
 
@@ -25,6 +25,10 @@ class Event(PhotoItem):
 
     def __str__(self):
         return self.name
+
+    def clean(self):
+        if self.end_date and self.end_date < self.start_date:
+            raise ValidationError('Мероприятие не может закончиться раньше, чем начаться')
 
     def is_outdated(self):
         return 'Мероприятие прошло' if (self.start_date < timezone.now()) \

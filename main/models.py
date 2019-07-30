@@ -34,6 +34,7 @@ class PhotoItem(models.Model):
             self.binary_image = None
 
     def save(self, *args, **kwargs):
+        self.save_photo()
         super(PhotoItem, self).save(*args, **kwargs)
 
     def img_from_binary(self):

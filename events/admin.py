@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.utils.html import mark_safe
 
 from events.models import Event, Announcement
@@ -20,6 +20,11 @@ class EventAdmin(admin.ModelAdmin):
     readonly_fields = ['img_preview']
     list_per_page = 20
     date_hierarchy = 'start_date'
+
+    def save_model(self, request, obj, form, change):
+        if obj.is_outdated():
+            messages.add_message(request, messages.WARNING, 'Вы работали с мероприятием, которое уже началось или прошло')
+        super(EventAdmin, self).save_model(request, obj, form, change)
 
     def announcement_count(self, obj):
         return obj.announcements.count()
