@@ -1,3 +1,14 @@
+body{
+    font-family: 'Forum', cursive;
+}
+.dropdown-menu > a:hover {
+background-color: transparent;
+background-image: none;
+}
+.dropdown-menu{
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
 .wh-n{
     white-space: normal;
 }

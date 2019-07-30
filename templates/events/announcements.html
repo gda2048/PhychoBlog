@@ -12,14 +12,13 @@
 
         <div class="row mx-1 mx-xl-5 justify-content-around">
             {% for announcement in announcement_list %}
-                <div class="card col-12 border-announcement bg-psycho-pearlbush row announcement justify-content-around"
+                <div class="card col-12 border-announcement bg-psycho-pearlbush row {% if announcement.event.photo %}announcement{% endif %} justify-content-around"
                      data-aos="flip-right">
                     <div class="card-header border-0 bg-psycho-pearlbush">
                             <div class="text-psycho-lightblue">
-                                <i class="fas fa-calendar"></i> <i>{{ announcement.event.start_date | date:"d E Y" }}</i>
+                                {% if announcement.event.start_date %}<i class="fas fa-calendar"></i> Начало: <i>{{ announcement.event.start_date | date:"d E Y H:i" }}</i><br>{% endif %}
+                                {% if announcement.event.end_date %}<i class="fas fa-calendar"></i> Конец: <i>{{ announcement.event.end_date | date:"d E Y H:i" }}</i><br>{% endif %}
                                 {% if announcement.event.duration %}
-                                    <span class="d-xl-none"><br></span>
-                                    <span class="d-none d-xl-inline">&nbsp;</span>
                                     <i class="fas fa-clock"></i> <i>{{ announcement.event.duration }}</i>
                                 {% endif %}
                             </div>

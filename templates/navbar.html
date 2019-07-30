@@ -1,52 +1,52 @@
 <nav class="navbar navbar-expand-lg bg-psycho-blue sticky-top row justify-content-around font-weight-bold">
-        <a class="navbar-brand col-4  text-light" href="/">Art Of Life</a>
+        <a class="navbar-brand col-4 text-light font-weight-bold" href="/">Art Of Life</a>
         <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse col-8 text-center" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse col-8 text-md-center" id="navbarSupportedContent">
             <ul class="navbar-nav container-fluid row justify-content-around">
                 <li class="nav-item dropdown col-lg-3">
-                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle text-light font-weight-bold" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         Обучение
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item wh-n" href="{% url 'event_list' type='common' %}">Обучение всех</a>
+                    <div class="dropdown-menu bg-psycho-blue text-light font-weight-bold" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item wh-n text-light font-weight-bold" href="{% url 'event_list' type='common' %}">Обучение всех</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item wh-n" href="{% url 'event_list' type='prof' %}">Обучение для
+                        <a class="dropdown-item wh-n text-light font-weight-bold" href="{% url 'event_list' type='prof' %}">Обучение для
                             специалистов</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item wh-n" href="{% url 'event_list' type='university' %}">Базовое
+                        <a class="dropdown-item wh-n text-light font-weight-bold" href="{% url 'event_list' type='university' %}">Базовое
                             психологическое образование в
                             ХДАК</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item wh-n" href="{% url 'event_list' type='personal' %}">Программы
+                        <a class="dropdown-item wh-n text-light font-weight-bold" href="{% url 'event_list' type='personal' %}">Программы
                             личностного роста</a>
                     </div>
                 </li>
                 <li class="nav-item col-lg-3">
-                    <a class="nav-link text-light" href="{% url 'help_item_list' %}">Психологическая помощь</a>
+                    <a class="nav-link text-light font-weight-bold" href="{% url 'help_item_list' %}">Психологическая помощь</a>
                 </li>
                 <li class="nav-item col-lg-2">
-                    <a class="nav-link text-light" href="{% url 'article_list' %}">Блог</a>
+                    <a class="nav-link text-light font-weight-bold" href="{% url 'article_list' %}">Блог</a>
                 </li>
                 <li class="nav-item col-lg-2">
-                    <a class="nav-link text-light" href="{% url 'shop' %}">Магазин</a>
+                    <a class="nav-link text-light font-weight-bold" href="{% url 'shop' %}">Магазин</a>
                 </li>
                 <li class="nav-item dropdown col-lg-2">
-                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link dropdown-toggle text-light font-weight-bold" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         О нас
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'person_list' %}">Специалисты</a>
+                    <div class="dropdown-menu bg-psycho-blue text-light font-weight-bold" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item text-light font-weight-bold" href="{% url 'person_list' %}">Специалисты</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Контакты</a>
+                        <a class="dropdown-item text-light font-weight-bold" href="#">Контакты</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Форма связи</a>
+                        <a class="dropdown-item text-light font-weight-bold" href="#">Форма связи</a>
                     </div>
                 </li>
             </ul>
