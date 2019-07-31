@@ -81,14 +81,13 @@
 
             window.onload = function () {
                 AOS.init();
-                sleep(1000);
                 document.getElementById('preloader').classList.add('d-none');
                 document.getElementById('body').classList.remove('d-none');
                 let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
                 if (width>=1200) {
                     max_class(document.getElementsByClassName("cardhead"));
                 }
-                AOS.refresh();
+                AOS.refresh();  
             }
         </script>
 

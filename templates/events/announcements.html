@@ -15,7 +15,7 @@
                 <div class="card col-12 bg-psycho-pearlbush border-0 row {% if announcement.event.photo %}announcement{% endif %} justify-content-around"
                      data-aos="flip-right">
                     <div class="card-header border-0 bg-psycho-pearlbush">
-                            <div class="text-psycho-lightblue border-psycho-date">
+                            <div class="text-psycho-lightblue border-psycho-date" style="font-size: 16px;">
                                 {% if announcement.event.start_date %}&nbsp;<i class="fas fa-calendar"></i> Начало: <i>{{ announcement.event.start_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
                                 {% if announcement.event.end_date %}&nbsp;<i class="fas fa-calendar"></i> Конец: <i>{{ announcement.event.end_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
                                 {% if announcement.event.duration %}
@@ -125,7 +125,6 @@
             }
 
             window.onload = function () {
-                sleep(1000);
                 document.getElementById('preloader').classList.add('d-none');
                 document.getElementById('body').classList.remove('d-none');
                 let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;

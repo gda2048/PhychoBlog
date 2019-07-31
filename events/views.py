@@ -8,7 +8,7 @@ class EventListView(ListView):
     model = Event
     template_name = 'events/events.html'
     context_object_name = 'event_list'
-    paginate_by = 1
+    paginate_by = 6
 
     def get_queryset(self):
         return Event.objects.filter(type=self.kwargs['type'])

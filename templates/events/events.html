@@ -1,23 +1,93 @@
 {% extends 'base.html' %}
 {% block title %} Мероприятия {% endblock %}
+{% block link %}
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
 {% block content %}
-    <ul>
-        {% for event_item in event_list %}
-            <li>{{ event_item.name }}<br>
-                {{ event_item.content | linebreaks }}<br>
-                {{ event_item.start_date }}<br>
-                {{ event_item.duration }}<br>
-                {{ event_item.type }}<br>
-                <a href = '{% url 'event' pk=event_item.id %}'>Посмотреть</a>
-                {% if  event_item.photo %}
-                <img src="{{ event_item.photo.url }}" alt="{{ event_item.alt }}"
-                     style="max-width: 100%; max-height: 100%;">
-                {% endif %}
-            </li>
-            <hr>
-        {% endfor %}
+    <div class="jumbotron mt-2 p-3 p-md-5 text-white rounded bg-psycho-teal">
+        <div class="col-md-6 px-0">
+            <h3 class="font-italic">Блог Art Of Life</h3>
+            <p class="lead my-3">Статьи специалистов нашей команды о психологии</p>
+        </div>
+    </div>
+    <div>
+        <div class="row justify-content-around mx-1 mx-xl-5">
+            {% for ev in event_list %}
+                <div class="card col-12 col-sm-12 col-md-12 col-xl-5 my-3 m-xl-5 border-0 bg-psycho-pearlbush-real"
+                     data-aos="flip-right">
+                    <div class="card-header bg-psycho-pearlbush-real border-0 cardhead row">
+                        <div class="col-12 col-md-6"><a href="{% url 'event' pk=ev.id %}"><h3 class="text-psycho-blue">{{ ev.name }}</h3></a></div>
+                        <div class="col-12 col-md-6 text-psycho-lightblue border-psycho-date" style="font-size: 16px;">
+                                {% if ev.start_date %}&nbsp;<i class="fas fa-calendar"></i> Начало: <i>{{ ev.start_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
+                                {% if ev.end_date %}&nbsp;<i class="fas fa-calendar"></i> Конец: <i>{{ ev.end_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
+                                {% if ev.duration %}
+                                    &nbsp;<i class="fas fa-clock"></i> Длительность: <i>{{ ev.duration }}&nbsp;</i>
+                                {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-body cardbody">
+                        {% if ev.photo %}
+                            <div class="d-none d-xl-flex row">
+                                <div class="col-xl-6 text-center"><div class=""><img class="img-fluid" src="{{ ev.photo.url }}" alt="{{ ev.alt }}"></div></div>
+                                <div class="col-xl-6"><p class="text-justify"> {{ ev.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                            </div>
+                            <div class="d-xl-none">
+                                <div class="text-center my-2 "><img class="img-fluid" src="{{ ev.photo.url }}" alt="{{ ev.alt }}"></div>
+                                <div><p class="text-justify"> {{ ev.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                            </div>
+                        {% else %}
+                                <div><p class="text-justify"> {{ ev.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer text-right border-0 bg-psycho-pearlbush-real">
+                        <b><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'event' pk=ev.id %}'>Читать
+                            далее...</a></b>
+                        <span class="d-none d-xl-inline">&nbsp;<br>&nbsp;</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
         {% block pagination %}
             {% include 'pagination.html' %}
         {% endblock %}
-    </ul>
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    {% block onload %}
+        <script>
+            function sleep(milliseconds) {
+                let start = new Date().getTime();
+                for (let i = 0; i < 1e7; i++) {
+                    if ((new Date().getTime() - start) > milliseconds) {
+                        break;
+                    }
+                }
+            }
+
+
+            function max_class(lst, mx = true) {
+                let l = mx?-Infinity:Infinity;
+                for (let i = 0; i < lst.length; ++i) {
+                    l = mx?Math.max(lst[i].offsetHeight, l):Math.min(lst[i].offsetHeight, l);
+                }
+                for (let i = 0; i < lst.length; ++i) {
+                    lst[i].style.height = l.toString() + "px";
+                }
+            }
+
+            window.onload = function () {
+                AOS.init();
+                document.getElementById('preloader').classList.add('d-none');
+                document.getElementById('body').classList.remove('d-none');
+                let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                if (width>=1200) {
+                    max_class(document.getElementsByClassName("cardhead"));
+                }
+                AOS.refresh();
+            }
+        </script>
+
+    {% endblock %}
 {% endblock %}
