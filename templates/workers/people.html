@@ -3,16 +3,17 @@
 {% block content %}
     <div class="row">
         <div class="row col-md-8">
+        <div class="text-center col-12 font-weight-bold my-5"><h3>Наши специалисты</h3></div>
         {% if authors_list %}
                 {% for person in authors_list %}
                 {% if person.photo %}
                     <div class="border-psycho-person row person mx-auto">
-                        <div class="col-8 text-center">
+                        <div class="col-12 col-md-8 text-center">
                             <img class="img-fluid w-auto imag" src="{{ person.photo.url }}" alt="{{ person.alt }}">
                         </div>
 
-                        <div class="col-4">
-                        <div class="my-2 col-5 text-center mb-3">
+                        <div class="col-12 col-md-4">
+                        <div class="my-2 col-12 col-md-5 text-center mb-3">
                             <a href='{% url 'person' pk=person.id %}'><h3><i class="fas fa-user-circle"></i> {{ person.name }}</h3></a>
                         </div>
                         <div>
@@ -114,12 +115,7 @@
                     max_class(document.getElementsByClassName("person"), 600);
                     max_class(document.getElementsByClassName("imag"), 400);
                 }
-                else if (width>=800) {
-                    max_class(document.getElementsByClassName("person"), 400);
-                }
-                else{
-                    max_class(document.getElementsByClassName("person"), 200);
-                }
+
             }
         </script>
 

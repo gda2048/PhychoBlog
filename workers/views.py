@@ -34,3 +34,9 @@ class PersonDetailView(DetailView):
     model = Person
     queryset = Person.objects.all()
     template_name = 'workers/worker.html'
+
+
+class AchievementDetailView(DetailView):
+    model = Achievement
+    queryset = Achievement.objects.all()
+    template_name = 'workers/achievement.html'

@@ -1,10 +1,36 @@
 {% extends 'base.html' %}
 {% block title %}  Специалисты {% endblock %}
 {% block content %}
-            <li>{{ person.name }}</li>
-            {{ person.email }}
+    <div class="jumbotron mt-2 text-white rounded bg-psycho-teal">
+        <h1 class="d-none d-xl-inline font-italic">Специалист {{ person.name }}</h1>
+        <h3 class="d-xl-none font-italic">Специалист {{ person.name }}</h3>
+        <p>{{ person.info }}</p>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-5">
             {% if person.photo %}
-            <img src="{{ person.photo.url }}" alt="{{ person.alt }}"
-                 style="max-width: 100%; max-height: 100%;">
+                <img src="{{ person.photo.url }}" alt="{{ person.alt }}"
+                     style="max-width: 100%; max-height: 100%;">
             {% endif %}
+        </div>
+        <div class="col-12 col-md-7">
+            Полное имя: {{ person.full_name }}<br>
+            Контактная информация: {{ person.email }}<br> {{ person.contacts| linebreaks }} <br>
+            {{ person.bio }}
+            <div class="row justify-content-around">
+                <div class="text-white rounded bg-psycho-teal col-12 text-center">
+                    <h1 class="d-none d-xl-inline font-italic">Достижения</h1>
+                    <h3 class="d-xl-none font-italic">Достижения</h3>
+                </div>
+                {% for ach in person.achievements.all %}
+                    <div class="col-12 col-md-5 my-1 text-white rounded bg-psycho-teal text-center"><a class="link-blue"
+                                                                      href="{% url 'achievement' pk=ach.id %}">{{ ach.alt }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+
 {% endblock %}
