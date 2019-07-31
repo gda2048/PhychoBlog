@@ -1,9 +1,16 @@
 """
 Stores main models of the project
 """
+from django.core.exceptions import ValidationError
 from django.db import models
 from PIL import Image
 from io import BytesIO
+
+
+def validate_name(value):
+    print(value.name)
+    if not all([letter.isalpha() or letter.isdigit() or letter in ['_', '.'] for letter in value.name]):
+        raise ValidationError('Измените название картинки и загрузите ее снова. Присутствуют неподдерживаемые символы')
 
 
 class PhotoItem(models.Model):
@@ -12,7 +19,8 @@ class PhotoItem(models.Model):
     help to store information about the photo
     """
     id = models.AutoField(primary_key=True)
-    photo = models.ImageField('Изображение', height_field='height', width_field='width', null=True, blank=True)
+    photo = models.ImageField('Изображение', height_field='height', width_field='width', null=True, blank=True,
+                              validators=[validate_name])
     alt = models.TextField("Описание фото", max_length=200, blank=True, null=True)
     height = models.PositiveIntegerField(null=True, blank=True)
     width = models.PositiveIntegerField(null=True, blank=True)
