@@ -1,9 +1,10 @@
 body{
     font-family: 'Forum', cursive;
+    font-size: 20px;
 }
 
 .border-psycho-date {
-    display: inline-block;
+  display: inline-block;
   border: 3px solid #0191C8;
 }
 .dropdown-menu > a:hover {
@@ -98,6 +99,13 @@ margin: 0 auto;
     border-right: 0;
     border-bottom: 2px dashed #3B5998;
 }
+
+.border-psycho-person{
+    border-top: 2px solid #3B5998;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 2px solid #3B5998;
+    }
 
 .bg-psycho-pearlbush-real{
     background-color: #b7e5e5;

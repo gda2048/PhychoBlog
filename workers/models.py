@@ -18,6 +18,7 @@ class Person(PhotoItem):
     info = models.TextField('Основная информация', blank=True,
                             help_text='Хорошее краткое описание своей деятельности')
     bio = models.TextField('Биография', blank=True)
+    contacts = models.TextField('Другие контактные данные: ', blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', null=True, blank=True)
 
     def save(self, *args, **kwargs):

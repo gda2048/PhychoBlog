@@ -1,13 +1,19 @@
 from django.views.generic import ListView, DetailView
 
 from workers.models import Person, Achievement, HelpItem
+from blog.models import Article
 
 
 class PersonListView(ListView):
     model = Person
     template_name = 'workers/people.html'
     context_object_name = 'authors_list'
-    paginate_by = 3
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super(PersonListView, self).get_context_data(**kwargs)
+        context['last_articles'] = Article.objects.order_by('-release_date')[:3]
+        return context
 
 
 class AchievementListView(ListView):
