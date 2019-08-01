@@ -4,7 +4,7 @@ from blog.models import Article
 
 
 class ArticleListView(ListView):
-    model = Article
+    queryset = Article.objects.prefetch_related("author").only("id", "name", "content", "content_min", "release_date", "author__id", "author__full_name").all()
     template_name = 'blog/articles.html'
     context_object_name = 'articles_list'
     paginate_by = 6
@@ -17,7 +17,6 @@ class ArticleDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
-        assert isinstance(context, object)
         context['images'] = Article.objects.get(pk=self.kwargs['pk']).photos.exclude(binary_image=None)
         context['last_articles'] = Article.objects.order_by('-release_date').exclude(id__in=[self.object.id])[:2]
         return context
