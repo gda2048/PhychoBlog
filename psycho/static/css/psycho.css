@@ -110,3 +110,7 @@ margin: 0 auto;
 .bg-psycho-pearlbush-real{
     background-color: #b7e5e5;
 }
+
+.dropdown-item > a:hover{
+    border-bottom: 2px dashed white;
+}

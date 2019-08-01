@@ -12,7 +12,7 @@
     </div>
     <div>
         <div class="row justify-content-around mx-1 mx-xl-5">
-            {% for article in articles_list %}
+            {% for ph, article in articles %}
                 <div class="card col-12 col-sm-12 col-md-12 col-xl-5 my-3 m-xl-5 border-0 bg-psycho-pearlbush-real"
                      data-aos="flip-right">
                     <div class="card-header bg-psycho-pearlbush-real border-0 cardhead">
@@ -28,13 +28,13 @@
                         </div>
                     </div>
                     <div class="card-body cardbody">
-                        {% if article.main_image.photo %}
+                        {% if ph.photo %}
                             <div class="d-none d-xl-flex row">
-                                <div class="col-xl-6 text-center"><div class=""><img class="img-fluid" src="{{ article.main_image.photo.url }}" alt="{{ article.main_image.alt }}"></div></div>
+                                <div class="col-xl-6 text-center"><div class=""><img class="img-fluid" src="{{ ph.photo.url }}" alt="{{ ph.alt }}"></div></div>
                                 <div class="col-xl-6"><p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
                             </div>
                             <div class="d-xl-none">
-                                <div class="text-center my-2 "><img class="img-fluid" src="{{ article.main_image.photo.url }}" alt="{{ article.main_image.alt }}"></div>
+                                <div class="text-center my-2 "><img class="img-fluid" src="{{ ph.photo.url }}" alt="{{ ph.alt }}"></div>
                                 <div><p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
                             </div>
                         {% else %}

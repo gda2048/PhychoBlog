@@ -1,13 +1,34 @@
 from django.views.generic import ListView, DetailView
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-from blog.models import Article
+from blog.models import Article, ArticlePhotoReport
 
 
 class ArticleListView(ListView):
-    queryset = Article.objects.prefetch_related("author").only("id", "name", "content", "content_min", "release_date", "author__id", "author__full_name").all()
+    queryset = Article.objects.select_related("author").prefetch_related("photos").filter(photos__main=True)
     template_name = 'blog/articles.html'
     context_object_name = 'articles_list'
     paginate_by = 6
+
+    def get_context_data(self, *args, **kwargs):
+        photos = []
+        for obj in self.object_list:
+            photos += obj.photos.all()
+
+        photo_dict = {obj.article: obj for obj in photos}
+        lst = [photo_dict.get(obj) for obj in self.object_list]
+        articles = list(zip(lst, list(self.object_list)))
+
+        paginator = Paginator(articles, self.paginate_by)
+        page = self.request.GET.get('page')
+        try:
+            articles = paginator.page(page)
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)
+        context = {"articles": articles}
+        return context
 
 
 class ArticleDetailView(DetailView):

@@ -45,12 +45,6 @@ INSTALLED_APPS = [
     'events.apps.EventsConfig',
     'blog.apps.BlogConfig',
     'workers.apps.WorkersConfig',
-    'debug_toolbar',
-]
-INTERNAL_IPS = [
-    # ...
-    '127.0.0.1',
-    # ...
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,7 +54,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.versions.VersionsPanel',
@@ -144,3 +137,24 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static/images')
 MEDIA_URL = '/images/'
 site_name = 'Art Of Life'
 st_password = '12345678'
+
+if DEBUG:
+    INSTALLED_APPS +=['debug_toolbar']
+    INTERNAL_IPS = ['127.0.0.1']
+    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
+if True:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+            },
+        },
+        'loggers': {
+            'django.db.backends': {
+                'level': 'DEBUG',
+                'handlers': ['console'],
+            }
+        },
+    }
