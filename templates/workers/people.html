@@ -4,7 +4,6 @@
     <div class="row">
         <div class="row col-md-8">
         <div class="text-center col-12 font-weight-bold my-5"><h3>Наши специалисты</h3></div>
-        {% if authors_list %}
                 {% for person in authors_list %}
                 {% if person.photo %}
                     <div class="border-psycho-person row person mx-auto">
@@ -32,14 +31,8 @@
 
                 {% endfor %}
 
-            {% block pagination %}
-                {% include 'pagination.html' %}
-            {% endblock %}
-        {% else %}
-            <h3>Специалисты</h3>
-            <p> Специалистов не найдено </p>
-        {% endif %}
         </div>
+
         <div class="col-11 col-md-4 bg-psycho-pearlbush">
                 <div class="text-white rounded bg-psycho-teal text-center my-2 py-4">
                     <h3 class="d-none d-xl-inline font-italic">Новые статьи</h3>
@@ -85,7 +78,9 @@
                 {% endfor %}
             </div>
     </div>
-
+        {% block pagination %}
+            {% include 'pagination.html' %}
+        {% endblock %}
 {% endblock %}
 {% block onload %}
         <script>

@@ -48,9 +48,8 @@ if settings.DEBUG:
 
     ] + urlpatterns
 
-"""
-ArticlePhotoReport.all_img_from_binary()
-Achievement.all_img_from_binary()
-Event.all_img_from_binary()
-Person.all_img_from_binary()
-"""
+if not settings.DEBUG:
+    ArticlePhotoReport.all_img_from_binary()
+    Achievement.all_img_from_binary()
+    Event.all_img_from_binary()
+    Person.all_img_from_binary()
