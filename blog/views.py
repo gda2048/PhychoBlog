@@ -41,9 +41,18 @@ class ArticleDetailView(DetailView):
     model = Article
     success_url = '/article/'
     template_name = 'blog/article.html'
+    queryset = Article.objects.select_related('author')\
+        .only("author__full_name", "author__id", "name", "id", "release_date", "content").prefetch_related(
+        Prefetch("photos", to_attr="images", queryset=ArticlePhotoReport.objects.exclude(binary_image=None))
+    )
 
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
-        context['images'] = Article.objects.get(pk=self.kwargs['pk']).photos.exclude(binary_image=None)
-        context['last_articles'] = Article.objects.order_by('-release_date').exclude(id__in=[self.object.id])[:2]
+        last_articles = Article.objects.order_by('-release_date').exclude(id__in=[self.object.id])[:2]\
+            .select_related('author').prefetch_related(
+            Prefetch("photos", to_attr="ph", queryset=ArticlePhotoReport.objects.filter(main=True)
+                     .only('photo', 'alt', 'id', 'height', "width", "article__id", "article__name").distinct("article"))
+        )
+        lst = list(next(iter(obj.ph), None) for obj in last_articles)
+        context['last_articles'] = list(zip(lst, list(last_articles)))
         return context

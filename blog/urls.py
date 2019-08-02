@@ -6,5 +6,5 @@ from .views import ArticleListView, ArticleDetailView
 
 urlpatterns = [
     path('article/', cache_page(60*15)(ArticleListView.as_view()), name='article_list'),
-    path(r'article/<int:pk>', ArticleDetailView.as_view(), name='article'),
+    path(r'article/<int:pk>', cache_page(60*15)(ArticleDetailView.as_view()), name='article'),
 ]
