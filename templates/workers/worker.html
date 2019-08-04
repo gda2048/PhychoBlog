@@ -14,8 +14,17 @@
             {% endif %}
         </div>
         <div class="col-12 col-md-7">
-            Полное имя: {{ person.full_name }}<br>
-            Контактная информация: {{ person.email }}<br> {{ person.contacts| linebreaks }} <br>
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-white rounded bg-psycho-teal col-12 text-center">
+                    <h1 class="d-none d-xl-inline font-italic">{{ person.full_name }}</h1>
+                    <h3 class="d-xl-none font-italic">{{ person.full_name }}</h3>
+                </div>
+                </div>
+                <div class="col-12">
+                    Email: {{ person.email }}<br> {{ person.contacts| linebreaks }} <br>
+                </div>
+            </div>
             {{ person.bio }}
             <div class="row justify-content-around">
                 <div class="text-white rounded bg-psycho-teal col-12 text-center">

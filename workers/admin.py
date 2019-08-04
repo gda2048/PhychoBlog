@@ -34,7 +34,7 @@ class PersonAdmin(admin.ModelAdmin):
          {'fields': ('name', 'email')}),
 
         ('Для заполнения профиля',
-         {'fields': ('full_name', 'birth_date', 'info', 'bio', ('photo', 'img_preview'), 'alt')})
+         {'fields': ('full_name', 'birth_date', 'contacts', 'info', 'bio', ('photo', 'img_preview'), 'alt')})
     )
     readonly_fields = ['img_preview']
     inlines = [AchievementInline, HelpItemInline]
