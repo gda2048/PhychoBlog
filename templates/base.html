@@ -16,6 +16,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body class="container-fluid {% block body %}{% endblock %}">
+{% for message in messages %}
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+{% endfor %}
+
 <div id="preloader" class="h100">
     {% block navbar_preloader %} {% include 'navbar.html' %} {% endblock %}
     <div class="center text-center">

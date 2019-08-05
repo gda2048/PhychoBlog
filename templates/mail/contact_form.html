@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Форма связи {% endblock %}
+{% block content %}
+    <div class="jumbotron mt-2 p-3 p-md-5 text-white rounded bg-psycho-teal">
+        <div class="col-md-6 px-0">
+            <h3 class="font-italic">Компания Art Of Life</h3>
+            <p class="lead my-3">Чтобы наши специалисты связались с вами по вашему вопросу - заполните форму ниже.</p>
+        </div>
+    </div>
+    <form method="post" class="offset-1 col-10 offset-lg-2 col-lg-8">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                {{ form.name|as_crispy_field }}
+            </div>
+            <div class="col-12 col-lg-6">
+                {{ form.to_email|as_crispy_field }}
+            </div>
+            </div>
+        <div>{{ form.subject|as_crispy_field }}</div>
+        <div>{{ form.message|as_crispy_field }}</div>
+
+        <button type="submit" class="btn bg-psycho-teal">Отправить сообщение</button>
+    </form>
+{% endblock %}
+
