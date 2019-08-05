@@ -34,7 +34,6 @@ class HelpItemListView(ListView):
     model = HelpItem
     template_name = 'workers/help_items.html'
     context_object_name = 'help_item_list'
-    paginate_by = 1
 
 
 class PersonDetailView(DetailView):

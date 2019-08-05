@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 {% block title %} Помощь {% endblock %}
 {% block content %}
-    <ul>
+    <div class="jumbotron mt-2 p-3 p-md-5 text-white rounded bg-psycho-teal">
+        <div class="px-0">
+            <h3 class="font-italic">Специалисты нашего центра предоставляют квалифицированную консультативную и психотерапевтическую помощь.</h3>
+        </div>
+    </div>
+    <ul class="list-group col-10 offset-1">
         {% for help_item in help_item_list %}
-            <li>{{ help_item.name }}<br>
-                {{ help_item.description | linebreaks }}
+            <li class="list-group-item mb-1 border-0">
+                <div class="row justify-content-between border-bottom ">
+                    <h3 class="mb-1 col-12 offset-lg-2 col-lg-6">{{ help_item.name|title}}</h3>
+                    <small class="mr-5 col-12 col-lg-3">
+                        <a href="{% url 'person' pk=help_item.expert_id %}"><i class="fas fa-user-circle"></i> {{ help_item.expert.full_name }}</a>
+                    </small>
+                </div>
+                <div class="mr-5">{{ help_item.description | linebreaks }}</div>
             </li>
-            <hr>
         {% endfor %}
-        {% block pagination %}
-            {% include 'pagination.html' %}
-        {% endblock %}
     </ul>
+
 {% endblock %}

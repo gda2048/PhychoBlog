@@ -177,7 +177,7 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'algolearn2048@gmail.com'
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_MAIN = ('bolshakova777@ukr.net', 'goncharovdma@gmail.com')
+EMAIL_MAIN = ('bolshakova777@ukr.net', 'goncharovdma@gmail.com', 'inst.art.of.life@gmail.com')
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
