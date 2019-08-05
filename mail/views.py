@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.views.generic import FormView
+from django.urls import reverse_lazy
 
 from mail.forms import ContactForm
 
@@ -15,4 +16,4 @@ class ContactView(FormView):
 
     def get_success_url(self):
         messages.add_message(self.request, messages.SUCCESS, 'Сообщение отправлено. С Вами свяжутся')
-        return '/'
+        return reverse_lazy('contact_form')

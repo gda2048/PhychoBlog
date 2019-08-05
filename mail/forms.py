@@ -12,5 +12,5 @@ class ContactForm(forms.Form):
     def send_email(self):
         name, to_email = self.cleaned_data['name'], self.cleaned_data['to_email']
         subject, message = self.cleaned_data['subject'], self.cleaned_data['message']
-        email = EmailMessage(subject, message, to=EMAIL_MAIN)
+        email = EmailMessage(subject, message+f'\nИмя: {name}\nEmail для связи с клиентом: {to_email}', to=EMAIL_MAIN)
         email.send()
