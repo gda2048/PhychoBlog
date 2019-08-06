@@ -68,11 +68,11 @@ class PhotoItem(models.Model):
 
 class Product(PhotoItem):
     name = models.CharField("Название", max_length=50)
-    about = models.CharField('Краткое описание', blank=True, max_length=300)
-    author = models.CharField('Про автора', blank=True, max_length=300)
+    about = models.TextField('Краткое описание', max_length=500)
+    author = models.TextField('Про автора', max_length=500)
     description = models.TextField('Полное описание', blank=True)
     contacts = models.TextField('Другие контактные данные: ', blank=True)
-    price = models.DecimalField('Цена', max_digits=5, decimal_places=2, null=True, default=0, blank=True)
+    price = models.DecimalField('Цена', max_digits=8, decimal_places=2, null=True, default=0, blank=True)
 
     def __str__(self):
         return self.name

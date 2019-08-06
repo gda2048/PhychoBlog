@@ -39,11 +39,6 @@
                                 <div><p class="text-justify"> {{ ev.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
                         {% endif %}
                     </div>
-                    <div class="card-footer text-right border-0 bg-psycho-pearlbush-real">
-                        <b><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'event' pk=ev.id %}'>Читать
-                            далее...</a></b>
-                        <span class="d-none d-xl-inline">&nbsp;<br>&nbsp;</span>
-                    </div>
                 </div>
             {% endfor %}
         </div>

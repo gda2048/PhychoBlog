@@ -1,5 +1,123 @@
 {% extends 'base.html' %}
 {% block title %}  Магазин {% endblock %}
 {% block content %}
-Магаз
+    <div class="row">
+        <div class="row col-md-8">
+            {% for product in product_list %}
+                <div class="row person mx-auto bg-psycho-pearlbush">
+                    <div class="text-center col-12 my-1"><h3><b>{{ product.name }}</b></h3></div>
+
+                    {% if product.photo %}
+                        <div class="row mb-3 justify-content-between">
+                        <div class="col-md-4 text-center">
+                            <img class="img-fluid w-auto imag" src="{{ product.photo.url }}" alt="{{ product.alt }}">
+                        </div>
+
+                        <div class="col-md-7 text-justify">
+                            <h3><i class="fas fa-user-circle"></i> <b>Автор:</b> {{ product.author  | linebreaksbr}}</h3>
+                            {{ product.about | linebreaksbr }}<br>
+                            <b>Контакты:</b> {{ product.contacts | linebreaksbr }}
+                        </div>
+                        </div>
+                        {% else %}
+                        <div class="text-center">
+                            <h3><i class="fas fa-user-circle"></i> <b>Автор:</b> {{ product.author  | linebreaksbr}}</h3>
+                            {{ product.about | linebreaksbr }}
+                        </div>
+
+                    {% endif %}
+
+                    <div class="col-12">
+
+                        <div>
+                            {{ product.description | linebreaksbr }}
+                        </div>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="col-11 col-md-4 bg-psycho-pearlbush">
+            <div class="text-white rounded bg-psycho-teal text-center my-2 py-4">
+                <h3 class="d-none d-xl-inline font-italic">Новые статьи</h3>
+                <h4 class="d-xl-none font-italic">Новые статьи</h4>
+            </div>
+
+            {% for ph, article in last_articles %}
+                <div class="card col-12 mb-3 bg-psycho-teal">
+                    <div class="card-header bg-psycho-teal border-0 cardhead">
+                        <a href="{% url 'article' pk=article.id %}"><h3 class="text-psycho-blue">{{ article.name }}</h3>
+                        </a>
+                    </div>
+                    <div class="card-header bg-psycho-teal">
+                        <div class="text-psycho-lightblue">
+                            <b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><i
+                                    class="fas fa-user"></i> {{ article.author.full_name }}</a></b>
+                            <span class="d-xl-none"><br></span>
+                            <span class="d-none d-xl-inline">&nbsp;</span>
+                            <i class="fas fa-calendar"></i> <i>{{ article.release_date | date:"d E Y" }}</i>
+                        </div>
+                    </div>
+                    <div class="card-body cardbody">
+                        {% if ph.photo %}
+                            <div>
+                                <div class="text-center my-2 "><img class="img-fluid center"
+                                                                    src="{{ ph.photo.url }}"
+                                                                    alt="{{ ph.alt }}"></div>
+                                <div>
+                                    <p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div>
+                                <p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer text-right border-0 bg-psycho-teal">
+                        <b><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'article' pk=article.id %}'>Читать
+                            далее...</a></b>
+                        <span class="d-none d-xl-inline">&nbsp;<br>&nbsp;</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% block pagination %}
+        {% include 'pagination.html' %}
+    {% endblock %}
+{% endblock %}
+{% block onload %}
+        <script>
+            function sleep(milliseconds) {
+                let start = new Date().getTime();
+                for (let i = 0; i < 1e7; i++) {
+                    if ((new Date().getTime() - start) > milliseconds) {
+                        break;
+                    }
+                }
+            }
+
+
+            function max_class(lst, l) {
+
+                for (let i = 0; i < lst.length; ++i) {
+                    lst[i].style.height = l.toString() + "px";
+                }
+            }
+
+            window.onload = function () {
+                document.getElementById('preloader').classList.add('d-none');
+                document.getElementById('body').classList.remove('d-none');
+                let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                if (width>=1200) {
+                    max_class(document.getElementsByClassName("imag"), 400);
+                }
+
+            }
+        </script>
+
 {% endblock %}
