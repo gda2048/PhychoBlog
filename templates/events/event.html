@@ -1,14 +1,36 @@
 {% extends 'base.html' %}
-{% block title %} {{ event.name }} {% endblock %}
+{% block title %}  {{ event.name }} {% endblock %}
 {% block content %}
-    {{ event.name }}<br>
-    {{ event.content | linebreaks }}<br>
-    {{ event.start_date }}<br>
-    {{ event.duration }}<br>
-    {{ event.type }}<br>
-    {% if  event.photo %}
-    <img src="{{ event.photo.url }}" alt="{{ event.alt }}"
-         style="max-width: 100%; max-height: 100%;">
-    {% endif %}
+    <div class="jumbotron mt-2 text-white rounded bg-psycho-teal">
+        <h1 class="d-none d-xl-inline font-italic">Мероприятие {{ event.name }}</h1>
+        <h3 class="d-xl-none font-italic">Мероприятие {{ event.name }}</h3>
+        <p>{{ person.info }}</p>
+    </div>
+    <div class="card border-0 bg-psycho-pearlbush-real">
+                    <div class="card-header bg-psycho-pearlbush-real border-0 cardhead row">
+                        <div class="col-12 col-md-6 text-psycho-lightblue border-psycho-date" style="font-size: 16px;">
+                                {% if event.start_date %}&nbsp;<i class="fas fa-calendar"></i> Начало: <i>{{ event.start_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
+                                {% if event.end_date %}&nbsp;<i class="fas fa-calendar"></i> Конец: <i>{{ event.end_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
+                                {% if event.duration %}
+                                    &nbsp;<i class="fas fa-clock"></i> Длительность: <i>{{ event.duration }}&nbsp;</i>
+                                {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-body cardbody">
+                        {% if event.photo %}
+                            <div class="d-none d-xl-flex row">
+                                <div class="col-xl-6 text-center"><div class=""><img class="img-fluid" src="{{ event.photo.url }}" alt="{{ event.alt }}"></div></div>
+                                <div class="col-xl-6"><p class="text-justify"> {{ event.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                            </div>
+                            <div class="d-xl-none">
+                                <div class="text-center my-2 "><img class="img-fluid" src="{{ event.photo.url }}" alt="{{ event.alt }}"></div>
+                                <div><p class="text-justify"> {{ event.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                            </div>
+                        {% else %}
+                                <div><p class="text-justify"> {{ event.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                        {% endif %}
+                    </div>
+                </div>
+
 
 {% endblock %}
