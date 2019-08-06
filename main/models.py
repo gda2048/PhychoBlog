@@ -64,3 +64,23 @@ class PhotoItem(models.Model):
         abstract = True
         verbose_name = 'Картинка'
         verbose_name_plural = 'Картинки'
+
+
+class Product(PhotoItem):
+    name = models.CharField("Название", max_length=50)
+    about = models.CharField('Краткое описание', blank=True, max_length=300)
+    author = models.CharField('Про автора', blank=True, max_length=300)
+    description = models.TextField('Полное описание', blank=True)
+    contacts = models.TextField('Другие контактные данные: ', blank=True)
+    price = models.DecimalField('Цена', max_digits=5, decimal_places=2, null=True, default=0, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        """
+        Product model settings
+        """
+        db_table = 'products'
+        verbose_name = 'Товар'
+        verbose_name_plural = 'Товары'

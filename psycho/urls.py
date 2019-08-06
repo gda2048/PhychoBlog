@@ -23,6 +23,7 @@ from .settings import site_name
 from blog.models import ArticlePhotoReport
 from workers.models import Achievement, Person
 from events.models import Event
+from main.models import Product
 
 admin.site.site_header = site_name
 admin.site.site_title = site_name
@@ -54,3 +55,4 @@ ArticlePhotoReport.all_img_from_binary()
 Achievement.all_img_from_binary()
 Event.all_img_from_binary()
 Person.all_img_from_binary()
+Product.all_img_from_binary()

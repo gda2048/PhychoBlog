@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'events.apps.EventsConfig',
     'blog.apps.BlogConfig',
     'workers.apps.WorkersConfig',
+    'mail.apps.MailConfig',
     'crispy_forms',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
