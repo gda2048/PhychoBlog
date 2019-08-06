@@ -35,10 +35,10 @@
                             </div>
                             <div class="d-xl-none">
                                 <div class="text-center my-2 "><img class="img-fluid" src="{{ ph.photo.url }}" alt="{{ ph.alt }}"></div>
-                                <div><p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                                <div><p class="text-justify"> {{ article.content_min| linebreaksbr| safe| truncatechars:'300' }}</p></div>
                             </div>
                         {% else %}
-                                <div><p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                                <div><p class="text-justify"> {{ article.content_min| linebreaksbr| safe| truncatechars:'300' }}</p></div>
                         {% endif %}
                     </div>
                     <div class="card-footer text-right border-0 bg-psycho-pearlbush-real">

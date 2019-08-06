@@ -80,8 +80,8 @@
                 </div>
 
                 <div class="mx-auto text-justify mx-5">
-                    <p class="mr-auto d-none d-md-block">{{ article.content | linebreaksbr | safe }} <br></p>
-                    <small class="mr-auto d-md-none">{{ article.content | linebreaksbr | safe }} <br></small>
+                    <p class="mr-auto d-none d-md-block">{{ article.content| linebreaksbr | safe }} <br></p>
+                    <small class="mr-auto d-md-none">{{ article.content| linebreaksbr | safe }} <br></small>
                 </div>
 
             </div>
@@ -113,12 +113,12 @@
                                                                         src="{{ ph.photo.url }}"
                                                                         alt="{{ ph.alt }}"></div>
                                     <div>
-                                        <p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p>
+                                        <p class="text-justify"> {{ article.content_min| linebreaksbr| safe| truncatechars:'300' }}</p>
                                     </div>
                                 </div>
                             {% else %}
                                 <div>
-                                    <p class="text-justify"> {{ article.content | linebreaksbr| safe| truncatechars:'300' }}</p>
+                                    <p class="text-justify"> {{ article.content_min| linebreaksbr| safe| truncatechars:'300' }}</p>
                                 </div>
                             {% endif %}
                         </div>
