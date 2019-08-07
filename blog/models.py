@@ -9,7 +9,7 @@ class Article(models.Model):
     Stores a single article entry
     """
     id = models.AutoField(primary_key=True)
-    name = models.CharField("Название", max_length=50)
+    name = models.CharField("Название", max_length=100)
     content = models.TextField("Содержание", blank=True)
     content_min = models.TextField("Миниверсия статьи", max_length=300, blank=True,
                                    help_text='Как статья отображается в свернутом виде. Максимум 200 символов.')

@@ -3,6 +3,7 @@
 {% block content %}
     <div class="row">
         <div class="row col-md-8">
+        {% autoescape off %}
             {% for product in product_list %}
                 <div class="row person mx-auto bg-psycho-pearlbush">
                     <div class="text-center col-12 my-1"><h3><b>{{ product.name }}</b></h3></div>
@@ -38,7 +39,7 @@
                 </div>
 
             {% endfor %}
-
+        {% endautoescape %}
         </div>
 
         <div class="col-11 col-md-4 bg-psycho-pearlbush">

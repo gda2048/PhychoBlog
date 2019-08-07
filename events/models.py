@@ -17,8 +17,8 @@ class Event(PhotoItem):
     Stores information about a single event
     """
     id = models.AutoField(primary_key=True)
-    name = models.CharField("Название", max_length=50)
-    content = models.TextField("Описание мероприятия", max_length=200, blank=True, null=True)
+    name = models.CharField("Название", max_length=100)
+    content = models.TextField("Описание мероприятия", max_length=400, blank=True, null=True)
     start_date = models.DateTimeField('Дата и время начала мероприятия', null=True, blank=True)
     end_date = models.DateTimeField('Дата и время окончания мероприятия', null=True, blank=True)
     type = models.CharField('Тип', max_length=20, choices=EventType, default='common')
@@ -60,8 +60,8 @@ class Announcement(models.Model):
     Stores am announcement entry
     """
     id = models.AutoField(primary_key=True)
-    name = models.CharField("Название", max_length=50)
-    content = models.TextField("Описание анонса", max_length=200, blank=True)
+    name = models.CharField("Название", max_length=100)
+    content = models.TextField("Описание анонса", max_length=300, blank=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name="Мероприятие", related_name='announcements')
     main = models.BooleanField("Отображать вверху", default=False)
 

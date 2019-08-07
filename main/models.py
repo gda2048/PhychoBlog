@@ -21,7 +21,7 @@ class PhotoItem(models.Model):
     id = models.AutoField(primary_key=True)
     photo = models.ImageField('Изображение', height_field='height', width_field='width', null=True, blank=True,
                               validators=[validate_name])
-    alt = models.TextField("Описание фото", max_length=200, blank=True, null=True)
+    alt = models.TextField("Описание фото", max_length=300, blank=True, null=True)
     height = models.PositiveIntegerField(null=True, blank=True)
     width = models.PositiveIntegerField(null=True, blank=True)
     binary_image = models.BinaryField(null=True)
@@ -67,7 +67,7 @@ class PhotoItem(models.Model):
 
 
 class Product(PhotoItem):
-    name = models.CharField("Название", max_length=50)
+    name = models.CharField("Название", max_length=100)
     about = models.TextField('Краткое описание', max_length=500)
     author = models.TextField('Про автора', max_length=500)
     description = models.TextField('Полное описание', blank=True)

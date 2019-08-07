@@ -37,7 +37,7 @@
 <div id='body' class="d-none">
     {% block navbar %} {% include 'navbar.html' %} {% endblock %}
 
-    {% block content %}{% endblock %}
+    {% autoescape off %}{% block content %}{% endblock %}{% endautoescape %}
 </div>
 {% block onload %}
     <script>

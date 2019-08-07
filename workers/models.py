@@ -10,8 +10,8 @@ class Person(PhotoItem):
     Stores all information about a psychologist
     """
     id = models.AutoField(primary_key=True)
-    full_name = models.CharField('Имя', max_length=50)
-    name = models.CharField('Логин', max_length=20, unique=True,
+    full_name = models.CharField('Имя', max_length=100)
+    name = models.CharField('Логин', max_length=50, unique=True,
                             help_text='Уникальный логин. При входе в систему его нужно будет указывать. ')
     birth_date = models.DateField('Дата рождения')
     email = models.EmailField()
