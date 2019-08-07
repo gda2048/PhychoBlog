@@ -23,7 +23,7 @@ from .settings import site_name
 from blog.models import ArticlePhotoReport
 from workers.models import Achievement, Person
 from events.models import Event
-from main.models import Product
+from shop.models import Product
 
 admin.site.site_header = site_name
 admin.site.site_title = site_name
@@ -36,6 +36,7 @@ urlpatterns = [
                   path('events/', include('events.urls')),
                   path('workers/', include('workers.urls')),
                   path('mail/', include('mail.urls')),
+                  path('shop/', include('shop.urls')),
                   path('admin/', admin.site.urls),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
