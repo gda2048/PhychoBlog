@@ -6,7 +6,7 @@
         {% autoescape off %}
             {% for product in product_list %}
                 <div class="row person mx-auto bg-psycho-pearlbush">
-                    <div class="text-center col-12 my-1"><h3><b>{{ product.name }}</b></h3></div>
+                    <div class="text-center col-12 my-1"><h3><strong>{{ product.name }}</strong></h3></div>
 
                     {% if product.photo %}
                         <div class="row mb-3 justify-content-between">
@@ -15,15 +15,15 @@
                         </div>
 
                         <div class="col-md-7 text-justify">
-                            <h3><i class="fas fa-user-circle"></i> <b>Автор:</b> {{ product.author  | linebreaksbr}}</h3>
+                            <h3><em class="fas fa-user-circle"></em> <strong>Автор:</strong> {{ product.author  | linebreaksbr}}</h3>
                             {{ product.about | linebreaksbr }}<br>
-                            <b>Контакты:</b> {{ product.contacts | linebreaksbr }}<br>
-                            <b>Цена:</b> {{ product.price }} грн
+                            <strong>Контакты:</strong> {{ product.contacts | linebreaksbr }}<br>
+                            <strong>Цена:</strong> {{ product.price }} грн
                         </div>
                         </div>
                         {% else %}
                         <div class="text-center">
-                            <h3><i class="fas fa-user-circle"></i> <b>Автор:</b> {{ product.author  | linebreaksbr}}</h3>
+                            <h3><em class="fas fa-user-circle"></em> <strong>Автор:</strong> {{ product.author  | linebreaksbr}}</h3>
                             {{ product.about | linebreaksbr }}
                         </div>
 
@@ -56,11 +56,11 @@
                     </div>
                     <div class="card-header bg-psycho-teal">
                         <div class="text-psycho-lightblue">
-                            <b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><i
-                                    class="fas fa-user"></i> {{ article.author.full_name }}</a></b>
+                            <strong><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><em
+                                    class="fas fa-user"></em> {{ article.author.full_name }}</a></strong>
                             <span class="d-xl-none"><br></span>
                             <span class="d-none d-xl-inline">&nbsp;</span>
-                            <i class="fas fa-calendar"></i> <i>{{ article.release_date | date:"d E Y" }}</i>
+                            <em class="fas fa-calendar"></em> <em>{{ article.release_date | date:"d E Y" }}</em>
                         </div>
                     </div>
                     <div class="card-body cardbody">
@@ -80,8 +80,8 @@
                         {% endif %}
                     </div>
                     <div class="card-footer text-right border-0 bg-psycho-teal">
-                        <b><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'article' pk=article.id %}'>Читать
-                            далее...</a></b>
+                        <strong><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'article' pk=article.id %}'>Читать
+                            далее...</a></strong>
                         <span class="d-none d-xl-inline">&nbsp;<br>&nbsp;</span>
                     </div>
                 </div>

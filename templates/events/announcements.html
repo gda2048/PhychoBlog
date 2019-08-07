@@ -16,10 +16,10 @@
                      data-aos="flip-right">
                     <div class="card-header border-0 bg-psycho-pearlbush">
                             <div class="text-psycho-lightblue border-psycho-date" style="font-size: 16px;">
-                                {% if announcement.event.start_date %}&nbsp;<i class="fas fa-calendar"></i> Начало: <i>{{ announcement.event.start_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
-                                {% if announcement.event.end_date %}&nbsp;<i class="fas fa-calendar"></i> Конец: <i>{{ announcement.event.end_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
+                                {% if announcement.event.start_date %}&nbsp;<em class="fas fa-calendar"></em> Начало: <em>{{ announcement.event.start_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
+                                {% if announcement.event.end_date %}&nbsp;<em class="fas fa-calendar"></em> Конец: <em>{{ announcement.event.end_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
                                 {% if announcement.event.duration %}
-                                    &nbsp;<i class="fas fa-clock"></i> Длительность: <i>{{ announcement.event.duration }}&nbsp;</i>
+                                    &nbsp;<em class="fas fa-clock"></em> Длительность: <em>{{ announcement.event.duration }}&nbsp;</em>
                                 {% endif %}
                             </div>
                     </div>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="col-12 border-announcement bg-psycho-pearlbush text-right text-psycho-lightblue my-2">
-                      {% if announcement.event.is_outdated != 'Мероприятие прошло' %}&nbsp;<i class="fas fa-hourglass"></i> До начала осталось: <h3>{{ announcement.event.start_date | timeuntil }}</h3>&nbsp;<br>{% endif %}
+                      {% if announcement.event.is_outdated != 'Мероприятие прошло' %}&nbsp;<em class="fas fa-hourglass"></em> До начала осталось: <h3>{{ announcement.event.start_date | timeuntil }}</h3>&nbsp;<br>{% endif %}
                 </div>
             {% endfor %}
         </div>
@@ -67,11 +67,11 @@
                         </div>
                         <div class="card-header bg-psycho-teal">
                             <div class="text-psycho-lightblue">
-                                <b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><i
-                                        class="fas fa-user"></i> {{ article.author.full_name }}</a></b>
+                                <strong><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><em
+                                        class="fas fa-user"></em> {{ article.author.full_name }}</a></strong>
                                 <span class="d-xl-none"><br></span>
                                 <span class="d-none d-xl-inline">&nbsp;</span>
-                                <i class="fas fa-calendar"></i> <i>{{ article.release_date | date:"d E Y" }}</i>
+                                <em class="fas fa-calendar"></em> <em>{{ article.release_date | date:"d E Y" }}</em>
                             </div>
                         </div>
                         <div class="card-body cardbody">
@@ -91,8 +91,8 @@
                             {% endif %}
                         </div>
                         <div class="card-footer text-right border-0 bg-psycho-teal">
-                            <b><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'article' pk=article.id %}'>Читать
-                                далее...</a></b>
+                            <strong><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'article' pk=article.id %}'>Читать
+                                далее...</a></strong>
                             <span class="d-none d-xl-inline">&nbsp;<br>&nbsp;</span>
                         </div>
                     </div>

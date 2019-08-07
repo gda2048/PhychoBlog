@@ -14,7 +14,7 @@ ul.submenu {
 ul.submenu li {
   display: inline-block;
 }
-ul.submenu li a i.fa {
+ul.submenu li a em.fa {
   padding: 10px;
   display: inline-block;
   border: 1px solid transparent;
@@ -28,7 +28,7 @@ ul.submenu li a i.fa {
   position: relative;
   z-index: 2;
 }
-ul.submenu li a i.fa::after {
+ul.submenu li a em.fa::after {
   content: "";
   height: 0%;
   width: 0%;
@@ -44,31 +44,31 @@ ul.submenu li a i.fa::after {
   z-index: -1;
   transition: all ease 0.5s;
 }
-ul.submenu li a:hover i.fa::before {
+ul.submenu li a:hover em.fa::before {
   color: white;
 }
-ul.submenu li a:hover i.fa-facebook::after {
+ul.submenu li a:hover em.fa-facebook::after {
   height: 200%;
   width: 200%;
   background-color: #3b5998;
   border-radius: 0px;
   opacity: 1;
 }
-ul.submenu li a:hover i.fa-twitter::after {
+ul.submenu li a:hover em.fa-twitter::after {
   height: 200%;
   width: 200%;
   background-color: #3b5998;
   border-radius: 0px;
   opacity: 1;
 }
-ul.submenu li a:hover i.fa-telegram::after {
+ul.submenu li a:hover em.fa-telegram::after {
   height: 200%;
   width: 200%;
   background-color: #3b5998;
   border-radius: 0px;
   opacity: 1;
 }
-ul.submenu li a:hover i.fa-instagram::after {
+ul.submenu li a:hover em.fa-instagram::after {
   height: 200%;
   width: 200%;
   background-color: #3b5998;

@@ -6,11 +6,11 @@
             <h1 class="d-none d-xl-inline font-italic">{{ article.name }}</h1>
             <h3 class="d-xl-none font-italic">{{ article.name }}</h3>
             <div class="col-md-6 px-0 text-psycho-blue">
-                <p class="lead my-3"><b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><i
-                        class="fas fa-user"></i> {{ article.author.full_name }}</a></b>
+                <p class="lead my-3"><strong><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><em
+                        class="fas fa-user"></em> {{ article.author.full_name }}</a></strong>
                     <span class="d-xl-none"><br></span>
                     <span class="d-none d-xl-inline">&nbsp;</span>
-                    <i class="fas fa-calendar"></i> <i>{{ article.release_date | date:"d E Y" }}</i></p>
+                    <em class="fas fa-calendar"></em> <em>{{ article.release_date | date:"d E Y" }}</em></p>
             </div>
         </div>
         <div class="row justify-content-around">
@@ -98,11 +98,11 @@
                         </div>
                         <div class="card-header bg-psycho-teal">
                             <div class="text-psycho-lightblue">
-                                <b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><i
-                                        class="fas fa-user"></i> {{ article.author.full_name }}</a></b>
+                                <strong><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><em
+                                        class="fas fa-user"></em> {{ article.author.full_name }}</a></strong>
                                 <span class="d-xl-none"><br></span>
                                 <span class="d-none d-xl-inline">&nbsp;</span>
-                                <i class="fas fa-calendar"></i> <i>{{ article.release_date | date:"d E Y" }}</i>
+                                <em class="fas fa-calendar"></em> <em>{{ article.release_date | date:"d E Y" }}</em>
                             </div>
                         </div>
                         <div class="card-body cardbody">
@@ -122,8 +122,8 @@
                             {% endif %}
                         </div>
                         <div class="card-footer text-right border-0 bg-psycho-teal">
-                            <b><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'article' pk=article.id %}'>Читать
-                                далее...</a></b>
+                            <strong><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'article' pk=article.id %}'>Читать
+                                далее...</a></strong>
                             <span class="d-none d-xl-inline">&nbsp;<br>&nbsp;</span>
                         </div>
                     </div>

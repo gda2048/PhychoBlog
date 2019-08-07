@@ -12,8 +12,8 @@
             {% for person in help_item_list %}
                 {% if person.help_items.exists %}
                     <h3 class="mr-5">
-                        <a href="{% url 'person' pk=person.id %}"><i
-                                class="fas fa-user-circle"></i> {{ person.full_name }}</a>
+                        <a href="{% url 'person' pk=person.id %}"><em
+                                class="fas fa-user-circle"></em> {{ person.full_name }}</a>
                     </h3>
                     <ul class="list-group offset-1 col-10">
                         {% for help_item in person.help_items.all %}
@@ -42,11 +42,11 @@
                     </div>
                     <div class="card-header bg-psycho-teal">
                         <div class="text-psycho-lightblue">
-                            <b><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><i
-                                    class="fas fa-user"></i> {{ article.author.full_name }}</a></b>
+                            <strong><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><em
+                                    class="fas fa-user"></em> {{ article.author.full_name }}</a></strong>
                             <span class="d-xl-none"><br></span>
                             <span class="d-none d-xl-inline">&nbsp;</span>
-                            <i class="fas fa-calendar"></i> <i>{{ article.release_date | date:"d E Y" }}</i>
+                            <em class="fas fa-calendar"></em> <em>{{ article.release_date | date:"d E Y" }}</em>
                         </div>
                     </div>
                     <div class="card-body cardbody">
@@ -66,8 +66,8 @@
                         {% endif %}
                     </div>
                     <div class="card-footer text-right border-0 bg-psycho-teal">
-                        <b><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'article' pk=article.id %}'>Читать
-                            далее...</a></b>
+                        <strong><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'article' pk=article.id %}'>Читать
+                            далее...</a></strong>
                         <span class="d-none d-xl-inline">&nbsp;<br>&nbsp;</span>
                     </div>
                 </div>

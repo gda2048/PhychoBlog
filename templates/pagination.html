@@ -18,10 +18,6 @@
                            tabindex="-1">Предыдущая</a>
                     </li>
                 {% endif %}
-            {% else %}
-                <li class="page-item disabled">
-                    <!--<a class="page-link" href="#" tabindex="-1">Предыдущая</a>-->
-                </li>
             {% endif %}
             {% for object in page_obj.paginator.page_range %}
                 {% ifequal page_obj.number forloop.counter %}
@@ -43,10 +39,6 @@
                         <a class="page-link" href="?{{ search }}&page={{ page_obj.next_page_number }}">Следующая</a>
                     </li>
                 {% endif %}
-            {% else %}
-                <li class="page-item disabled">
-                    <!--<a class="page-link" href="#">Следующая</a>-->
-                </li>
             {% endif %}
         </ul>
     </nav>

@@ -30,11 +30,11 @@ admin.site.index_title = "Добро пожаловать в панель нас
 
 urlpatterns = [
                   path('blog/', include('blog.urls')),
-                  path('', include('events.urls')),
                   path('workers/', include('workers.urls')),
                   path('mail/', include('mail.urls')),
                   path('shop/', include('shop.urls')),
                   path('admin/', admin.site.urls),
+                  path('', include('events.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

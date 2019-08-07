@@ -9,10 +9,10 @@
     <div class="card border-0 bg-psycho-pearlbush-real">
                     <div class="card-header bg-psycho-pearlbush-real border-0 cardhead row">
                         <div class="col-12 col-md-6 text-psycho-lightblue border-psycho-date" style="font-size: 16px;">
-                                {% if event.start_date %}&nbsp;<i class="fas fa-calendar"></i> Начало: <i>{{ event.start_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
-                                {% if event.end_date %}&nbsp;<i class="fas fa-calendar"></i> Конец: <i>{{ event.end_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
+                                {% if event.start_date %}&nbsp;<em class="fas fa-calendar"></em> Начало: <em>{{ event.start_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
+                                {% if event.end_date %}&nbsp;<em class="fas fa-calendar"></em> Конец: <em>{{ event.end_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
                                 {% if event.duration %}
-                                    &nbsp;<i class="fas fa-clock"></i> Длительность: <i>{{ event.duration }}&nbsp;</i>
+                                    &nbsp;<em class="fas fa-clock"></em> Длительность: <em>{{ event.duration }}&nbsp;</em>
                                 {% endif %}
                         </div>
                     </div>

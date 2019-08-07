@@ -18,10 +18,10 @@
                     <div class="card-header bg-psycho-pearlbush-real border-0 cardhead row">
                         <div class="col-12 col-md-6"><a href="{% url 'event' pk=ev.id %}"><h3 class="text-psycho-blue">{{ ev.name }}</h3></a></div>
                         <div class="col-12 col-md-6 text-psycho-lightblue border-psycho-date" style="font-size: 16px;">
-                                {% if ev.start_date %}&nbsp;<i class="fas fa-calendar"></i> Начало: <i>{{ ev.start_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
-                                {% if ev.end_date %}&nbsp;<i class="fas fa-calendar"></i> Конец: <i>{{ ev.end_date | date:"d E Y H:i" }}</i>&nbsp;<br>{% endif %}
+                                {% if ev.start_date %}&nbsp;<em class="fas fa-calendar"></em> Начало: <em>{{ ev.start_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
+                                {% if ev.end_date %}&nbsp;<em class="fas fa-calendar"></em> Конец: <em>{{ ev.end_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
                                 {% if ev.duration %}
-                                    &nbsp;<i class="fas fa-clock"></i> Длительность: <i>{{ ev.duration }}&nbsp;</i>
+                                    &nbsp;<em class="fas fa-clock"></em> Длительность: <em>{{ ev.duration }}&nbsp;</em>
                                 {% endif %}
                         </div>
                     </div>
@@ -42,10 +42,10 @@
                 </div>
             {% endfor %}
         </div>
-        {% block pagination %}
-            {% include 'pagination.html' %}
-        {% endblock %}
     </div>
+    {% block pagination %}
+        {% include 'pagination.html' %}
+    {% endblock %}
 {% endblock %}
 {% block script %}
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
