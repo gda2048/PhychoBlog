@@ -17,7 +17,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic.base import RedirectView
 
 from .settings import site_name
 from blog.models import ArticlePhotoReport
@@ -30,10 +29,8 @@ admin.site.site_title = site_name
 admin.site.index_title = "Добро пожаловать в панель настроек " + site_name
 
 urlpatterns = [
-                  path('', RedirectView.as_view(pattern_name='announcement_list'), name='main'),
                   path('blog/', include('blog.urls')),
-                  path('', include('main.urls')),
-                  path('events/', include('events.urls')),
+                  path('', include('events.urls')),
                   path('workers/', include('workers.urls')),
                   path('mail/', include('mail.urls')),
                   path('shop/', include('shop.urls')),

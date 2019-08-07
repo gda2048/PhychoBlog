@@ -6,7 +6,7 @@ from django.db.models import Prefetch
 
 class ProductListView(ListView):
     model = Product
-    template_name = 'main/shop.html'
+    template_name = 'shop/shop.html'
     context_object_name = 'product_list'
 
     def get_context_data(self, **kwargs):
