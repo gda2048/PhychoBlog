@@ -50,7 +50,8 @@ class ArticleAdmin(admin.ModelAdmin):
             return qs.filter(author=request.user.profile)
 
     def save_model(self, request, obj, *args):
-        obj.author = request.user.profile
+        if not obj.author:
+            obj.author = request.user.profile
         super().save_model(request, obj, *args)
         if len(obj.photos.filter(main=True)) > 1:
             messages.add_message(request, messages.WARNING, 'Вы выбрали несколько картинок для статьи для preview. '
