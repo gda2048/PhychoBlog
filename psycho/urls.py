@@ -48,7 +48,9 @@ if settings.DEBUG:
 
     ] + urlpatterns
 
-
+import os
+if not os.path.exists(settings.MEDIA_ROOT):
+    os.makedirs(settings.MEDIA_ROOT)
 ArticlePhotoReport.all_img_from_binary()
 Achievement.all_img_from_binary()
 Event.all_img_from_binary()

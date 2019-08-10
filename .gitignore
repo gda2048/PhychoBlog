@@ -15,6 +15,6 @@ settings.ini
 
 psycho/staticfiles/
 
-psycho/static/images/
+psycho/static/images/*
 
 test_venv/
