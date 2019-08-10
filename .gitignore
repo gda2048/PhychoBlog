@@ -18,3 +18,4 @@ psycho/staticfiles/
 psycho/static/images/*
 
 test_venv/
+!/psycho/static/images/.gitkeep
