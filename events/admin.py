@@ -21,6 +21,9 @@ class EventAdmin(admin.ModelAdmin):
     list_per_page = 20
     date_hierarchy = 'start_date'
 
+    def get_queryset(self, request):
+        return super(EventAdmin, self).get_queryset(request).defer('binary_image', 'ext').prefetch_related("announcements")
+
     def save_model(self, request, obj, form, change):
         if obj.is_outdated():
             messages.add_message(request, messages.WARNING, 'Вы работали с мероприятием, которое уже началось или прошло')

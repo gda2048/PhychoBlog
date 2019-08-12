@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib import messages
 from django.utils.html import mark_safe
+from django.db.models import Prefetch, Count
 
 from blog.models import Article, ArticlePhotoReport
 
@@ -10,6 +11,9 @@ class PictureInline(admin.TabularInline):
     extra = 0
     readonly_fields = ['img_preview']
     fields = ['article', 'photo', 'img_preview', 'alt', 'main']
+
+    def get_queryset(self, request):
+        return super(PictureInline, self).get_queryset(request).defer('binary_image', 'ext')
 
     def img_preview(self, obj):
         return mark_safe(
@@ -21,19 +25,15 @@ class PictureInline(admin.TabularInline):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('name', 'release_date', 'pictures_count', 'main_image')
+    list_display = ('name', 'release_date', 'pictures_count')
     fields = ['name', 'author', 'content', 'content_min']
     inlines = [PictureInline]
     list_per_page = 20
 
-    def main_image(self, obj):
-        return obj.photos.filter(main=True)[:1].get()
-
     def pictures_count(self, obj):
-        return obj.photos.count()
+        return obj.photos_count
 
     pictures_count.short_description = 'Количество картинок'
-    main_image.short_description = 'Изображение, которое будет показано'
 
     def get_readonly_fields(self, request, obj=None):
         if request.user.is_staff:
@@ -43,7 +43,9 @@ class ArticleAdmin(admin.ModelAdmin):
                 return ['author']
 
     def get_queryset(self, request):
-        qs = super(ArticleAdmin, self).get_queryset(request)
+        qs = super(ArticleAdmin, self).get_queryset(request)\
+            .prefetch_related(Prefetch("photos", queryset=ArticlePhotoReport.objects.defer('binary_image', 'ext'))).\
+            annotate(photos_count=Count("photos", distinct=True))
         if request.user.is_superuser:
             return qs
         else:
