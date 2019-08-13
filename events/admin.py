@@ -1,5 +1,6 @@
 from django.contrib import admin, messages
 from django.utils.html import mark_safe
+from django.db.models import Count
 
 from events.models import Event, Announcement
 
@@ -22,7 +23,8 @@ class EventAdmin(admin.ModelAdmin):
     date_hierarchy = 'start_date'
 
     def get_queryset(self, request):
-        return super(EventAdmin, self).get_queryset(request).defer('binary_image', 'ext').prefetch_related("announcements")
+        return super(EventAdmin, self).get_queryset(request).defer('binary_image', 'ext')\
+            .annotate(announcements_count=Count('announcements', distinct=True))
 
     def save_model(self, request, obj, form, change):
         if obj.is_outdated():
@@ -30,7 +32,7 @@ class EventAdmin(admin.ModelAdmin):
         super(EventAdmin, self).save_model(request, obj, form, change)
 
     def announcement_count(self, obj):
-        return obj.announcements.count()
+        return obj.announcements_count
 
     announcement_count.short_description = 'Количество анонсов'
 

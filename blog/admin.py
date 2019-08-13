@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib import messages
 from django.utils.html import mark_safe
-from django.db.models import Prefetch, Count
+from django.db.models import Prefetch, Count, Subquery, OuterRef
 
 from blog.models import Article, ArticlePhotoReport
 
@@ -25,14 +25,18 @@ class PictureInline(admin.TabularInline):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('name', 'release_date', 'pictures_count')
+    list_display = ('name', 'release_date', 'pictures_count', 'main_image')
     fields = ['name', 'author', 'content', 'content_min']
     inlines = [PictureInline]
     list_per_page = 20
 
+    def main_image(self, obj):
+        return obj.main_photo
+
     def pictures_count(self, obj):
         return obj.photos_count
 
+    main_image.short_description = 'Изображение, которое будет показано'
     pictures_count.short_description = 'Количество картинок'
 
     def get_readonly_fields(self, request, obj=None):
@@ -45,7 +49,12 @@ class ArticleAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super(ArticleAdmin, self).get_queryset(request)\
             .prefetch_related(Prefetch("photos", queryset=ArticlePhotoReport.objects.defer('binary_image', 'ext'))).\
-            annotate(photos_count=Count("photos", distinct=True))
+            annotate(
+            photos_count=Count("photos", distinct=True),
+            main_photo=Subquery(
+                ArticlePhotoReport.objects.filter(article=OuterRef('pk'), main=True).values_list('alt')[:1]
+            )
+        )
         if request.user.is_superuser:
             return qs
         else:
