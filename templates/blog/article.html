@@ -91,43 +91,7 @@
                     <h4 class="d-xl-none font-italic">Новые статьи</h4>
                 </div>
 
-                {% for ph, article in last_articles %}
-                    <div class="card col-12 mb-3 bg-psycho-teal">
-                        <div class="card-header bg-psycho-teal border-0 cardhead">
-                            <a href="{% url 'article' pk=article.id %}"><h3 class="text-psycho-blue">{{ article.name }}</h3></a>
-                        </div>
-                        <div class="card-header bg-psycho-teal">
-                            <div class="text-psycho-lightblue">
-                                <strong><a class="link-blue" href="{% url 'person' pk=article.author.id %}"><em
-                                        class="fas fa-user"></em> {{ article.author.full_name }}</a></strong>
-                                <span class="d-xl-none"><br></span>
-                                <span class="d-none d-xl-inline">&nbsp;</span>
-                                <em class="fas fa-calendar"></em> <em>{{ article.release_date | date:"d E Y" }}</em>
-                            </div>
-                        </div>
-                        <div class="card-body cardbody">
-                            {% if ph.photo %}
-                                <div>
-                                    <div class="text-center my-2 "><img class="img-fluid center"
-                                                                        src="{{ ph.photo.url }}"
-                                                                        alt="{{ ph.alt }}"></div>
-                                    <div>
-                                        <p class="text-justify"> {{ article.content_min| linebreaksbr| safe| truncatechars:'300' }}</p>
-                                    </div>
-                                </div>
-                            {% else %}
-                                <div>
-                                    <p class="text-justify"> {{ article.content_min| linebreaksbr| safe| truncatechars:'300' }}</p>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="card-footer text-right border-0 bg-psycho-teal">
-                            <strong><a class='btn bg-psycho-teal text-psycho-blue' href='{% url 'article' pk=article.id %}'>Читать
-                                далее...</a></strong>
-                            <span class="d-none d-xl-inline">&nbsp;<br>&nbsp;</span>
-                        </div>
-                    </div>
-                {% endfor %}
+                {% include 'articles_aside.html' %}
             </div>
 
         </div>

@@ -3,9 +3,20 @@
 
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
-    {% block extrahead %}
+{% block extrahead %}
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
 {% endblock %}
 {% block branding %}
-    <h1 id="site-name"><a href="{% url 'announcement_list' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+    <h1 id="site-name"><a href="{% url 'announcement_list' %}">{{ site_header|default:_('Django administration') }}</a>
+    </h1>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+    <script>
+        Mousetrap.bind('shift+a', function () {
+            window.location.href = '{% url 'admin:index' %}';
+        });
+        Mousetrap.bind('shift+m', function () {
+            window.location.href = '{% url 'announcement_list' %}';
+        });
+    </script>
 {% endblock %}

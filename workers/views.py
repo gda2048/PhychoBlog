@@ -23,13 +23,6 @@ class PersonListView(ListView):
         return context
 
 
-class AchievementListView(ListView):
-    model = Achievement
-    template_name = 'workers/achievements.html'
-    context_object_name = 'achievement_list'
-    paginate_by = 1
-
-
 class HelpItemListView(ListView):
     queryset = Person.objects.prefetch_related("help_items").defer('email', 'birth_date', 'binary_image', 'info', 'bio')
     template_name = 'workers/help_items.html'

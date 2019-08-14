@@ -18,11 +18,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-from .settings import site_name
 from blog.models import ArticlePhotoReport
-from workers.models import Achievement, Person
 from events.models import Event
 from shop.models import Product
+from workers.models import Achievement, Person
+from .settings import site_name
 
 admin.site.site_header = site_name
 admin.site.site_title = site_name
