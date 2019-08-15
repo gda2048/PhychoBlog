@@ -1,5 +1,5 @@
 from django.contrib import admin, messages
-from django.utils.html import mark_safe
+from main.admin import AdminImagePreviewMixin
 from django.db.models import Count
 
 from events.models import Event, Announcement
@@ -9,21 +9,20 @@ class AnnouncementInline(admin.TabularInline):
     model = Announcement
     fields = ['name', 'main', 'content']
     extra = 0
+    classes = ['collapse']
 
 
 @admin.register(Event)
-class EventAdmin(admin.ModelAdmin):
-    exclude = ['width', 'height']
+class EventAdmin(AdminImagePreviewMixin, admin.ModelAdmin):
     list_display = ('name', 'type', 'announcement_count', 'is_outdated')
     list_filter = ('type',)
-    fields = ['name', ('start_date', 'end_date'), 'type', 'content', ('photo', 'img_preview'), 'alt']
+    fields = ['name', ('start_date', 'end_date'), 'type', 'content', ('photo', AdminImagePreviewMixin.readonly_fields[0]), 'alt']
     inlines = [AnnouncementInline]
-    readonly_fields = ['img_preview']
     list_per_page = 20
     date_hierarchy = 'start_date'
 
     def get_queryset(self, request):
-        return super(EventAdmin, self).get_queryset(request).defer('binary_image', 'ext')\
+        return super(EventAdmin, self).get_queryset(request).deMZMMAfer('binary_image', 'ext')\
             .annotate(announcements_count=Count('announcements', distinct=True))
 
     def save_model(self, request, obj, form, change):
@@ -35,10 +34,3 @@ class EventAdmin(admin.ModelAdmin):
         return obj.announcements_count
 
     announcement_count.short_description = 'Количество анонсов'
-
-    def img_preview(self, obj):
-        return mark_safe(
-            '<img src="{url}" width="{width}" height={height} />'.format(url=obj.photo.url, width=obj.photo.width / 10,
-                                                                         height=obj.photo.height / 10))
-
-    img_preview.short_description = 'Предпросмотр фото'

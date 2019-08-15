@@ -1,32 +1,24 @@
 from django.contrib import admin
 from django.contrib import messages
-from django.utils.html import mark_safe
 from django.db.models import Prefetch, Count, Subquery, OuterRef
-
+from main.admin import AdminImagePreviewMixin
 from blog.models import Article, ArticlePhotoReport
 
 
-class PictureInline(admin.TabularInline):
+class PictureInline(AdminImagePreviewMixin, admin.TabularInline):
     model = ArticlePhotoReport
     extra = 0
-    readonly_fields = ['img_preview']
-    fields = ['article', 'photo', 'img_preview', 'alt', 'main']
+    fields = ['article', 'photo', 'alt', 'main'] + AdminImagePreviewMixin.readonly_fields
+    classes = ['collapse']
 
     def get_queryset(self, request):
         return super(PictureInline, self).get_queryset(request).defer('binary_image', 'ext')
-
-    def img_preview(self, obj):
-        return mark_safe(
-            '<img src="{url}" width="{width}" height={height} />'.format(url=obj.photo.url, width=obj.photo.width / 10,
-                                                                         height=obj.photo.height / 10))
-
-    img_preview.short_description = 'Предпросмотр фото'
 
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('name', 'release_date', 'pictures_count', 'main_image')
-    fields = ['name', 'author', 'content', 'content_min']
+    fields = ['name', 'author', ('content', 'content_min')]
     inlines = [PictureInline]
     list_per_page = 20
 
