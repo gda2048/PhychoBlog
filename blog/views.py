@@ -3,6 +3,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Prefetch
 
 from blog.models import Article, ArticlePhotoReport
+from main.views import last_articles
 
 
 class ArticleListView(ListView):
@@ -48,11 +49,5 @@ class ArticleDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ArticleDetailView, self).get_context_data(**kwargs)
-        last_articles = Article.objects.order_by('-release_date').exclude(id__in=[self.object.id])[:2]\
-            .select_related('author').prefetch_related(
-            Prefetch("photos", to_attr="ph", queryset=ArticlePhotoReport.objects.filter(main=True)
-                     .only('photo', 'alt', 'id', 'height', "width", "article__id", "article__name").distinct("article"))
-        )
-        lst = list(next(iter(obj.ph), None) for obj in last_articles)
-        context['last_articles'] = list(zip(lst, list(last_articles)))
+        context['last_articles'] = last_articles(2)
         return context
