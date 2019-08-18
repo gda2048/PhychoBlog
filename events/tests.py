@@ -1,6 +1,6 @@
-from events.views import *
-
 import pytest
+
+from events.views import *
 
 
 @pytest.mark.django_db
@@ -14,4 +14,3 @@ def test_announcements_page(rf):
     request = rf.get('/announcement')
     response = AnnouncementListView.as_view()(request)
     assert response.status_code == 200
-

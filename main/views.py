@@ -1,5 +1,6 @@
-from blog.models import Article, ArticlePhotoReport
 from django.db.models import Prefetch
+
+from blog.models import Article, ArticlePhotoReport
 
 
 def last_articles(num):

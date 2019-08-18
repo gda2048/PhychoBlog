@@ -40,7 +40,7 @@ class Event(PhotoItem):
             if time.days > 0:
                 return str(time.days) + ' дн.'
             elif time.seconds > 3600:
-                return str(time.seconds//3600) + ' ч.'
+                return str(time.seconds // 3600) + ' ч.'
 
     is_outdated.short_description = 'Осталось дней'
 

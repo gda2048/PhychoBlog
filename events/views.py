@@ -15,7 +15,7 @@ class EventListView(ListView):
 
 
 class AnnouncementListView(ListView):
-    queryset = Announcement.objects.select_related("event")\
+    queryset = Announcement.objects.select_related("event") \
         .only("id", "content", "event__id", "name",
               "event__alt", "event__width", "event__height", 'event__photo', "event__end_date", "event__start_date")
     template_name = 'events/announcements.html'

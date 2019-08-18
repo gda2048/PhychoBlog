@@ -1,7 +1,6 @@
-from workers.views import *
-from workers.models import Achievement, Person
-
 import pytest
+
+from workers.views import *
 
 
 @pytest.mark.django_db
@@ -17,4 +16,3 @@ def test_announcements_page(rf):
     request = rf.get('/author')
     response = PersonListView.as_view()(request)
     assert response.status_code == 200
-

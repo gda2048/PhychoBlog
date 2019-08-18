@@ -1,6 +1,7 @@
-import pytest
 import dj_database_url
+import pytest
 from decouple import config
+
 from psycho import settings
 
 

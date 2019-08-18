@@ -17,9 +17,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="text-white rounded bg-psycho-teal col-12 text-center">
-                    <h1 class="d-none d-xl-inline font-italic">{{ person.full_name }}</h1>
-                    <h3 class="d-xl-none font-italic">{{ person.full_name }}</h3>
-                </div>
+                        <h1 class="d-none d-xl-inline font-italic">{{ person.full_name }}</h1>
+                        <h3 class="d-xl-none font-italic">{{ person.full_name }}</h3>
+                    </div>
                 </div>
                 <div class="col-12">
                     Email: {{ person.email }}<br> {{ person.contacts| linebreaks }} <br>
@@ -33,7 +33,7 @@
                 </div>
                 {% for ach in person.achievements.all %}
                     <div class="col-12 col-md-5 my-1 text-white rounded bg-psycho-teal text-center"><a class="link-blue"
-                                                                      href="{% url 'achievement' pk=ach.id %}">{{ ach.alt }}</a>
+                                                                                                       href="{% url 'achievement' pk=ach.id %}">{{ ach.alt }}</a>
                     </div>
                 {% endfor %}
             </div>

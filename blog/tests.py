@@ -1,7 +1,6 @@
-from blog.views import *
-from blog.models import ArticlePhotoReport
-
 import pytest
+
+from blog.views import *
 
 
 @pytest.mark.django_db
@@ -15,4 +14,3 @@ def test_announcements_page(rf):
     request = rf.get('/article')
     response = ArticleListView.as_view()(request)
     assert response.status_code == 200
-

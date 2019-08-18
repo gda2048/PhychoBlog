@@ -16,7 +16,8 @@
                 <div class="card col-12 col-sm-12 col-md-12 col-xl-5 my-3 m-xl-5 border-0 bg-psycho-pearlbush-real"
                      data-aos="flip-right">
                     <div class="card-header bg-psycho-pearlbush-real border-0 cardhead">
-                        <a href="{% url 'article' pk=article.id %}"><h3 class="text-psycho-blue">{{ article.name }}</h3></a>
+                        <a href="{% url 'article' pk=article.id %}"><h3 class="text-psycho-blue">{{ article.name }}</h3>
+                        </a>
                     </div>
                     <div class="card-header bg-psycho-pearlbush-real">
                         <div class="text-psycho-lightblue">
@@ -30,15 +31,25 @@
                     <div class="card-body cardbody">
                         {% if ph.photo %}
                             <div class="d-none d-xl-flex row">
-                                <div class="col-xl-6 text-center"><div class=""><img class="img-fluid" src="{{ ph.photo.url }}" alt="{{ ph.alt }}"></div></div>
-                                <div class="col-xl-6"><p class="text-justify"> {{ article.content_min | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                                <div class="col-xl-6 text-center">
+                                    <div class=""><img class="img-fluid" src="{{ ph.photo.url }}" alt="{{ ph.alt }}">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6"><p
+                                        class="text-justify"> {{ article.content_min | linebreaksbr| safe| truncatechars:'300' }}</p>
+                                </div>
                             </div>
                             <div class="d-xl-none">
-                                <div class="text-center my-2 "><img class="img-fluid" src="{{ ph.photo.url }}" alt="{{ ph.alt }}"></div>
-                                <div><p class="text-justify"> {{ article.content_min| linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                                <div class="text-center my-2 "><img class="img-fluid" src="{{ ph.photo.url }}"
+                                                                    alt="{{ ph.alt }}"></div>
+                                <div>
+                                    <p class="text-justify"> {{ article.content_min| linebreaksbr| safe| truncatechars:'300' }}</p>
+                                </div>
                             </div>
                         {% else %}
-                                <div><p class="text-justify"> {{ article.content_min| linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                            <div>
+                                <p class="text-justify"> {{ article.content_min| linebreaksbr| safe| truncatechars:'300' }}</p>
+                            </div>
                         {% endif %}
                     </div>
                     <div class="card-footer text-right border-0 bg-psycho-pearlbush-real">
@@ -50,7 +61,7 @@
             {% endfor %}
         </div>
     </div>
-{% block pagination %}{% include 'pagination.html' %}{% endblock %}
+    {% block pagination %}{% include 'pagination.html' %}{% endblock %}
 {% endblock %}
 {% block script %}
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -68,9 +79,9 @@
 
 
             function max_class(lst, mx = true) {
-                let l = mx?-Infinity:Infinity;
+                let l = mx ? -Infinity : Infinity;
                 for (let i = 0; i < lst.length; ++i) {
-                    l = mx?Math.max(lst[i].offsetHeight, l):Math.min(lst[i].offsetHeight, l);
+                    l = mx ? Math.max(lst[i].offsetHeight, l) : Math.min(lst[i].offsetHeight, l);
                 }
                 for (let i = 0; i < lst.length; ++i) {
                     lst[i].style.height = l.toString() + "px";
@@ -82,10 +93,10 @@
                 document.getElementById('preloader').classList.add('d-none');
                 document.getElementById('body').classList.remove('d-none');
                 let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-                if (width>=1200) {
+                if (width >= 1200) {
                     max_class(document.getElementsByClassName("cardhead"));
                 }
-                AOS.refresh();  
+                AOS.refresh();
             }
         </script>
 

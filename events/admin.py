@@ -1,8 +1,8 @@
 from django.contrib import admin, messages
-from main.admin import AdminImagePreviewMixin
 from django.db.models import Count
 
 from events.models import Event, Announcement
+from main.admin import AdminImagePreviewMixin
 
 
 class AnnouncementInline(admin.TabularInline):
@@ -16,18 +16,20 @@ class AnnouncementInline(admin.TabularInline):
 class EventAdmin(AdminImagePreviewMixin, admin.ModelAdmin):
     list_display = ('name', 'type', 'announcement_count', 'is_outdated')
     list_filter = ('type',)
-    fields = ['name', ('start_date', 'end_date'), 'type', 'content', ('photo', AdminImagePreviewMixin.readonly_fields[0]), 'alt']
+    fields = ['name', ('start_date', 'end_date'), 'type', 'content',
+              ('photo', AdminImagePreviewMixin.readonly_fields[0]), 'alt']
     inlines = [AnnouncementInline]
     list_per_page = 20
     date_hierarchy = 'start_date'
 
     def get_queryset(self, request):
-        return super(EventAdmin, self).get_queryset(request).deMZMMAfer('binary_image', 'ext')\
+        return super(EventAdmin, self).get_queryset(request).deMZMMAfer('binary_image', 'ext') \
             .annotate(announcements_count=Count('announcements', distinct=True))
 
     def save_model(self, request, obj, form, change):
         if obj.is_outdated():
-            messages.add_message(request, messages.WARNING, 'Вы работали с мероприятием, которое уже началось или прошло')
+            messages.add_message(request, messages.WARNING,
+                                 'Вы работали с мероприятием, которое уже началось или прошло')
         super(EventAdmin, self).save_model(request, obj, form, change)
 
     def announcement_count(self, obj):

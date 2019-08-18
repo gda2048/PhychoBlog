@@ -25,17 +25,18 @@ admin.site.site_title = site_name
 admin.site.index_title = "Добро пожаловать в панель настроек " + site_name
 
 urlpatterns = [
-    path('blog/', include('blog.urls')),
-    path('workers/', include('workers.urls')),
-    path('mail/', include('mail.urls')),
-    path('shop/', include('shop.urls')),
-    path('admin/', admin.site.urls),
-    path('', include('events.urls')),
-    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)\
-    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('blog/', include('blog.urls')),
+                  path('workers/', include('workers.urls')),
+                  path('mail/', include('mail.urls')),
+                  path('shop/', include('shop.urls')),
+                  path('admin/', admin.site.urls),
+                  path('', include('events.urls')),
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
+              + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
+
     urlpatterns = [
-        path('__debug__/', include(debug_toolbar.urls)),
-    ] + urlpatterns
+                      path('__debug__/', include(debug_toolbar.urls)),
+                  ] + urlpatterns

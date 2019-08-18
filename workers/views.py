@@ -30,10 +30,11 @@ class HelpItemListView(ListView):
 
 class PersonDetailView(DetailView):
     queryset = Person.objects.defer("user_id", "binary_image", "birth_date", "ext").prefetch_related(
-        Prefetch("achievements",  queryset=Achievement.objects.defer('ext', "binary_image")))
+        Prefetch("achievements", queryset=Achievement.objects.defer('ext', "binary_image")))
     template_name = 'workers/worker.html'
 
 
 class AchievementDetailView(DetailView):
-    queryset = Achievement.objects.select_related("expert").only("id", 'photo', "alt", "height", "width", "expert__name")
+    queryset = Achievement.objects.select_related("expert").only("id", 'photo', "alt", "height", "width",
+                                                                 "expert__name")
     template_name = 'workers/achievement.html'

@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Product
+
 from main.admin import AdminImagePreviewMixin
+from .models import Product
 
 
 @admin.register(Product)

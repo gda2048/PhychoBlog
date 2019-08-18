@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.contrib import messages
 from django.db.models import Prefetch, Count, Subquery, OuterRef
-from main.admin import AdminImagePreviewMixin
+
 from blog.models import Article, ArticlePhotoReport
+from main.admin import AdminImagePreviewMixin
 
 
 class PictureInline(AdminImagePreviewMixin, admin.TabularInline):
@@ -39,8 +40,8 @@ class ArticleAdmin(admin.ModelAdmin):
                 return ['author']
 
     def get_queryset(self, request):
-        qs = super(ArticleAdmin, self).get_queryset(request)\
-            .prefetch_related(Prefetch("photos", queryset=ArticlePhotoReport.objects.defer('binary_image', 'ext'))).\
+        qs = super(ArticleAdmin, self).get_queryset(request) \
+            .prefetch_related(Prefetch("photos", queryset=ArticlePhotoReport.objects.defer('binary_image', 'ext'))). \
             annotate(
             photos_count=Count("photos", distinct=True),
             main_photo=Subquery(

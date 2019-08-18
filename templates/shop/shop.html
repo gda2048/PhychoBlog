@@ -3,43 +3,46 @@
 {% block content %}
     <div class="row">
         <div class="row col-md-8">
-        {% autoescape off %}
-            {% for product in product_list %}
-                <div class="row person mx-auto bg-psycho-pearlbush">
-                    <div class="text-center col-12 my-1"><h3><strong>{{ product.name }}</strong></h3></div>
+            {% autoescape off %}
+                {% for product in product_list %}
+                    <div class="row person mx-auto bg-psycho-pearlbush">
+                        <div class="text-center col-12 my-1"><h3><strong>{{ product.name }}</strong></h3></div>
 
-                    {% if product.photo %}
-                        <div class="row mb-3 justify-content-between">
-                        <div class="col-md-4 text-center">
-                            <img class="img-fluid w-auto imag" src="{{ product.photo.url }}" alt="{{ product.alt }}">
-                        </div>
+                        {% if product.photo %}
+                            <div class="row mb-3 justify-content-between">
+                                <div class="col-md-4 text-center">
+                                    <img class="img-fluid w-auto imag" src="{{ product.photo.url }}"
+                                         alt="{{ product.alt }}">
+                                </div>
 
-                        <div class="col-md-7 text-justify">
-                            <h3><em class="fas fa-user-circle"></em> <strong>Автор:</strong> {{ product.author  | linebreaksbr}}</h3>
-                            {{ product.about | linebreaksbr }}<br>
-                            <strong>Контакты:</strong> {{ product.contacts | linebreaksbr }}<br>
-                            <strong>Цена:</strong> {{ product.price }} грн
-                        </div>
-                        </div>
+                                <div class="col-md-7 text-justify">
+                                    <h3><em class="fas fa-user-circle"></em>
+                                        <strong>Автор:</strong> {{ product.author  | linebreaksbr }}</h3>
+                                    {{ product.about | linebreaksbr }}<br>
+                                    <strong>Контакты:</strong> {{ product.contacts | linebreaksbr }}<br>
+                                    <strong>Цена:</strong> {{ product.price }} грн
+                                </div>
+                            </div>
                         {% else %}
-                        <div class="text-center">
-                            <h3><em class="fas fa-user-circle"></em> <strong>Автор:</strong> {{ product.author  | linebreaksbr}}</h3>
-                            {{ product.about | linebreaksbr }}
+                            <div class="text-center">
+                                <h3><em class="fas fa-user-circle"></em>
+                                    <strong>Автор:</strong> {{ product.author  | linebreaksbr }}</h3>
+                                {{ product.about | linebreaksbr }}
+                            </div>
+
+                        {% endif %}
+
+                        <div class="col-12">
+
+                            <div>
+                                {{ product.description | linebreaksbr }}
+                            </div>
                         </div>
 
-                    {% endif %}
-
-                    <div class="col-12">
-
-                        <div>
-                            {{ product.description | linebreaksbr }}
-                        </div>
                     </div>
 
-                </div>
-
-            {% endfor %}
-        {% endautoescape %}
+                {% endfor %}
+            {% endautoescape %}
         </div>
 
         <div class="col-11 col-md-4 bg-psycho-pearlbush">
@@ -56,33 +59,33 @@
     {% endblock %}
 {% endblock %}
 {% block onload %}
-        <script>
-            function sleep(milliseconds) {
-                let start = new Date().getTime();
-                for (let i = 0; i < 1e7; i++) {
-                    if ((new Date().getTime() - start) > milliseconds) {
-                        break;
-                    }
+    <script>
+        function sleep(milliseconds) {
+            let start = new Date().getTime();
+            for (let i = 0; i < 1e7; i++) {
+                if ((new Date().getTime() - start) > milliseconds) {
+                    break;
                 }
             }
+        }
 
 
-            function max_class(lst, l) {
+        function max_class(lst, l) {
 
-                for (let i = 0; i < lst.length; ++i) {
-                    lst[i].style.height = l.toString() + "px";
-                }
+            for (let i = 0; i < lst.length; ++i) {
+                lst[i].style.height = l.toString() + "px";
+            }
+        }
+
+        window.onload = function () {
+            document.getElementById('preloader').classList.add('d-none');
+            document.getElementById('body').classList.remove('d-none');
+            let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            if (width >= 1200) {
+                max_class(document.getElementsByClassName("imag"), 400);
             }
 
-            window.onload = function () {
-                document.getElementById('preloader').classList.add('d-none');
-                document.getElementById('body').classList.remove('d-none');
-                let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-                if (width>=1200) {
-                    max_class(document.getElementsByClassName("imag"), 400);
-                }
-
-            }
-        </script>
+        }
+    </script>
 
 {% endblock %}

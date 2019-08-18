@@ -16,27 +16,39 @@
                 <div class="card col-12 col-sm-12 col-md-12 col-xl-5 my-3 m-xl-5 border-0 bg-psycho-pearlbush-real"
                      data-aos="flip-right">
                     <div class="card-header bg-psycho-pearlbush-real border-0 cardhead row">
-                        <div class="col-12 col-md-6"><a href="{% url 'event' pk=ev.id %}"><h3 class="text-psycho-blue">{{ ev.name }}</h3></a></div>
+                        <div class="col-12 col-md-6"><a href="{% url 'event' pk=ev.id %}"><h3
+                                class="text-psycho-blue">{{ ev.name }}</h3></a></div>
                         <div class="col-12 col-md-6 text-psycho-lightblue border-psycho-date" style="font-size: 16px;">
-                                {% if ev.start_date %}&nbsp;<em class="fas fa-calendar"></em> Начало: <em>{{ ev.start_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
-                                {% if ev.end_date %}&nbsp;<em class="fas fa-calendar"></em> Конец: <em>{{ ev.end_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
-                                {% if ev.duration %}
-                                    &nbsp;<em class="fas fa-clock"></em> Длительность: <em>{{ ev.duration }}&nbsp;</em>
-                                {% endif %}
+                            {% if ev.start_date %}&nbsp;<em class="fas fa-calendar"></em> Начало:
+                                <em>{{ ev.start_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
+                            {% if ev.end_date %}&nbsp;<em class="fas fa-calendar"></em> Конец:
+                                <em>{{ ev.end_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
+                            {% if ev.duration %}
+                                &nbsp;<em class="fas fa-clock"></em> Длительность: <em>{{ ev.duration }}&nbsp;</em>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="card-body cardbody">
                         {% if ev.photo %}
                             <div class="d-none d-xl-flex row">
-                                <div class="col-xl-6 text-center"><div class=""><img class="img-fluid" src="{{ ev.photo.url }}" alt="{{ ev.alt }}"></div></div>
-                                <div class="col-xl-6"><p class="text-justify"> {{ ev.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                                <div class="col-xl-6 text-center">
+                                    <div class=""><img class="img-fluid" src="{{ ev.photo.url }}" alt="{{ ev.alt }}">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6"><p
+                                        class="text-justify"> {{ ev.content | linebreaksbr| safe| truncatechars:'300' }}</p>
+                                </div>
                             </div>
                             <div class="d-xl-none">
-                                <div class="text-center my-2 "><img class="img-fluid" src="{{ ev.photo.url }}" alt="{{ ev.alt }}"></div>
-                                <div><p class="text-justify"> {{ ev.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                                <div class="text-center my-2 "><img class="img-fluid" src="{{ ev.photo.url }}"
+                                                                    alt="{{ ev.alt }}"></div>
+                                <div>
+                                    <p class="text-justify"> {{ ev.content | linebreaksbr| safe| truncatechars:'300' }}</p>
+                                </div>
                             </div>
                         {% else %}
-                                <div><p class="text-justify"> {{ ev.content | linebreaksbr| safe| truncatechars:'300' }}</p></div>
+                            <div><p class="text-justify"> {{ ev.content | linebreaksbr| safe| truncatechars:'300' }}</p>
+                            </div>
                         {% endif %}
                     </div>
                 </div>
@@ -63,9 +75,9 @@
 
 
             function max_class(lst, mx = true) {
-                let l = mx?-Infinity:Infinity;
+                let l = mx ? -Infinity : Infinity;
                 for (let i = 0; i < lst.length; ++i) {
-                    l = mx?Math.max(lst[i].offsetHeight, l):Math.min(lst[i].offsetHeight, l);
+                    l = mx ? Math.max(lst[i].offsetHeight, l) : Math.min(lst[i].offsetHeight, l);
                 }
                 for (let i = 0; i < lst.length; ++i) {
                     lst[i].style.height = l.toString() + "px";
@@ -77,7 +89,7 @@
                 document.getElementById('preloader').classList.add('d-none');
                 document.getElementById('body').classList.remove('d-none');
                 let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-                if (width>=1200) {
+                if (width >= 1200) {
                     max_class(document.getElementsByClassName("cardhead"));
                 }
                 AOS.refresh();

@@ -1,6 +1,6 @@
-from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Prefetch
+from django.views.generic import ListView, DetailView
 
 from blog.models import Article, ArticlePhotoReport
 from main.views import last_articles
@@ -9,11 +9,11 @@ from main.views import last_articles
 class ArticleListView(ListView):
     queryset = Article.objects.only(
         'id', 'name', 'release_date', 'content', 'content_min', 'author__id', 'author__full_name'
-        ).select_related(
-            "author"
-        ).prefetch_related(
-            Prefetch("photos", to_attr='ph', queryset=ArticlePhotoReport.objects.filter(main=True)
-                     .only('photo', 'alt', 'id', 'height', "width", "article_id").distinct("article"))
+    ).select_related(
+        "author"
+    ).prefetch_related(
+        Prefetch("photos", to_attr='ph', queryset=ArticlePhotoReport.objects.filter(main=True)
+                 .only('photo', 'alt', 'id', 'height', "width", "article_id").distinct("article"))
     )
 
     template_name = 'blog/articles.html'
@@ -41,7 +41,7 @@ class ArticleDetailView(DetailView):
     model = Article
     success_url = '/article/'
     template_name = 'blog/article.html'
-    queryset = Article.objects.select_related('author')\
+    queryset = Article.objects.select_related('author') \
         .only("author__full_name", "author__id", "name", "id", "release_date", "content").prefetch_related(
         Prefetch("photos", to_attr="images", queryset=ArticlePhotoReport.objects.exclude(binary_image=None))
     )

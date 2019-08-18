@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('workers', '0009_auto_20190731_1007'),
     ]
@@ -28,6 +27,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='person',
             name='name',
-            field=models.CharField(help_text='Уникальный логин. При входе в систему его нужно будет указывать. ', max_length=50, unique=True, verbose_name='Логин'),
+            field=models.CharField(help_text='Уникальный логин. При входе в систему его нужно будет указывать. ',
+                                   max_length=50, unique=True, verbose_name='Логин'),
         ),
     ]

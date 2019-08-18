@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('main', '0022_auto_20190806_0953'),
     ]
@@ -23,6 +22,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='price',
-            field=models.DecimalField(blank=True, decimal_places=2, default=0, max_digits=8, null=True, verbose_name='Цена'),
+            field=models.DecimalField(blank=True, decimal_places=2, default=0, max_digits=8, null=True,
+                                      verbose_name='Цена'),
         ),
     ]

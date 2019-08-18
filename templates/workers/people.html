@@ -3,8 +3,8 @@
 {% block content %}
     <div class="row">
         <div class="row col-md-8">
-        <div class="text-center col-12 font-weight-bold my-5"><h3>Наши специалисты</h3></div>
-                {% for person in authors_list %}
+            <div class="text-center col-12 font-weight-bold my-5"><h3>Наши специалисты</h3></div>
+            {% for person in authors_list %}
                 {% if person.photo %}
                     <div class="border-psycho-person row person mx-auto">
                         <div class="col-12 col-md-8 text-center">
@@ -12,69 +12,71 @@
                         </div>
 
                         <div class="col-12 col-md-4">
-                        <div class="my-2 col-12 col-md-5 text-center mb-3">
-                            <a href='{% url 'person' pk=person.id %}'><h3><em class="fas fa-user-circle"></em> {{ person.name }}</h3></a>
-                        </div>
-                        <div>
-                            Полное имя: {{ person.full_name }}<br>
-                            Контактная информация: {{ person.email }}<br> {{ person.contacts| linebreaks }} <br>
-                            {{ person.info }}
-                        </div>
+                            <div class="my-2 col-12 col-md-5 text-center mb-3">
+                                <a href='{% url 'person' pk=person.id %}'><h3><em
+                                        class="fas fa-user-circle"></em> {{ person.name }}</h3></a>
+                            </div>
+                            <div>
+                                Полное имя: {{ person.full_name }}<br>
+                                Контактная информация: {{ person.email }}<br> {{ person.contacts| linebreaks }} <br>
+                                {{ person.info }}
+                            </div>
                         </div>
                         <div class="offset-4 col-8 text-center mb-5">
-                            <strong><a class='btn bg-psycho-teal text-psycho-blue' href = '{% url 'person' pk=person.id %}'>Посмотреть</a></strong>
+                            <strong><a class='btn bg-psycho-teal text-psycho-blue'
+                                       href='{% url 'person' pk=person.id %}'>Посмотреть</a></strong>
 
                         </div>
 
-                     </div>
+                    </div>
                 {% endif %}
 
-                {% endfor %}
+            {% endfor %}
 
         </div>
 
         <div class="col-11 col-md-4 bg-psycho-pearlbush">
-                <div class="text-white rounded bg-psycho-teal text-center my-2 py-4">
-                    <h3 class="d-none d-xl-inline font-italic">Новые статьи</h3>
-                    <h4 class="d-xl-none font-italic">Новые статьи</h4>
-                </div>
-
-                {% include 'articles_aside.html' %}
+            <div class="text-white rounded bg-psycho-teal text-center my-2 py-4">
+                <h3 class="d-none d-xl-inline font-italic">Новые статьи</h3>
+                <h4 class="d-xl-none font-italic">Новые статьи</h4>
             </div>
+
+            {% include 'articles_aside.html' %}
+        </div>
     </div>
-        {% block pagination %}
-            {% include 'pagination.html' %}
-        {% endblock %}
+    {% block pagination %}
+        {% include 'pagination.html' %}
+    {% endblock %}
 {% endblock %}
 {% block onload %}
-        <script>
-            function sleep(milliseconds) {
-                let start = new Date().getTime();
-                for (let i = 0; i < 1e7; i++) {
-                    if ((new Date().getTime() - start) > milliseconds) {
-                        break;
-                    }
+    <script>
+        function sleep(milliseconds) {
+            let start = new Date().getTime();
+            for (let i = 0; i < 1e7; i++) {
+                if ((new Date().getTime() - start) > milliseconds) {
+                    break;
                 }
             }
+        }
 
 
-            function max_class(lst, l) {
+        function max_class(lst, l) {
 
-                for (let i = 0; i < lst.length; ++i) {
-                    lst[i].style.height = l.toString() + "px";
-                }
+            for (let i = 0; i < lst.length; ++i) {
+                lst[i].style.height = l.toString() + "px";
+            }
+        }
+
+        window.onload = function () {
+            document.getElementById('preloader').classList.add('d-none');
+            document.getElementById('body').classList.remove('d-none');
+            let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            if (width >= 1200) {
+                max_class(document.getElementsByClassName("person"), 600);
+                max_class(document.getElementsByClassName("imag"), 400);
             }
 
-            window.onload = function () {
-                document.getElementById('preloader').classList.add('d-none');
-                document.getElementById('body').classList.remove('d-none');
-                let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-                if (width>=1200) {
-                    max_class(document.getElementsByClassName("person"), 600);
-                    max_class(document.getElementsByClassName("imag"), 400);
-                }
+        }
+    </script>
 
-            }
-        </script>
-
-    {% endblock %}
+{% endblock %}
