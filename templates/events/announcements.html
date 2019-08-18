@@ -1,101 +1,106 @@
 {% extends 'base.html' %}
 {% block title %} Анонсы {% endblock %}
 {% block content %}
-<div class="jumbotron mt-2 p-3 p-md-5 text-white rounded bg-psycho-teal">
-    <div class="col-md-6 px-0">
-        <h3 class="font-italic">Компания Art Of Life</h3>
-        <p class="lead my-3">Сайт психологического института</p>
+    <div class="jumbotron mt-2 p-3 p-md-5 text-white rounded bg-psycho-teal">
+        <div class="col-md-6 px-0">
+            <h3 class="font-italic">Компания Art Of Life</h3>
+            <p class="lead my-3">Сайт психологического института</p>
+        </div>
     </div>
-</div>
-<div class="row justify-content-around">
-    <div class="row col-md-7">
-        <div class="text-center col-12 font-weight-bold"><h3>Анонсы мероприятий</h3></div>
-        <div class="row mx-1 mx-xl-5 justify-content-around">
-            {% for announcement in announcement_list %}
-                <div class="card col-12 bg-psycho-pearlbush border-0 row {% if announcement.event.photo %}announcement{% endif %} justify-content-around"
-                     data-aos="flip-right">
-                    <div class="card-header border-0 bg-psycho-pearlbush">
+    <div class="row justify-content-around">
+        <div class="row col-md-7">
+            <div class="text-center col-12 font-weight-bold"><h3>Анонсы мероприятий</h3></div>
+            <div class="row mx-1 mx-xl-5 justify-content-around">
+                {% for announcement in announcement_list %}
+                    <div class="card col-12 bg-psycho-pearlbush border-0 row {% if announcement.event.photo %}announcement{% endif %} justify-content-around"
+                         data-aos="flip-right">
+                        <div class="card-header border-0 bg-psycho-pearlbush">
                             <div class="text-psycho-lightblue border-psycho-date" style="font-size: 16px;">
-                                {% if announcement.event.start_date %}&nbsp;<em class="fas fa-calendar"></em> Начало: <em>{{ announcement.event.start_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
-                                {% if announcement.event.end_date %}&nbsp;<em class="fas fa-calendar"></em> Конец: <em>{{ announcement.event.end_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
+                                {% if announcement.event.start_date %}&nbsp;<em class="fas fa-calendar"></em> Начало:
+                                    <em>{{ announcement.event.start_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
+                                {% if announcement.event.end_date %}&nbsp;<em class="fas fa-calendar"></em> Конец:
+                                    <em>{{ announcement.event.end_date | date:"d E Y H:i" }}</em>&nbsp;<br>{% endif %}
                                 {% if announcement.event.duration %}
-                                    &nbsp;<em class="fas fa-clock"></em> Длительность: <em>{{ announcement.event.duration }}&nbsp;</em>
+                                    &nbsp;<em class="fas fa-clock"></em> Длительность:
+                                    <em>{{ announcement.event.duration }}&nbsp;</em>
                                 {% endif %}
                             </div>
-                    </div>
-                    <div class="col-md-6 text-left">
-                        {% if announcement.event.photo %}
+                        </div>
+                        <div class="col-md-6 text-left">
+                            {% if announcement.event.photo %}
                                 <div class="offset-1 text-left mb-2 h300 ">
                                     <img class="w-auto h-100 img-fluid rounded" src="{{ announcement.event.photo.url }}"
-                                                                    alt="{{ announcement.event.alt }}">
+                                         alt="{{ announcement.event.alt }}">
                                 </div>
 
-                        {% endif %}
+                            {% endif %}
 
-                    </div>
-                    <div class="col-md-5">
-                        <div class="card bg-psycho-pearlbush border-0 cardhead">
-                            <a href="{% url 'event' pk=announcement.event.id %}"><h3
-                                    class="text-psycho-blue">{{ announcement.name }}</h3></a>
                         </div>
-                        <div class="card-body cardbody">
-                            {{ announcement.content }}
-                        </div>
+                        <div class="col-md-5">
+                            <div class="card bg-psycho-pearlbush border-0 cardhead">
+                                <a href="{% url 'event' pk=announcement.event.id %}"><h3
+                                        class="text-psycho-blue">{{ announcement.name }}</h3></a>
+                            </div>
+                            <div class="card-body cardbody">
+                                {{ announcement.content }}
+                            </div>
 
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 border-announcement bg-psycho-pearlbush text-right text-psycho-lightblue my-2">
-                      {% if announcement.event.is_outdated != 'Мероприятие прошло' %}&nbsp;<em class="fas fa-hourglass"></em> До начала осталось: <h3>{{ announcement.event.start_date | timeuntil }}</h3>&nbsp;<br>{% endif %}
-                </div>
-            {% endfor %}
+                    <div class="col-12 border-announcement bg-psycho-pearlbush text-right text-psycho-lightblue my-2">
+                        {% if announcement.event.is_outdated != 'Мероприятие прошло' %}&nbsp;
+                            <em class="fas fa-hourglass"></em> До начала осталось:
+                            <h3>{{ announcement.event.start_date | timeuntil }}</h3>&nbsp;<br>{% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            {% block pagination %}
+                {% include 'pagination.html' %}
+            {% endblock %}
+
         </div>
-        {% block pagination %}
-            {% include 'pagination.html' %}
-        {% endblock %}
-
-    </div>
-    <div class="col-11 col-md-4 bg-psycho-pearlbush">
-                <div class="text-white rounded bg-psycho-teal text-center my-2 py-4">
-                    <h3 class="d-none d-xl-inline font-italic">Новые статьи</h3>
-                    <h4 class="d-xl-none font-italic">Новые статьи</h4>
-                </div>
-
-                {% include 'articles_aside.html' %}
+        <div class="col-11 col-md-4 bg-psycho-pearlbush">
+            <div class="text-white rounded bg-psycho-teal text-center my-2 py-4">
+                <h3 class="d-none d-xl-inline font-italic">Новые статьи</h3>
+                <h4 class="d-xl-none font-italic">Новые статьи</h4>
             </div>
 
+            {% include 'articles_aside.html' %}
+        </div>
 
-</div>
+
+    </div>
 {% endblock %}
-    {% block onload %}
-        <script>
-            function sleep(milliseconds) {
-                let start = new Date().getTime();
-                for (let i = 0; i < 1e7; i++) {
-                    if ((new Date().getTime() - start) > milliseconds) {
-                        break;
-                    }
+{% block onload %}
+    <script>
+        function sleep(milliseconds) {
+            let start = new Date().getTime();
+            for (let i = 0; i < 1e7; i++) {
+                if ((new Date().getTime() - start) > milliseconds) {
+                    break;
                 }
             }
+        }
 
 
-            function max_class(lst, mx = true) {
-                let l = mx?-Infinity:Infinity;
-                for (let i = 0; i < lst.length; ++i) {
-                    l = mx?Math.max(lst[i].offsetHeight, l):Math.min(lst[i].offsetHeight, l);
-                }
-                for (let i = 0; i < lst.length; ++i) {
-                    lst[i].style.height = l.toString() + "px";
-                }
+        function max_class(lst, mx = true) {
+            let l = mx ? -Infinity : Infinity;
+            for (let i = 0; i < lst.length; ++i) {
+                l = mx ? Math.max(lst[i].offsetHeight, l) : Math.min(lst[i].offsetHeight, l);
             }
-
-            window.onload = function () {
-                document.getElementById('preloader').classList.add('d-none');
-                document.getElementById('body').classList.remove('d-none');
-                let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-                if (width>=800) {
-                    max_class(document.getElementsByClassName("announcement"));
-                }
+            for (let i = 0; i < lst.length; ++i) {
+                lst[i].style.height = l.toString() + "px";
             }
-        </script>
+        }
 
-    {% endblock %}
+        window.onload = function () {
+            document.getElementById('preloader').classList.add('d-none');
+            document.getElementById('body').classList.remove('d-none');
+            let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            if (width >= 800) {
+                max_class(document.getElementsByClassName("announcement"));
+            }
+        }
+    </script>
+
+{% endblock %}

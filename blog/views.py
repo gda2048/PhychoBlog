@@ -7,7 +7,6 @@ from main.views import last_articles
 
 
 class ArticleListView(ListView):
-
     queryset = Article.objects.only(
         'id', 'name', 'release_date', 'content', 'content_min', 'author__id', 'author__full_name'
         ).select_related(
