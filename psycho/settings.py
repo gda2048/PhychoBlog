@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
 
     'crispy_forms',
+    'django_summernote',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -151,18 +152,18 @@ if DEBUG:
     ]
     INTERNAL_IPS = ['127.0.0.1']
     MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'handlers': {
-            'console': {
-                'class': 'logging.StreamHandler',
-            },
-        },
-        'loggers': {
-            'django.db.backends': {
-                'level': 'DEBUG',
-                'handlers': ['console'],
-            }
-        },
-    }
+    # LOGGING = {
+    #     'version': 1,
+    #     'disable_existing_loggers': False,
+    #     'handlers': {
+    #         'console': {
+    #             'class': 'logging.StreamHandler',
+    #         },
+    #     },
+    #     'loggers': {
+    #         'django.db.backends': {
+    #             'level': 'DEBUG',
+    #             'handlers': ['console'],
+    #         }
+    #     },
+    # }

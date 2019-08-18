@@ -32,9 +32,7 @@
                                     <img class="w-auto h-100 img-fluid rounded" src="{{ announcement.event.photo.url }}"
                                          alt="{{ announcement.event.alt }}">
                                 </div>
-
                             {% endif %}
-
                         </div>
                         <div class="col-md-5">
                             <div class="card bg-psycho-pearlbush border-0 cardhead">
@@ -44,7 +42,6 @@
                             <div class="card-body cardbody">
                                 {{ announcement.content }}
                             </div>
-
                         </div>
                     </div>
                     <div class="col-12 border-announcement bg-psycho-pearlbush text-right text-psycho-lightblue my-2">
@@ -57,7 +54,6 @@
             {% block pagination %}
                 {% include 'pagination.html' %}
             {% endblock %}
-
         </div>
         <div class="col-11 col-md-4 bg-psycho-pearlbush">
             <div class="text-white rounded bg-psycho-teal text-center my-2 py-4">

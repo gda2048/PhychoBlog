@@ -2,11 +2,13 @@ from django.contrib import admin
 from django.contrib import messages
 from django.db.models import Count
 
+from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelAdmin
 from main.admin import AdminImagePreviewMixin
 from workers.models import Achievement, Person, HelpItem
 
 
-class HelpItemInline(admin.TabularInline):
+class HelpItemInline(admin.TabularInline, SummernoteInlineModelAdmin):
+    summernote_fields = ('description', )
     model = HelpItem
     fields = ['name', 'expert', 'description']
     extra = 0
@@ -25,7 +27,8 @@ class AchievementInline(AdminImagePreviewMixin, admin.TabularInline):
 
 
 @admin.register(Person)
-class PersonAdmin(AdminImagePreviewMixin, admin.ModelAdmin):
+class PersonAdmin(AdminImagePreviewMixin, SummernoteModelAdmin):
+    summernote_fields = ('contacts', 'bio', 'info')
     list_display = ('full_name', 'name', 'email', 'achievement_count', 'help_item_count', 'is_superuser')
     fieldsets = (
         ('Для создание пользователя',

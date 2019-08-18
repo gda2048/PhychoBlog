@@ -1,6 +1,7 @@
 from django.contrib import admin, messages
 from django.db.models import Count
 
+from django_summernote.admin import SummernoteModelAdmin
 from events.models import Event, Announcement
 from main.admin import AdminImagePreviewMixin
 
@@ -13,7 +14,8 @@ class AnnouncementInline(admin.TabularInline):
 
 
 @admin.register(Event)
-class EventAdmin(AdminImagePreviewMixin, admin.ModelAdmin):
+class EventAdmin(AdminImagePreviewMixin, SummernoteModelAdmin):
+    summernote_fields = ('content',)
     list_display = ('name', 'type', 'announcement_count', 'is_outdated')
     list_filter = ('type',)
     fields = ['name', ('start_date', 'end_date'), 'type', 'content',
@@ -23,7 +25,7 @@ class EventAdmin(AdminImagePreviewMixin, admin.ModelAdmin):
     date_hierarchy = 'start_date'
 
     def get_queryset(self, request):
-        return super(EventAdmin, self).get_queryset(request).deMZMMAfer('binary_image', 'ext') \
+        return super(EventAdmin, self).get_queryset(request).defer('binary_image', 'ext') \
             .annotate(announcements_count=Count('announcements', distinct=True))
 
     def save_model(self, request, obj, form, change):

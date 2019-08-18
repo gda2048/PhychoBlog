@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib import messages
 from django.db.models import Prefetch, Count, Subquery, OuterRef
+from django_summernote.admin import SummernoteModelAdmin
 
 from blog.models import Article, ArticlePhotoReport
 from main.admin import AdminImagePreviewMixin
@@ -17,7 +18,8 @@ class PictureInline(AdminImagePreviewMixin, admin.TabularInline):
 
 
 @admin.register(Article)
-class ArticleAdmin(admin.ModelAdmin):
+class ArticleAdmin(SummernoteModelAdmin):
+    summernote_fields = ('content_min', 'content')
     list_display = ('name', 'release_date', 'pictures_count', 'main_image')
     fields = ['name', 'author', ('content', 'content_min')]
     inlines = [PictureInline]
