@@ -1,6 +1,6 @@
 from django.contrib import admin
-
 from django_summernote.admin import SummernoteModelAdmin
+
 from main.admin import AdminImagePreviewMixin
 from .models import Product
 
@@ -11,4 +11,4 @@ class ProductAdmin(AdminImagePreviewMixin, SummernoteModelAdmin):
     fields = ['name', 'about', ('author', 'description'), 'contacts', 'price', ('photo', 'img_preview'), 'alt']
 
     def get_queryset(self, request):
-            return super(ProductAdmin, self).get_queryset(request).defer('ext', 'binary_image')
+        return super(ProductAdmin, self).get_queryset(request).defer('ext', 'binary_image')

@@ -1,14 +1,14 @@
 from django.contrib import admin
 from django.contrib import messages
 from django.db.models import Count
-
 from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelAdmin
+
 from main.admin import AdminImagePreviewMixin
 from workers.models import Achievement, Person, HelpItem
 
 
 class HelpItemInline(admin.TabularInline, SummernoteInlineModelAdmin):
-    summernote_fields = ('description', )
+    summernote_fields = ('description',)
     model = HelpItem
     fields = ['name', 'expert', 'description']
     extra = 0

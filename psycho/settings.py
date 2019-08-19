@@ -36,6 +36,24 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_summernote',
 ]
+
+SUMMERNOTE_THEME = 'bs4'
+SUMMERNOTE_CONFIG = {
+    'disable_attachment': True,
+    'summernote': {
+        'airMode': False,
+        'lang': 'ru-RU',
+        'toolbar': [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'superscript', 'subscript', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link', 'hr']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+        ],
+    },
+}
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [

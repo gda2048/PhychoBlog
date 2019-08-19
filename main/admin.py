@@ -1,4 +1,8 @@
+from django.contrib import admin
 from django.utils.html import mark_safe
+from django_summernote.admin import get_attachment_model
+
+admin.site.unregister(get_attachment_model())
 
 
 class AdminImagePreviewMixin:

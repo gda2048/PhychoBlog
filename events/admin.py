@@ -1,12 +1,13 @@
 from django.contrib import admin, messages
 from django.db.models import Count
+from django_summernote.admin import SummernoteModelAdmin, SummernoteInlineModelAdmin
 
-from django_summernote.admin import SummernoteModelAdmin
 from events.models import Event, Announcement
 from main.admin import AdminImagePreviewMixin
 
 
-class AnnouncementInline(admin.TabularInline):
+class AnnouncementInline(admin.TabularInline, SummernoteInlineModelAdmin):
+    summernote_fields = ('content',)
     model = Announcement
     fields = ['name', 'main', 'content']
     extra = 0

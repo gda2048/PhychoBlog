@@ -43,7 +43,8 @@ class ArticleDetailView(DetailView):
     template_name = 'blog/article.html'
     queryset = Article.objects.select_related('author') \
         .only("author__full_name", "author__id", "name", "id", "release_date", "content").prefetch_related(
-        Prefetch("photos", to_attr="images", queryset=ArticlePhotoReport.objects.exclude(ext=None).defer('binary_image'))
+        Prefetch("photos", to_attr="images",
+                 queryset=ArticlePhotoReport.objects.exclude(ext=None).defer('binary_image'))
     )
 
     def get_context_data(self, **kwargs):
